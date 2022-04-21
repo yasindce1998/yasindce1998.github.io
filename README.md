@@ -17,7 +17,7 @@
 
 - 👨‍💻 All of my projects are available at [https://github.com/yasindce1998](https://github.com/yasindce1998)
 
-- 💬 Ask me about **Kubernetes, Docker, Linux, eBPF**
+- 💬 Ask me about **Kubernetes, Docker, Cloud-native, Linux, eBPF**
 
 - 📫 How to reach me **yasindce1998@gmail.com**
 
