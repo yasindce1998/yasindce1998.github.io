@@ -1,165 +1,117 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,14,18,20,24&height=200&section=header&text=Hey%20There!%20👋&fontSize=60&fontAlignY=35&animation=fadeIn&fontColor=fff" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:292D3E,50:7C4DFF,100:80CBC4&height=220&section=header&text=Mohammed%20Yasin&fontSize=42&fontColor=EEFFFF&fontAlignY=35&desc=Cyber%20Security%20Researcher%20%7C%20Cloud-Native%20Security&descSize=18&descColor=C792EA&descAlignY=55&animation=fadeIn" width="100%"/>
 
-# 🚀 I'm Mohammed Yasin
+<img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&weight=500&size=22&duration=3000&pause=1000&color=80CBC4&center=true&vCenter=true&random=false&width=550&lines=Runtime+Security+%E2%9A%A1+eBPF;Cloud-Native+Defense+Systems;Open+Source+Security+Tools;Container+%26+Kubernetes+Security" alt="Typing SVG" />
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&duration=2000&pause=500&color=6366F1&center=true&vCenter=true&multiline=true&width=600&height=100&lines=Cyber+Security+Researcher+🛡️;Breaking+Things+to+Fix+Them+🔧;Coffee+%2B+Code+%3D+Magic+☕" alt="Typing SVG" />
+<br/>
 
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=yasindce1998&label=Visitors&color=blueviolet&style=for-the-badge" alt="profile views" />
-  <img src="https://img.shields.io/badge/Coffee%20Consumed-∞-brown?style=for-the-badge&logo=buy-me-a-coffee&logoColor=white" alt="coffee" />
-  <img src="https://img.shields.io/badge/Status-Debugging%20Life-success?style=for-the-badge" alt="status" />
-</p>
+[![Profile Views](https://komarev.com/ghpvc/?username=yasindce1998&label=Visitors&color=7C4DFF&style=flat-square)](https://github.com/yasindce1998)&nbsp;
+[![GitHub followers](https://img.shields.io/github/followers/yasindce1998?label=Followers&style=flat-square&color=80CBC4&labelColor=292D3E)](https://github.com/yasindce1998?tab=followers)&nbsp;
+[![GitHub Stars](https://img.shields.io/github/stars/yasindce1998?label=Stars&style=flat-square&color=FFCB6B&labelColor=292D3E)](https://github.com/yasindce1998?tab=repositories)
 
 </div>
 
----
+<br/>
 
-## 🎮 About This Human
+## `> whoami`
 
-```javascript
-const mohammed = {
-    pronouns: "He" | "Him",
-    location: "India 🇮🇳",
-    role: "Cyber Security Researcher 🕵️",
-    currentMission: "Making the cloud safer, one bug at a time 🐛",
-    
-    dailyRoutine: {
-        morning: "☕ Coffee",
-        afternoon: "💻 Code",
-        evening: "🐛 Debug", 
-        night: "🌙 More Code"
-    },
-    
-    workingOn: ["KubeArmor 🛡️", "eBPF Magic 🔧", "Cloud Security ☁️"],
-    
-    funFact: "I speak to computers in multiple languages, but still can't order coffee in French ☕"
+```js
+const yasin = {
+    role: "Cyber Security Researcher",
+    location: "India",
+    focus: ["Cloud-Native Security", "Runtime Protection", "eBPF", "Container Security"],
+    currently: "Contributing to KubeArmor & Cilium",
+    learning: ["Go", "Rust", "eBPF", "DevSecOps"],
+    motto: "Building secure cloud-native solutions, one syscall at a time"
 };
 ```
 
+<br/>
+
+## Active Projects
+
+| Project | Description | Area |
+|:--------|:------------|:-----|
+| [**Warmor**](https://github.com/yasindce1998/Warmor) | WASM based security | `runtime-security` |
+| [**aegis-shadow**](https://github.com/yasindce1998/aegis-shadow) | eBPF-based rootkit, offense & defense | `ebpf` `security` |
+| **eBPF Research** | Low-level kernel security instrumentation | `kernel` `research` |
+
+<br/>
+
+## Tech Stack
+
 <div align="center">
 
-## 🎯 Current Quests
+#### Languages
+![Python](https://img.shields.io/badge/Python-292D3E?style=flat-square&logo=python&logoColor=FFCB6B)
+![Go](https://img.shields.io/badge/Go-292D3E?style=flat-square&logo=go&logoColor=80CBC4)
+![Rust](https://img.shields.io/badge/Rust-292D3E?style=flat-square&logo=rust&logoColor=F78C6C)
+![C](https://img.shields.io/badge/C-292D3E?style=flat-square&logo=c&logoColor=89DDFF)
+![Bash](https://img.shields.io/badge/Bash-292D3E?style=flat-square&logo=gnu-bash&logoColor=C3E88D)
 
-<table>
-  <tr>
-    <td align="center" width="150">
-      <img src="https://media.giphy.com/media/LMt9638dO8dftAjtco/giphy.gif" width="80"><br>
-      <b>KubeArmor</b><br>
-      🛡️ Runtime Protection
-    </td>
-    <td align="center" width="150">
-      <img src="https://media.giphy.com/media/kH1DBkPNyZPOk0BxrM/giphy.gif" width="80"><br>
-      <b>eBPF</b><br>
-      🔧 Kernel Magic
-    </td>
-    <td align="center" width="150">
-      <img src="https://media.giphy.com/media/kdFc8fubgS31b8DsVu/giphy.gif" width="80"><br>
-      <b>Cloud Security</b><br>
-      ☁️ Securing the Sky
-    </td>
-    <td align="center" width="150">
-      <img src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" width="80"><br>
-      <b>DevSecOps</b><br>
-      🔐 Security First
-    </td>
-  </tr>
-</table>
+#### Cloud & Infrastructure
+![Kubernetes](https://img.shields.io/badge/Kubernetes-292D3E?style=flat-square&logo=kubernetes&logoColor=89DDFF)
+![Docker](https://img.shields.io/badge/Docker-292D3E?style=flat-square&logo=docker&logoColor=82AAFF)
+![GCP](https://img.shields.io/badge/Google_Cloud-292D3E?style=flat-square&logo=google-cloud&logoColor=FFCB6B)
+![Linux](https://img.shields.io/badge/Linux-292D3E?style=flat-square&logo=linux&logoColor=EEFFFF)
+![Nginx](https://img.shields.io/badge/Nginx-292D3E?style=flat-square&logo=nginx&logoColor=C3E88D)
+
+#### Security & Observability
+![eBPF](https://img.shields.io/badge/eBPF-292D3E?style=flat-square&logo=ebpf&logoColor=F78C6C)
+![Grafana](https://img.shields.io/badge/Grafana-292D3E?style=flat-square&logo=grafana&logoColor=F78C6C)
+
+#### Frameworks & Tools
+![Git](https://img.shields.io/badge/Git-292D3E?style=flat-square&logo=git&logoColor=FF5370)
+![MySQL](https://img.shields.io/badge/MySQL-292D3E?style=flat-square&logo=mysql&logoColor=82AAFF)
 
 </div>
 
----
+<br/>
 
-## 🧰 My Toolbox
+## GitHub Stats
 
 <div align="center">
 
-### 💬 Languages I Speak (to Computers)
+<img height="170em" src="https://github-readme-stats.vercel.app/api?username=yasindce1998&show_icons=true&theme=material-palenight&include_all_commits=true&count_private=true&hide_border=true&border_radius=8&bg_color=292D3E&title_color=C792EA&icon_color=80CBC4&text_color=EEFFFF&ring_color=7C4DFF"/>
+&nbsp;&nbsp;
+<img height="170em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=yasindce1998&layout=compact&theme=material-palenight&hide_border=true&border_radius=8&bg_color=292D3E&title_color=C792EA&text_color=EEFFFF"/>
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)
-![Rust](https://img.shields.io/badge/Rust-CE422B?style=for-the-badge&logo=rust&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white)
-![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
+<br/><br/>
 
-### 🐳 Container & Orchestration
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=yasindce1998&theme=material-palenight&hide_border=true&border_radius=8&background=292D3E&ring=7C4DFF&fire=FF5370&currStreakLabel=80CBC4&sideLabels=C792EA&dates=676E95" alt="GitHub Streak"/>
 
-![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Cilium](https://img.shields.io/badge/Cilium-F8C517?style=for-the-badge&logo=cilium&logoColor=black)
-![Helm](https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=helm&logoColor=white)
+<br/><br/>
 
-### ☁️ Cloud & Infrastructure
-
-![GCP](https://img.shields.io/badge/GCP-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
-![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
-
-### 📊 Monitoring & Observability
-
-![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)
-![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
-![Elasticsearch](https://img.shields.io/badge/Elasticsearch-005571?style=for-the-badge&logo=elasticsearch&logoColor=white)
-
-### 🛠️ Dev Tools
-
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-![Vim](https://img.shields.io/badge/Vim-019733?style=for-the-badge&logo=vim&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=yasindce1998&theme=material-palenight&hide_border=true&bg_color=292D3E&color=C792EA&line=80CBC4&point=FFCB6B&area=true&area_color=7C4DFF" alt="Contribution Graph"/>
 
 </div>
 
----
+<br/>
 
-## 📈 GitHub Stats (My Gaming Dashboard)
+## Connect
 
 <div align="center">
-  
-<img width="49%" src="https://github-readme-stats.vercel.app/api?username=yasindce1998&show_icons=true&theme=radical&include_all_commits=true&count_private=true&hide_border=true&bg_color=0d1117&title_color=6366f1&icon_color=8b5cf6&text_color=c9d1d9" />
-<img width="49%" src="https://github-readme-streak-stats.herokuapp.com/?user=yasindce1998&theme=radical&hide_border=true&background=0d1117&ring=6366f1&fire=8b5cf6&currStreakLabel=8b5cf6" />
 
-<img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=yasindce1998&layout=compact&langs_count=10&theme=radical&hide_border=true&bg_color=0d1117&title_color=6366f1&text_color=c9d1d9" />
-<img width="49%" src="https://github-readme-activity-graph.vercel.app/graph?username=yasindce1998&theme=react-dark&hide_border=true&bg_color=0d1117&color=6366f1&line=8b5cf6&point=ec4899&area=true" />
+[![Portfolio](https://img.shields.io/badge/Portfolio-292D3E?style=flat-square&logo=google-chrome&logoColor=80CBC4)](https://yasindce1998.github.io/)&nbsp;
+[![Email](https://img.shields.io/badge/Email-292D3E?style=flat-square&logo=gmail&logoColor=FF5370)](mailto:yasindce1998@gmail.com)&nbsp;
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-292D3E?style=flat-square&logo=linkedin&logoColor=82AAFF)](https://linkedin.com/in/mohammed-yasin-4660b9206)&nbsp;
+[![Twitter](https://img.shields.io/badge/Twitter-292D3E?style=flat-square&logo=x&logoColor=EEFFFF)](https://twitter.com/yasindce1998)&nbsp;
+[![LeetCode](https://img.shields.io/badge/LeetCode-292D3E?style=flat-square&logo=leetcode&logoColor=FFCB6B)](https://leetcode.com/yasindce1998)&nbsp;
+[![Kaggle](https://img.shields.io/badge/Kaggle-292D3E?style=flat-square&logo=kaggle&logoColor=89DDFF)](https://kaggle.com/yasindce1998)
 
 </div>
 
----
-
-## 🏆 Achievement Unlocked!
+<br/>
 
 <div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=yasindce1998&theme=radical&no-frame=true&no-bg=true&row=1&column=7&margin-w=15&margin-h=15" alt="trophies" />
-</div>
 
----
+```
+"A computer can never be held accountable, therefore a computer must never make a management decision."
+```
 
-## 🎨 Contribution Art
+<br/>
 
-<div align="center">
-  
-![Snake animation](https://raw.githubusercontent.com/yasindce1998/yasindce1998/output/github-contribution-grid-snake-dark.svg)
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:292D3E,50:7C4DFF,100:80CBC4&height=100&section=footer" width="100%"/>
 
 </div>
-
----
-
-## 💬 Random Dev Quote
-
-<div align="center">
-
-![Quote](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
-
-</div>
-
----
-
-## 🎵 Coding Playlist
-
-<div align="center">
-
-```ascii
-♪♫ Now Playing: Debugging Symphony in C Minor ♫♪
