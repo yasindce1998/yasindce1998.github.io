@@ -238,9 +238,9 @@ function initConfigSettings() {
         applyFontPreference(savedFont);
 
         fontBtn.addEventListener('click', () => {
-            const nextFont = fontBtn.textContent === 'PIXEL' ? 'PIXEL' : 'CLASSIC';
-            const flipped = nextFont === 'PIXEL' ? 'CLASSIC' : 'PIXEL';
-            applyFontPreference(flipped);
+            const currentFont = localStorage.getItem('fontStyle') || 'CLASSIC';
+            const nextFont = currentFont === 'CLASSIC' ? 'PIXEL' : 'CLASSIC';
+            applyFontPreference(nextFont);
         });
 
         function applyFontPreference(pref) {
@@ -400,7 +400,7 @@ function initCrtTerminal() {
                         "  /about      - Learn about Yasin's professional focus",
                         "  /projects   - List key container hardening & developer projects",
                         "  /tutorials  - List published deep dives & articles",
-                        "  /contact    - Show mail inbox, Gtihub link, and channels",
+                        "  /contact    - Show mail inbox, GitHub link, and channels",
                         "  /theme      - Flip colors between Light (Stone) and Dark (Navy) modes",
                         "  /ping       - Test icmp connection trace to yasin.security node",
                         "  /version    - Print agent version code & build metadata",
@@ -543,6 +543,44 @@ function initSmoothScroll() {
     });
 }
 
+// 7. Mobile Hamburger Menu
+function initMobileMenu() {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileOverlay = document.getElementById('mobile-nav-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    
+    if (!hamburgerBtn || !mobileOverlay) return;
+    
+    hamburgerBtn.addEventListener('click', () => {
+        const isActive = hamburgerBtn.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        hamburgerBtn.setAttribute('aria-expanded', isActive);
+        
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = isActive ? 'hidden' : '';
+    });
+    
+    // Close menu when clicking on a link
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburgerBtn.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        });
+    });
+    
+    // Close menu when clicking overlay
+    mobileOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileOverlay) {
+            hamburgerBtn.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
 // Initialize all features
 document.addEventListener('DOMContentLoaded', () => {
     updateTime();
@@ -551,6 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initConfigSettings();
     initCrtTerminal();
     initSmoothScroll();
+    initMobileMenu();
     
     // Update time clock every second
     setInterval(updateTime, 1000);

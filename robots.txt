@@ -1,0 +1,5 @@
+# robots.txt for yasindce1998.github.io
+User-agent: *
+Allow: /
+
+Sitemap: https://yasindce1998.github.io/sitemap.xml
