@@ -1,0 +1,34 @@
+.project-blueprint-card {
+    --glow-x: 50%;
+    --glow-y: 50%;
+    transform-style: preserve-3d;
+    perspective: 800px;
+}
+
+.project-blueprint-card .card-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at var(--glow-x) var(--glow-y), var(--accent-glow), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.project-blueprint-card:hover .card-glow {
+    opacity: 1;
+}
+
+.project-blueprint-card.tilt-active {
+    transition: transform 0.1s ease-out, border-color 0.22s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project-blueprint-card .card-glow {
+        display: none;
+    }
+    .project-blueprint-card.tilt-active {
+        transform: none !important;
+    }
+}

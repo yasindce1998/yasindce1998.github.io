@@ -11,4 +11,10 @@
 @import './sections/tutorials.css';
 @import './sections/footer.css';
 @import './components/animations.css';
+@import './components/cursor.css';
+@import './components/magnetic.css';
+@import './components/parallax.css';
+@import './components/text-reveal.css';
+@import './components/page-intro.css';
+@import './components/hover-glow.css';
 @import './layout/responsive.css';

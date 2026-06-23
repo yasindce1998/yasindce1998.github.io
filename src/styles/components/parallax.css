@@ -1,0 +1,10 @@
+[data-parallax-speed] {
+    will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-parallax-speed] {
+        will-change: auto;
+        transform: none !important;
+    }
+}
