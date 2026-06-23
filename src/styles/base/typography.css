@@ -1,0 +1,23 @@
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-height);
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.font-manrope { font-family: var(--font-sans); }
+.font-mono { font-family: var(--font-mono); }
+.font-miriam { font-family: var(--font-heading); }
+.font-pixel { font-family: var(--font-fancy); }
+.text-accent { color: var(--accent); }
+.text-success { color: var(--success); }
+.text-warn { color: var(--warn); }
+.text-error { color: var(--error); }
+.hide { display: none !important; }

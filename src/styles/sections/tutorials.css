@@ -1,0 +1,102 @@
+.tutorials-section {
+    padding: 6.5rem 0;
+    background-color: var(--bg-primary);
+}
+
+.tutorials-technical-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border-color);
+}
+
+.tutorial-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 2.2rem 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+.tutorial-item:hover {
+    background-color: var(--bg-secondary);
+}
+
+.tutorial-meta {
+    width: 200px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.tut-number {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.tut-tech {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.tutorial-main-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding-right: 2rem;
+}
+
+.tutorial-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.35;
+}
+
+.tutorial-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.tutorial-title a:hover {
+    color: var(--accent);
+}
+
+.tutorial-description {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.tutorial-link-btn {
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.tut-circle-arrow {
+    display: flex;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tutorial-item:hover .tut-circle-arrow {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+    transform: scale(1.06) rotate(-45deg);
+}

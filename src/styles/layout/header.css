@@ -1,0 +1,109 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background-color: var(--header-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 100;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    cursor: default;
+}
+
+.logo-svg {
+    transition: transform 0.3s ease;
+}
+
+.logo:hover .logo-svg {
+    transform: rotate(90deg);
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+}
+
+.badge {
+    font-size: 0.65rem;
+    background-color: var(--border-strong);
+    color: var(--text-secondary);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.badge-pulse {
+    background-color: var(--accent);
+    color: white;
+    animation: badge-pulse-anim 1.5s infinite ease-in-out;
+}
+
+@keyframes badge-pulse-anim {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+.search-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    background-color: transparent;
+    border: 1px solid var(--border-strong);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.search-btn:hover {
+    border-color: var(--accent);
+    background-color: var(--accent-glow);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.hamburger-btn {
+    display: none;
+}

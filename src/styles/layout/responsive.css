@@ -1,0 +1,83 @@
+@media (max-width: 1024px) {
+    #card-name { top: 8%; left: 4%; }
+    #card-bio { top: 40%; left: 10%; }
+    #card-config { top: 12%; right: 4%; left: auto; }
+
+    .quote-content-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    .footer-top-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .search-btn {
+        font-size: 0;
+        padding: 0.5rem;
+        width: 40px;
+        height: 40px;
+        justify-content: center;
+    }
+
+    .search-btn svg {
+        margin: 0;
+    }
+
+    .draggable-card {
+        width: 90%;
+        max-width: 380px;
+    }
+
+    #card-name { top: 5%; left: 5%; }
+    #card-bio { top: 38%; left: 5%; }
+    #card-config { top: 70%; left: 5%; right: auto; }
+
+    .hero-section {
+        height: 1020px;
+    }
+
+    .projects-blueprint-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tutorial-item {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .tutorial-meta {
+        width: 100%;
+        flex-direction: row;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .tutorial-link-btn {
+        align-self: flex-start;
+    }
+
+    .footer-bottom-bar {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+
+    .footer-social-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
