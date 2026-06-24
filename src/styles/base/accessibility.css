@@ -2,8 +2,8 @@
     position: absolute;
     top: -40px;
     left: 0;
-    background: var(--text-primary);
-    color: var(--bg-primary);
+    background: var(--color-text);
+    color: var(--color-bg);
     padding: 8px 16px;
     text-decoration: none;
     font-weight: 600;

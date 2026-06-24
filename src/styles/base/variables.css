@@ -1,33 +1,24 @@
 :root {
-    --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-display: 'Manrope', sans-serif;
+    --color-bg: #0a0a0a;
+    --color-text: #f0f0f0;
+    --color-text-muted: rgba(240, 240, 240, 0.4);
+    --color-accent: #ffffff;
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-surface: rgba(255, 255, 255, 0.03);
+
+    --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
-    --bg-primary: #000000;
-    --bg-secondary: #080808;
-    --bg-elevated: #111111;
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 8rem;
+    --space-2xl: 12rem;
 
-    --text-primary: #ffffff;
-    --text-secondary: #888888;
-    --text-muted: #444444;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 
-    --accent: #ffffff;
-    --accent-hover: #cccccc;
-
-    --border-color: rgba(255,255,255,0.07);
-    --border-hover: #333333;
-
-    --terminal-green: #00ff41;
-
-    --header-height: 60px;
-
-    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-slow: cubic-bezier(0.77, 0, 0.175, 1);
-
-    --space-xs: 8px;
-    --space-sm: 16px;
-    --space-md: 32px;
-    --space-lg: 64px;
-    --space-xl: 100px;
-    --space-2xl: 140px;
+    --header-height: 80px;
 }

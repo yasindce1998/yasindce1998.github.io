@@ -13,11 +13,11 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md) var(--space-sm);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--color-border);
     text-decoration: none;
-    color: var(--text-primary);
+    color: var(--color-text);
     position: relative;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.4s ease, padding-left 0.4s var(--ease-out-expo);
 }
 
 .tutorial-row::before {
@@ -27,16 +27,17 @@
     top: 0;
     bottom: 0;
     width: 0;
-    background: var(--text-primary);
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--color-text);
+    transition: width 0.4s var(--ease-out-expo);
 }
 
 .tutorial-row:first-child {
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--color-border);
 }
 
 .tutorial-row:hover {
-    background: var(--bg-secondary);
+    background: var(--color-surface);
+    padding-left: var(--space-md);
 }
 
 .tutorial-row:hover::before {
@@ -46,12 +47,12 @@
 .tutorial-number {
     font-family: var(--font-mono);
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--color-text-muted);
     letter-spacing: 0.05em;
 }
 
 .tutorial-title {
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     font-size: clamp(16px, 1.4vw, 20px);
     font-weight: 500;
     line-height: 1.4;
@@ -61,18 +62,18 @@
     font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.1em;
-    color: var(--text-muted);
+    color: var(--color-text-muted);
     text-transform: uppercase;
 }
 
 .tutorial-arrow {
-    color: var(--text-muted);
-    transition: transform 0.2s ease, color 0.2s ease;
+    color: var(--color-text-muted);
+    transition: transform 0.3s var(--ease-out-expo), color 0.3s ease;
 }
 
 .tutorial-row:hover .tutorial-arrow {
-    color: var(--text-primary);
-    transform: translateX(4px);
+    color: var(--color-text);
+    transform: translateX(6px);
 }
 
 @media (max-width: 768px) {

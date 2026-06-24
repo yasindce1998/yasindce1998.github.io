@@ -19,3 +19,20 @@
         flex-wrap: wrap;
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .char {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    .scroll-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .hero-subtitle {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

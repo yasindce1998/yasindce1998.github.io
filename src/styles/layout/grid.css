@@ -9,12 +9,13 @@
     font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    border-left: 2px solid var(--text-muted);
+    color: var(--color-text-muted);
+    border-left: 2px solid var(--color-text-muted);
 }
 
 @media (max-width: 768px) {
     .section-label {
         padding: 0 var(--space-sm);
+        padding-left: calc(var(--space-sm) + 12px);
     }
 }

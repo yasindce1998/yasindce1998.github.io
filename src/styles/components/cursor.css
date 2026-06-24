@@ -1,6 +1,6 @@
 @media (pointer: fine) {
-    body.custom-cursor-active,
-    body.custom-cursor-active * {
+    body,
+    body * {
         cursor: none !important;
     }
 }
@@ -11,12 +11,13 @@
     left: 0;
     width: 6px;
     height: 6px;
-    background-color: var(--text-primary);
+    background-color: var(--color-text);
     border-radius: 50%;
     pointer-events: none;
     z-index: 99999;
     transform: translate(-50%, -50%);
-    transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), background-color 0.2s ease;
+    will-change: transform;
+    mix-blend-mode: difference;
 }
 
 .cursor-ring {
@@ -25,13 +26,13 @@
     left: 0;
     width: 44px;
     height: 44px;
-    border: 1px solid var(--text-primary);
+    border: 1px solid var(--color-text);
     border-radius: 50%;
     pointer-events: none;
     z-index: 99998;
     transform: translate(-50%, -50%);
-    transition: width 0.4s var(--ease-out), height 0.4s var(--ease-out), border-color 0.3s ease, opacity 0.3s ease;
     opacity: 0.25;
+    will-change: transform;
 }
 
 .cursor-ring-outer {
@@ -40,13 +41,13 @@
     left: 0;
     width: 64px;
     height: 64px;
-    border: 1px solid var(--text-primary);
+    border: 1px solid var(--color-text);
     border-radius: 50%;
     pointer-events: none;
     z-index: 99997;
     transform: translate(-50%, -50%);
-    transition: width 0.5s var(--ease-out), height 0.5s var(--ease-out), opacity 0.3s ease;
-    opacity: 0.12;
+    opacity: 0.1;
+    will-change: transform;
 }
 
 .cursor-label {
@@ -59,58 +60,47 @@
     font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.15em;
-    color: var(--text-primary);
+    color: var(--color-text);
     opacity: 0;
-    transition: opacity 0.3s ease;
     white-space: nowrap;
-    margin-top: 40px;
+    margin-top: 44px;
 }
 
 .cursor-label.visible {
     opacity: 1;
 }
 
-.cursor-dot.hovering {
-    width: 4px;
-    height: 4px;
+.cursor-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 99995;
 }
 
-.cursor-ring.hovering {
-    width: 60px;
-    height: 60px;
-    opacity: 0.2;
-}
+@media (pointer: coarse), (max-width: 768px) {
+    .cursor-dot,
+    .cursor-ring,
+    .cursor-ring-outer,
+    .cursor-label,
+    .cursor-trail {
+        display: none !important;
+    }
 
-.cursor-ring-outer.hovering {
-    width: 80px;
-    height: 80px;
-    opacity: 0.08;
-}
-
-.cursor-ring.project-hover {
-    width: 80px;
-    height: 80px;
-    border-color: var(--accent);
-    opacity: 0.2;
-}
-
-.cursor-ring-outer.project-hover {
-    width: 100px;
-    height: 100px;
-    opacity: 0.06;
-}
-
-.cursor-dot.hidden,
-.cursor-ring.hidden,
-.cursor-ring-outer.hidden {
-    opacity: 0;
+    body,
+    body * {
+        cursor: auto !important;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .cursor-dot,
     .cursor-ring,
     .cursor-ring-outer,
-    .cursor-label {
-        display: none;
+    .cursor-label,
+    .cursor-trail {
+        display: none !important;
     }
 }

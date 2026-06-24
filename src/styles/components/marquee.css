@@ -1,0 +1,26 @@
+.marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-sm) 0;
+    white-space: nowrap;
+}
+
+.marquee-track {
+    display: inline-flex;
+    gap: var(--space-md);
+    white-space: nowrap;
+    will-change: transform;
+}
+
+.marquee-item {
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.5vw, 18px);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+}
+
+.marquee-separator {
+    color: rgba(255, 255, 255, 0.15);
+}
