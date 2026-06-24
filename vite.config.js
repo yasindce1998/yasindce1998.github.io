@@ -25,6 +25,14 @@ export default defineConfig({
         outDir: 'dist',
         rollupOptions: {
             input: getBlogInputs(),
+            output: {
+                manualChunks: {
+                    'vendor-three': ['three'],
+                    'vendor-gsap': ['gsap'],
+                    'vendor-lenis': ['lenis'],
+                    'vendor-postprocessing': ['postprocessing'],
+                },
+            },
         },
     },
 });

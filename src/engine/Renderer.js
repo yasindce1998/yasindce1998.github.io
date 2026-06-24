@@ -30,6 +30,7 @@ export class Renderer {
         this.container.appendChild(this.canvas);
 
         this.setupPostProcessing();
+        this.setupSectionPulses();
         this.setupResize();
     }
 
@@ -83,12 +84,33 @@ export class Renderer {
         });
     }
 
-    setScrollVelocity(velocity) {
-        const intensity = Math.min(Math.abs(velocity) * 0.003, 0.004);
-        this.chromaticAberration.offset.set(intensity, intensity);
+    setupSectionPulses() {
+        this.pulseIntensity = 0;
+        this.pulseDecay = 0.95;
+        const sections = document.querySelectorAll('.hero, .projects, .tutorials-section, .footer-section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.1 && entry.intersectionRatio < 0.9) {
+                    this.pulseIntensity = 0.004;
+                }
+            });
+        }, { threshold: [0.1, 0.5, 0.9] });
+
+        sections.forEach(s => observer.observe(s));
     }
 
-    render() {
+    setScrollVelocity(velocity) {
+        const velocityIntensity = Math.min(Math.abs(velocity) * 0.002, 0.003);
+        this.pulseIntensity *= this.pulseDecay;
+        const total = Math.min(velocityIntensity + this.pulseIntensity, 0.006);
+        this.chromaticAberration.offset.set(total, total);
+    }
+
+    render(homeScene) {
+        if (homeScene && homeScene.renderBackground) {
+            homeScene.renderBackground();
+        }
         this.composer.render();
     }
 

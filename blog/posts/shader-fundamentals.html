@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLSL Shader Fundamentals for Web Developers | Mohammed Yasin</title>
+    <meta name="description" content="A practical introduction to writing vertex and fragment shaders for Three.js, covering coordinate spaces, uniforms, and common patterns.">
+    <link rel="canonical" href="https://yasindce1998.github.io/blog/posts/shader-fundamentals.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23ffffff'/%3E%3Cpath d='M9 23V9L16 16L23 9V23' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <meta name="theme-color" content="#000000">
+    <script type="module" src="/src/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+    <div class="blog-post-page">
+        <header class="blog-post-header">
+            <a href="/blog/" class="blog-post-back">&larr; All Posts</a>
+            <h1 class="blog-post-page-title">GLSL Shader Fundamentals for Web Developers</h1>
+            <div class="blog-post-page-meta">
+                <span>June 18, 2026</span>
+                <span>10 min read</span>
+                <span>Tutorial</span>
+            </div>
+        </header>
+
+        <article class="blog-post-content">
+            <p>If you&#39;ve written JavaScript but never touched GLSL, shaders can feel alien. There&#39;s no <code>console.log</code>, no debugger, and the execution model is fundamentally different from anything in the JS runtime.</p>
+<p>But once you internalize a few concepts, shaders become one of the most powerful tools for creating visual experiences on the web. This post covers the practical foundations.</p>
+<h2>What Runs Where</h2>
+<p>A WebGL shader program has two stages:</p>
+<ul>
+<li><strong>Vertex shader</strong> — runs once per vertex. Transforms 3D positions into screen coordinates. Can pass data to the fragment shader via <code>varying</code> variables.</li>
+<li><strong>Fragment shader</strong> — runs once per pixel (technically per fragment). Determines the final color of each pixel.</li>
+</ul>
+<p>The GPU runs thousands of these in parallel. That&#39;s why shaders are fast — but also why you can&#39;t have loops with unpredictable iteration counts or branch-heavy logic.</p>
+<h2>Coordinate Spaces</h2>
+<p>The most confusing part of shader programming is keeping track of which space you&#39;re in:</p>
+<table>
+<thead>
+<tr>
+<th>Space</th>
+<th>Range</th>
+<th>Used For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Object/Local</td>
+<td>varies</td>
+<td>Vertex positions before transform</td>
+</tr>
+<tr>
+<td>World</td>
+<td>varies</td>
+<td>After model matrix</td>
+</tr>
+<tr>
+<td>View/Camera</td>
+<td>varies</td>
+<td>After view matrix</td>
+</tr>
+<tr>
+<td>Clip</td>
+<td>-1 to 1 (NDC)</td>
+<td>After projection matrix</td>
+</tr>
+<tr>
+<td>Screen</td>
+<td>0 to resolution</td>
+<td>Final pixel coordinates</td>
+</tr>
+</tbody></table>
+<p>In Three.js, the built-in uniforms handle most transforms:</p>
+<pre><code class="language-glsl">gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+</code></pre>
+<p>That single line takes you from object space all the way to clip space.</p>
+<h2>Uniforms: Your Bridge to JavaScript</h2>
+<p>Uniforms are values you send from JS to the shader every frame. They&#39;re read-only in the shader and uniform across all vertices/fragments:</p>
+<pre><code class="language-javascript">const material = new THREE.ShaderMaterial({
+    uniforms: {
+        uTime: { value: 0 },
+        uMouse: { value: new THREE.Vector2() },
+        uHover: { value: 0 },
+    },
+    vertexShader: vertCode,
+    fragmentShader: fragCode,
+});
+
+// In your animation loop:
+material.uniforms.uTime.value = elapsed;
+</code></pre>
+<p>Common uniforms I use in every project:</p>
+<ul>
+<li><code>uTime</code> — elapsed time for animation</li>
+<li><code>uMouse</code> — normalized mouse position</li>
+<li><code>uResolution</code> — viewport dimensions</li>
+<li><code>uScroll</code> — scroll progress (0 to 1)</li>
+</ul>
+<h2>Pattern: Radial Displacement</h2>
+<p>One of the most versatile shader patterns is radial displacement from a point (like the mouse cursor):</p>
+<pre><code class="language-glsl">float dist = length(uv - uMouse);
+float strength = smoothstep(0.5, 0.0, dist) * uIntensity;
+vec2 offset = normalize(uv - uMouse) * strength;
+vec2 displaced = uv + offset;
+</code></pre>
+<p>This creates a &quot;push away from cursor&quot; effect. Swap the sign to pull inward. Layer multiple points for complex displacement fields.</p>
+<h2>Pattern: Noise-Based Motion</h2>
+<p>For organic, fluid motion, layer multiple octaves of simplex noise:</p>
+<pre><code class="language-glsl">float noise(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+float fbm(vec2 p) {
+    float value = 0.0;
+    float amplitude = 0.5;
+    for (int i = 0; i &lt; 4; i++) {
+        value += amplitude * noise(p);
+        p *= 2.0;
+        amplitude *= 0.5;
+    }
+    return value;
+}
+</code></pre>
+<p>Feed <code>uTime</code> into the noise input to animate it. Multiply by different frequencies for different &quot;scales&quot; of motion.</p>
+<h2>Debugging Without a Debugger</h2>
+<p>Since you can&#39;t <code>console.log</code> in GLSL, here are the tricks I use:</p>
+<ol>
+<li><strong>Color-code values</strong> — output the value as a color: <code>gl_FragColor = vec4(vec3(myValue), 1.0);</code></li>
+<li><strong>Isolate channels</strong> — render only R, G, or B to see individual components</li>
+<li><strong>Hard boundaries</strong> — use <code>step()</code> to create visible thresholds: <code>gl_FragColor = vec4(step(0.5, myValue));</code></li>
+<li><strong>Range visualization</strong> — map your value to a heatmap gradient to see the full range</li>
+</ol>
+<h2>Next Steps</h2>
+<p>Once you&#39;re comfortable with these fundamentals:</p>
+<ul>
+<li>Explore <strong>raymarching</strong> for 3D signed distance field rendering</li>
+<li>Try <strong>compute shaders</strong> via WebGPU for particle simulations</li>
+<li>Study <strong>post-processing</strong> effects (bloom, DOF, motion blur) which are all fragment shader techniques</li>
+</ul>
+<p>The key is experimentation. Shaders reward play — change a constant, see what happens. The feedback loop is milliseconds.</p>
+
+        </article>
+    </div>
+</body>
+</html>

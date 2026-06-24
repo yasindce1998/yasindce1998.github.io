@@ -1,0 +1,22 @@
+.no-webgl .hero {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.no-webgl .projects {
+    background: linear-gradient(180deg, transparent 0%, rgba(26, 26, 46, 0.1) 50%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .no-webgl .hero {
+        animation: none;
+        background-position: 0% 50%;
+    }
+}

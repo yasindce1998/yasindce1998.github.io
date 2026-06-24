@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a WebGL Portfolio from Scratch | Mohammed Yasin</title>
+    <meta name="description" content="How I built a portfolio site with a custom Three.js rendering engine, post-processing pipeline, and shader-driven interactions.">
+    <link rel="canonical" href="https://yasindce1998.github.io/blog/posts/building-webgl-portfolio.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23ffffff'/%3E%3Cpath d='M9 23V9L16 16L23 9V23' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <meta name="theme-color" content="#000000">
+    <script type="module" src="/src/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+    <div class="blog-post-page">
+        <header class="blog-post-header">
+            <a href="/blog/" class="blog-post-back">&larr; All Posts</a>
+            <h1 class="blog-post-page-title">Building a WebGL Portfolio from Scratch</h1>
+            <div class="blog-post-page-meta">
+                <span>June 20, 2026</span>
+                <span>7 min read</span>
+                <span>Creative Dev</span>
+            </div>
+        </header>
+
+        <article class="blog-post-content">
+            <p>Most developer portfolios are static pages with a dark theme and some hover effects. I wanted something that felt more like an interactive experience — something that responded to your presence on the page.</p>
+<p>This post covers the technical architecture behind this portfolio site: the rendering engine, post-processing pipeline, and the decisions that shaped the final result.</p>
+<h2>The Rendering Stack</h2>
+<p>The core of the visual experience is a Three.js WebGL2 scene with a post-processing pipeline built on the <code>postprocessing</code> library:</p>
+<pre><code>Three.js WebGLRenderer
+  └── EffectComposer
+       ├── RenderPass (main scene)
+       ├── BloomEffect (subtle glow on particles)
+       ├── ChromaticAberrationEffect (scroll-reactive)
+       ├── VignetteEffect (depth framing)
+       └── NoiseEffect (film grain overlay)
+</code></pre>
+<p>The key insight was making the post-processing <em>reactive</em>. Chromatic aberration doesn&#39;t just exist — it pulses when you cross section boundaries. The bloom intensifies on particle clusters that drift near the camera.</p>
+<h2>Shader Architecture</h2>
+<p>I wrote three custom GLSL shader pairs:</p>
+<ol>
+<li><strong>Fluid background</strong> — a fragment shader that simulates turbulent flow using layered simplex noise, driven by scroll position and time</li>
+<li><strong>Particles</strong> — a vertex shader that displaces points along a spiral with mouse-reactive repulsion</li>
+<li><strong>Image hover</strong> — a vertex+fragment pair that warps project tile images with a ripple displacement and RGB shift on hover</li>
+</ol>
+<p>The image hover shader is the most interesting. It uses the UV distance from the mouse cursor to create a radial distortion:</p>
+<pre><code class="language-glsl">float dist = length(uv - uMouse);
+float distortion = smoothstep(0.8, 0.0, dist) * uHover * 0.03;
+uv += distortion * normalize(uv - uMouse);
+</code></pre>
+<p>The <code>smoothstep</code> falloff gives it a natural, organic feel rather than a hard-edged displacement.</p>
+<h2>Performance Budget</h2>
+<p>Running a full post-processing pipeline on every frame is expensive. Here&#39;s how I kept it performant:</p>
+<ul>
+<li><strong>Device-aware DPR capping</strong> — mobile gets 1.5x max, desktop caps at 2x</li>
+<li><strong>Dynamic quality</strong> — <code>isHighPerformance()</code> check disables antialiasing on weaker GPUs</li>
+<li><strong>Code splitting</strong> — Three.js, GSAP, and postprocessing are separate chunks loaded asynchronously</li>
+<li><strong>Graceful degradation</strong> — if WebGL2 isn&#39;t available, a CSS gradient animation fills the background</li>
+</ul>
+<p>The total JS payload lands around 180KB gzipped for the critical path. The WebGL chunk loads lazily after the page transition completes.</p>
+<h2>Lessons Learned</h2>
+<ol>
+<li><strong>Post-processing is additive</strong> — every effect you add compounds the visual noise. Start with none and add only what serves the experience.</li>
+<li><strong>Motion should be motivated</strong> — random floating particles are meaningless. Tie motion to user intent (scroll, hover, focus).</li>
+<li><strong>The fallback is the product too</strong> — 15% of visitors won&#39;t get WebGL. The CSS fallback should still feel intentional.</li>
+</ol>
+<p>The source for all of this is on <a href="https://github.com/yasindce1998/yasindce1998.github.io">GitHub</a>.</p>
+
+        </article>
+    </div>
+</body>
+</html>

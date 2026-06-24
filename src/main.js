@@ -1,8 +1,6 @@
 import './styles/index.css';
 
-import { Renderer } from './engine/Renderer.js';
 import { Clock } from './engine/Clock.js';
-import { HomeScene } from './scenes/HomeScene.js';
 import { SmoothScroll } from './components/Scroll.js';
 import { Cursor } from './components/Cursor.js';
 import { PageLoader } from './components/Loader.js';
@@ -10,6 +8,7 @@ import { TextAnimation } from './components/TextAnimation.js';
 import { PageTransition } from './components/Transition.js';
 import { Marquee } from './components/Marquee.js';
 import { HorizontalScroll } from './components/HorizontalScroll.js';
+import { Router } from './components/Router.js';
 import { isMobile, hasWebGL2 } from './utils/device.js';
 
 class App {
@@ -43,9 +42,12 @@ class App {
         }
 
         this.transition = new PageTransition();
+        this.router = new Router(this);
 
         if (hasWebGL2()) {
             this.initWebGL();
+        } else {
+            document.body.classList.add('no-webgl');
         }
 
         this.bindEvents();
@@ -58,10 +60,13 @@ class App {
         this.clock.add(this.update.bind(this), 0);
     }
 
-    initWebGL() {
-        this.renderer = new Renderer();
-        this.scene = new HomeScene(this.renderer.renderer);
-        this.renderer.setScene(this.scene.scene, this.scene.camera);
+    async initWebGL() {
+        const { Renderer } = await import('./engine/Renderer.js');
+        const { HomeScene } = await import('./scenes/HomeScene.js');
+        const { ImageHoverEffect } = await import('./components/ImageHoverEffect.js');
+        this.renderer = new Renderer(document.body);
+        this.scene = new HomeScene(this.renderer);
+        this.imageHover = new ImageHoverEffect(this.renderer);
     }
 
     bindEvents() {
@@ -79,6 +84,7 @@ class App {
         window.addEventListener('resize', () => {
             if (this.renderer) this.renderer.resize();
             if (this.scene) this.scene.resize();
+            if (this.imageHover) this.imageHover.resize();
         });
 
         this.scroll.onScroll(({ velocity, progress }) => {
@@ -155,8 +161,9 @@ class App {
 
     update(delta, elapsed) {
         if (this.scene) this.scene.update(delta, elapsed);
+        if (this.imageHover) this.imageHover.update(delta);
         if (this.renderer && this.scene) {
-            this.renderer.render();
+            this.renderer.render(this.scene);
         }
     }
 }

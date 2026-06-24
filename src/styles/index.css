@@ -14,4 +14,6 @@
 @import './components/text-animation.css';
 @import './components/marquee.css';
 @import './components/scroll-reveal.css';
+@import './components/fallback.css';
+@import './pages/project-detail.css';
 @import './layout/responsive.css';

@@ -3,13 +3,12 @@ import fluidVert from '../shaders/fluid.vert?raw';
 import fluidFrag from '../shaders/fluid.frag?raw';
 import particlesVert from '../shaders/particles.vert?raw';
 import particlesFrag from '../shaders/particles.frag?raw';
-import backgroundVert from '../shaders/background.vert?raw';
-import backgroundFrag from '../shaders/background.frag?raw';
 
 export class HomeScene {
     constructor(renderer) {
         this.renderer = renderer;
         this.scene = renderer.scene;
+        this.camera = renderer.camera;
         this.mouse = new THREE.Vector2(0.5, 0.5);
         this.scrollVelocity = 0;
         this.scrollProgress = 0;
@@ -155,15 +154,16 @@ export class HomeScene {
 
         const cameraOffsetX = (this.mouse.x - 0.5) * 0.3;
         const cameraOffsetY = (this.mouse.y - 0.5) * 0.2;
-        this.renderer.camera.position.x += (cameraOffsetX - this.renderer.camera.position.x) * 0.02;
-        this.renderer.camera.position.y += (cameraOffsetY - this.renderer.camera.position.y) * 0.02;
-        this.renderer.camera.lookAt(0, 0, 0);
+        this.camera.position.x += (cameraOffsetX - this.camera.position.x) * 0.02;
+        this.camera.position.y += (cameraOffsetY - this.camera.position.y) * 0.02;
+        this.camera.lookAt(0, 0, 0);
     }
 
     renderBackground() {
-        this.renderer.renderer.autoClear = false;
-        this.renderer.renderer.render(this.bgScene, this.bgCamera);
-        this.renderer.renderer.autoClear = true;
+        const gl = this.renderer.renderer;
+        gl.autoClear = false;
+        gl.render(this.bgScene, this.bgCamera);
+        gl.autoClear = true;
     }
 
     resize() {

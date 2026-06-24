@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import { isReducedMotion } from '../utils/device.js';
 
 export class Marquee {
     constructor() {
@@ -9,9 +10,10 @@ export class Marquee {
         this.speed = 1;
         this.direction = -1;
         this.scrollVelocity = 0;
+        this.paused = isReducedMotion();
 
         this.duplicate();
-        this.animate();
+        if (!this.paused) this.animate();
     }
 
     duplicate() {

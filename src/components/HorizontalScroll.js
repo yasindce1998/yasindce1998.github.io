@@ -38,6 +38,15 @@ export class HorizontalScroll {
     }
 
     bindEvents() {
+        this.section.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                const scrollAmount = this.cardWidth + this.gap;
+                const direction = e.key === 'ArrowRight' ? 1 : -1;
+                window.scrollBy({ top: scrollAmount * direction, behavior: 'smooth' });
+            }
+        });
+
         this.scroll.onScroll(({ scroll }) => {
             if (window.innerWidth < 900) return;
 

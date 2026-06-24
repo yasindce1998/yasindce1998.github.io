@@ -40,6 +40,7 @@ function postTemplate(meta, contentHtml) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/blog.css">
 </head>
 <body>
     <div class="blog-post-page">
@@ -87,6 +88,7 @@ function indexTemplate(posts) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/blog.css">
 </head>
 <body>
     <div class="blog-page">
@@ -94,7 +96,7 @@ function indexTemplate(posts) {
             <div class="container">
                 <a href="/" class="blog-post-back">&larr; Back to Home</a>
                 <h1 class="blog-page-title">Blog</h1>
-                <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 1.05rem;">
+                <p style="color: var(--color-text-secondary); margin-top: 1rem; font-size: 1.05rem;">
                     Thoughts on kernel security, eBPF, offensive research, and building secure systems.
                 </p>
             </div>

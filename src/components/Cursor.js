@@ -26,7 +26,7 @@ export class Cursor {
         this.ringEl.className = 'cursor-ring';
 
         this.outerEl = document.createElement('div');
-        this.outerEl.className = 'cursor-outer';
+        this.outerEl.className = 'cursor-ring-outer';
 
         this.label = document.createElement('div');
         this.label.className = 'cursor-label';
