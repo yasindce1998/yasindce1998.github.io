@@ -20,6 +20,17 @@ export function initTextReveal() {
         });
     }
 
+    // Reveal hero lines after intro completes
+    const revealHero = () => {
+        heroLines.forEach(el => el.classList.add('chars-visible'));
+    };
+
+    if (document.body.classList.contains('intro-complete')) {
+        revealHero();
+    } else {
+        document.body.addEventListener('introComplete', revealHero);
+    }
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -30,7 +41,9 @@ export function initTextReveal() {
     }, { threshold: 0.2 });
 
     document.querySelectorAll('[data-char-split]').forEach(el => {
-        observer.observe(el);
+        if (!el.classList.contains('hero-line')) {
+            observer.observe(el);
+        }
     });
 }
 

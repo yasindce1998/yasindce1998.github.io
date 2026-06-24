@@ -55,6 +55,7 @@ export function initPageIntro() {
 
         setTimeout(() => {
             document.body.classList.add('intro-complete');
+            document.body.dispatchEvent(new CustomEvent('introComplete'));
             wrapper.remove();
         }, 1200);
     }
