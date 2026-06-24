@@ -5,6 +5,8 @@ import { initMobileMenu } from './js/mobile-menu.js';
 import { initCustomCursor } from './js/custom-cursor.js';
 import { initPageIntro } from './js/page-intro.js';
 import { initHoverGlow } from './js/hover-glow.js';
+import { initHeroCanvas } from './js/hero-canvas.js';
+import { initHoverDistortion } from './js/hover-distortion.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initPageIntro();
@@ -12,5 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initMobileMenu();
     initHoverGlow();
+    initHeroCanvas();
+    initHoverDistortion();
     initCustomCursor();
 });
