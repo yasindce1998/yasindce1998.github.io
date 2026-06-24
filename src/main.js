@@ -6,17 +6,13 @@ import { initConfigSettings } from './js/config-settings.js';
 import { initCrtTerminal } from './js/terminal.js';
 import { initSmoothScroll } from './js/smooth-scroll.js';
 import { initMobileMenu } from './js/mobile-menu.js';
-import { initScrollReveal } from './js/scroll-reveal.js';
 import { initCustomCursor } from './js/custom-cursor.js';
 import { initMagneticButtons } from './js/magnetic-buttons.js';
-import { initParallax } from './js/parallax.js';
-import { initTextReveal } from './js/text-reveal.js';
 import { initPageIntro } from './js/page-intro.js';
 import { initHoverGlow } from './js/hover-glow.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initPageIntro();
-    initTextReveal();
     updateTime();
     initDraggableCanvas();
     initSimulatedCursors();
@@ -24,8 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initCrtTerminal();
     initSmoothScroll();
     initMobileMenu();
-    initScrollReveal();
-    initParallax();
     initMagneticButtons();
     initHoverGlow();
     initCustomCursor();
