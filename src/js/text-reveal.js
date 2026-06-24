@@ -1,37 +1,53 @@
 export function initTextReveal() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const elements = document.querySelectorAll('.text-reveal');
-    if (!elements.length) return;
+    const heroLines = document.querySelectorAll('.hero-line');
+    const footerTitle = document.querySelector('.footer-cta-title');
 
-    elements.forEach(el => {
-        const text = el.textContent;
-        el.innerHTML = '';
-        let charIndex = 0;
-
-        for (let i = 0; i < text.length; i++) {
+    heroLines.forEach(el => splitChars(el));
+    if (footerTitle) {
+        const lines = footerTitle.innerHTML.split('<br>');
+        footerTitle.innerHTML = '';
+        lines.forEach((line, i) => {
             const span = document.createElement('span');
-            if (text[i] === ' ') {
-                span.className = 'char whitespace';
-                span.innerHTML = '&nbsp;';
-            } else {
-                span.className = 'char';
-                span.textContent = text[i];
+            span.className = 'reveal-line';
+            span.textContent = line.replace(/<[^>]*>/g, '');
+            splitChars(span);
+            footerTitle.appendChild(span);
+            if (i < lines.length - 1) {
+                footerTitle.appendChild(document.createElement('br'));
             }
-            span.style.transitionDelay = `${charIndex * 30}ms`;
-            el.appendChild(span);
-            charIndex++;
-        }
-    });
+        });
+    }
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('text-reveal--active');
+                entry.target.classList.add('chars-visible');
                 observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.2 });
 
-    elements.forEach(el => observer.observe(el));
+    document.querySelectorAll('[data-char-split]').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+function splitChars(el) {
+    const text = el.textContent;
+    el.textContent = '';
+    el.setAttribute('data-char-split', '');
+
+    for (let i = 0; i < text.length; i++) {
+        const span = document.createElement('span');
+        span.className = 'char';
+        if (text[i] === ' ') {
+            span.innerHTML = '&nbsp;';
+        } else {
+            span.textContent = text[i];
+        }
+        span.style.transitionDelay = `${i * 35}ms`;
+        el.appendChild(span);
+    }
 }

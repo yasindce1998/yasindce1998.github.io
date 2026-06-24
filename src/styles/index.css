@@ -15,4 +15,6 @@
 @import './components/page-intro.css';
 @import './components/hover-glow.css';
 @import './components/noise.css';
+@import './components/text-reveal.css';
+@import './components/scroll-reveal.css';
 @import './layout/responsive.css';

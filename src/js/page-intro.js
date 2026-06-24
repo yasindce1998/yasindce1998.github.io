@@ -1,34 +1,54 @@
 export function initPageIntro() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.body.classList.add('page-loaded');
+        document.body.classList.add('intro-complete');
         return;
     }
 
-    const header = document.querySelector('.header');
-    const heroLines = document.querySelectorAll('.hero-line');
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    const heroFooter = document.querySelector('.hero-footer');
+    const overlay = document.createElement('div');
+    overlay.className = 'loader-overlay';
+    overlay.innerHTML = `
+        <div class="loader-counter">
+            <span class="loader-number">0</span>
+        </div>
+        <div class="loader-line"></div>
+    `;
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
 
-    const introElements = [header, ...heroLines, heroSubtitle, heroFooter].filter(Boolean);
-    introElements.forEach(el => el.classList.add('page-intro-hidden'));
+    const numberEl = overlay.querySelector('.loader-number');
+    const lineEl = overlay.querySelector('.loader-line');
 
-    requestAnimationFrame(() => {
-        setTimeout(() => document.body.classList.add('page-loaded'), 50);
+    let count = 0;
+    const duration = 2000;
+    const startTime = performance.now();
 
-        if (header) {
-            header.style.transitionDelay = '0.1s';
+    function updateCounter(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        count = Math.floor(eased * 100);
+        numberEl.textContent = count;
+        lineEl.style.transform = `scaleX(${eased})`;
+
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        } else {
+            numberEl.textContent = '100';
+            setTimeout(revealPage, 300);
         }
+    }
 
-        heroLines.forEach((line, i) => {
-            line.style.transitionDelay = `${0.2 + i * 0.1}s`;
-        });
+    requestAnimationFrame(updateCounter);
 
-        if (heroSubtitle) {
-            heroSubtitle.style.transitionDelay = '0.6s';
-        }
+    function revealPage() {
+        overlay.classList.add('loader-reveal');
+        document.body.style.overflow = '';
+        document.body.classList.add('page-loaded');
 
-        if (heroFooter) {
-            heroFooter.style.transitionDelay = '0.8s';
-        }
-    });
+        setTimeout(() => {
+            document.body.classList.add('intro-complete');
+            overlay.remove();
+        }, 1200);
+    }
 }

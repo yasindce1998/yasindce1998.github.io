@@ -5,8 +5,14 @@
     right: 0;
     height: var(--header-height);
     z-index: 1000;
-    background: var(--bg-primary);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    background: transparent;
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+.header.header-scrolled {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .header-inner {

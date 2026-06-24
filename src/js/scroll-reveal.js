@@ -1,6 +1,11 @@
 export function initScrollReveal() {
-    const reveals = document.querySelectorAll('.scroll-reveal');
-    if (!reveals.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const sections = document.querySelectorAll('.terminal-section, .tutorials-section, .footer-section, .section-label');
+
+    sections.forEach(el => {
+        el.classList.add('scroll-reveal');
+    });
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -9,7 +14,7 @@ export function initScrollReveal() {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-    reveals.forEach(el => observer.observe(el));
+    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
 }

@@ -1,16 +1,30 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { readdirSync } from 'fs';
 
-export default defineConfig({
-  base: '/',
-  build: {
-    outDir: 'dist',
-    rollupOptions: {
-      input: {
+function getBlogInputs() {
+    const inputs = {
         main: resolve(__dirname, 'index.html'),
         blog: resolve(__dirname, 'blog/index.html'),
-        'blog-hello-world': resolve(__dirname, 'blog/posts/hello-world.html'),
-      },
+    };
+
+    try {
+        const posts = readdirSync(resolve(__dirname, 'blog/posts')).filter(f => f.endsWith('.html'));
+        for (const post of posts) {
+            const name = `blog-${post.replace('.html', '')}`;
+            inputs[name] = resolve(__dirname, 'blog/posts', post);
+        }
+    } catch {}
+
+    return inputs;
+}
+
+export default defineConfig({
+    base: '/',
+    build: {
+        outDir: 'dist',
+        rollupOptions: {
+            input: getBlogInputs(),
+        },
     },
-  },
 });

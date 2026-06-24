@@ -1,9 +1,11 @@
-.text-reveal .char {
+[data-char-split] .char {
     display: inline-block;
-    opacity: 1;
-    transform: none;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.text-reveal .char.whitespace {
-    width: 0.3em;
+[data-char-split].chars-visible .char {
+    opacity: 1;
+    transform: translateY(0);
 }

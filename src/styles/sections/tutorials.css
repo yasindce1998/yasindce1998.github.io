@@ -5,9 +5,6 @@
 .tutorials-list {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid var(--border-color);
-    max-width: 900px;
-    margin: 0 auto;
 }
 
 .tutorial-row {
@@ -15,18 +12,35 @@
     grid-template-columns: 60px 1fr auto 44px;
     align-items: center;
     gap: var(--space-md);
-    padding: var(--space-md) 0;
+    padding: var(--space-md) var(--space-sm);
     border-bottom: 1px solid var(--border-color);
     text-decoration: none;
     color: var(--text-primary);
-    transition: background-color 0.2s ease;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.tutorial-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: var(--terminal-green);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tutorial-row:first-child {
+    border-top: 1px solid var(--border-color);
 }
 
 .tutorial-row:hover {
     background: var(--bg-secondary);
-    padding-left: var(--space-sm);
-    padding-right: var(--space-sm);
-    margin: 0 calc(-1 * var(--space-sm));
+}
+
+.tutorial-row:hover::before {
+    width: 3px;
 }
 
 .tutorial-number {

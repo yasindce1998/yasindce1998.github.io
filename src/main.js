@@ -7,6 +7,11 @@ import { initPageIntro } from './js/page-intro.js';
 import { initHoverGlow } from './js/hover-glow.js';
 import { initHeroCanvas } from './js/hero-canvas.js';
 import { initHoverDistortion } from './js/hover-distortion.js';
+import { initHorizontalScroll } from './js/horizontal-scroll.js';
+import { initTextReveal } from './js/text-reveal.js';
+import { initScrollReveal } from './js/scroll-reveal.js';
+import { initMarquee } from './js/marquee.js';
+import { initHeaderScroll } from './js/header-scroll.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initPageIntro();
@@ -16,5 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initHoverGlow();
     initHeroCanvas();
     initHoverDistortion();
+    initHorizontalScroll();
+    initTextReveal();
+    initScrollReveal();
+    initMarquee();
+    initHeaderScroll();
     initCustomCursor();
 });

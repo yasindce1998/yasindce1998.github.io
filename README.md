@@ -1,119 +1,179 @@
-<div align="center">
+# yasindce1998.github.io
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:292D3E,50:7C4DFF,100:80CBC4&height=220&section=header&text=Mohammed%20Yasin&fontSize=42&fontColor=EEFFFF&fontAlignY=35&desc=Offensive%20Security%20Researcher%20%7C%20Kernel%20Engineer&descSize=18&descColor=C792EA&descAlignY=55&animation=fadeIn" width="100%"/>
+Personal portfolio and blog — dark editorial design inspired by [Active Theory](https://activetheory.net).
 
-<img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&weight=500&size=22&duration=3000&pause=1000&color=80CBC4&center=true&vCenter=true&random=false&width=600&lines=eBPF+Offense+%26+Defense;Kernel+Security+Research;UEFI+%7C+Rootkits+%7C+Container+Escapes;AI+Agent+Containment+Systems" alt="Typing SVG" />
-
-<br/>
-
-[![Profile Views](https://komarev.com/ghpvc/?username=yasindce1998&label=Visitors&color=7C4DFF&style=flat-square)](https://github.com/yasindce1998)&nbsp;
-[![GitHub followers](https://img.shields.io/github/followers/yasindce1998?label=Followers&style=flat-square&color=80CBC4&labelColor=292D3E)](https://github.com/yasindce1998?tab=followers)&nbsp;
-[![GitHub Stars](https://img.shields.io/github/stars/yasindce1998?label=Stars&style=flat-square&color=FFCB6B&labelColor=292D3E)](https://github.com/yasindce1998?tab=repositories)
-
-</div>
-
-<br/>
-
-## `> whoami`
-
-```js
-const yasin = {
-    role: "Offensive Security Researcher & Kernel Engineer",
-    location: "India",
-    focus: [
-        "eBPF Offense & Defense",
-        "Kernel-Level Security",
-        "UEFI/Firmware Research",
-        "AI Agent Containment"
-    ],
-    currently: "Building security research tools at the kernel layer",
-    languages: ["Go", "Rust", "C", "Python"],
-    motto: "Understand the offense to build the defense"
-};
-```
-
-<br/>
-
-## Pinned Research
-
-| Project | Description | Language |
-|:--------|:------------|:---------|
-| [**RedHands**](https://github.com/yasindce1998/RedHands) | MCP server exposing offensive security tools to AI agents | `Go` |
-| [**Aegis-Shadow**](https://github.com/yasindce1998/aegis-shadow) | Dual-module eBPF framework — offensive rootkit + defensive runtime auditing | `Rust` |
-| [**KubeDagger**](https://github.com/yasindce1998/KubeDagger) | eBPF offensive toolkit — network discovery, process hiding, container breakouts | `Go` |
-| [**Barzakh**](https://github.com/yasindce1998/Barzakh) | UEFI bootkit simulation for academic research & detection engineering | `C` |
-| [**NeuronTrace**](https://github.com/yasindce1998/NeuronTrace) | Kernel-level behavioral containment for AI agents using eBPF/LSM | `Rust` |
-| [**Warmor**](https://github.com/yasindce1998/Warmor) | eBPF syscall monitoring + WASM policies for workload protection | `Go` |
-
-<br/>
-
-## Professional Experience
-
-| Company | Role |
-|:--------|:-----|
-| **Kroger** | Location & Geospatial Services — cloud-native mapping infrastructure |
-| **Procter & Gamble** | Video Analytics Platform — real-time ML inference pipelines |
-| **Bank of America** | Provisioning Platform — enterprise infrastructure automation |
-
-<br/>
+**Live:** [yasindce1998.github.io](https://yasindce1998.github.io)
 
 ## Tech Stack
 
-<div align="center">
+- **Build:** Vite 6 (vanilla JS, no framework)
+- **3D:** Three.js particle network in the hero section
+- **Typography:** Manrope (display) + JetBrains Mono (monospace)
+- **Blog:** Markdown → HTML via `marked`, built with a Node script
+- **Hosting:** GitHub Pages (static files committed to repo)
 
-#### Languages
-![Go](https://img.shields.io/badge/Go-292D3E?style=flat-square&logo=go&logoColor=80CBC4)
-![Rust](https://img.shields.io/badge/Rust-292D3E?style=flat-square&logo=rust&logoColor=F78C6C)
-![C](https://img.shields.io/badge/C-292D3E?style=flat-square&logo=c&logoColor=89DDFF)
-![Python](https://img.shields.io/badge/Python-292D3E?style=flat-square&logo=python&logoColor=FFCB6B)
-![Bash](https://img.shields.io/badge/Bash-292D3E?style=flat-square&logo=gnu-bash&logoColor=C3E88D)
+## Quick Start
 
-#### Kernel & Security
-![eBPF](https://img.shields.io/badge/eBPF-292D3E?style=flat-square&logo=ebpf&logoColor=F78C6C)
-![Linux](https://img.shields.io/badge/Linux_Kernel-292D3E?style=flat-square&logo=linux&logoColor=EEFFFF)
-![WebAssembly](https://img.shields.io/badge/WASM-292D3E?style=flat-square&logo=webassembly&logoColor=654FF0)
+```bash
+npm install
+npm run dev
+```
 
-#### Cloud & Infrastructure
-![Kubernetes](https://img.shields.io/badge/Kubernetes-292D3E?style=flat-square&logo=kubernetes&logoColor=89DDFF)
-![Docker](https://img.shields.io/badge/Docker-292D3E?style=flat-square&logo=docker&logoColor=82AAFF)
-![GCP](https://img.shields.io/badge/Google_Cloud-292D3E?style=flat-square&logo=google-cloud&logoColor=FFCB6B)
-![Grafana](https://img.shields.io/badge/Grafana-292D3E?style=flat-square&logo=grafana&logoColor=F78C6C)
+The dev server runs at `http://localhost:5173`. Blog HTML is generated automatically before the server starts.
 
-</div>
+## Scripts
 
-<br/>
+| Command | What it does |
+|---------|--------------|
+| `npm run dev` | Builds blog + starts Vite dev server |
+| `npm run build` | Builds blog + production build to `dist/` |
+| `npm run blog:build` | Generates blog HTML only |
+| `npm run preview` | Preview the production build locally |
 
-## GitHub Stats
+## Project Structure
 
-<div align="center">
+```
+├── index.html                  # Main portfolio page
+├── blog/
+│   ├── content/                # Markdown source files (you write here)
+│   │   └── hello-world.md
+│   ├── posts/                  # Generated HTML (don't edit directly)
+│   │   └── hello-world.html
+│   └── index.html              # Generated blog listing page
+├── scripts/
+│   └── build-blog.mjs          # Blog build script
+├── src/
+│   ├── main.js                 # Entry point — initializes all modules
+│   ├── js/
+│   │   ├── hero-canvas.js      # Three.js particle network
+│   │   ├── hover-distortion.js # Mouse-driven distortion effect
+│   │   ├── hover-glow.js       # Cursor glow on project cards
+│   │   ├── custom-cursor.js    # Custom cursor with trail
+│   │   ├── page-intro.js       # Page load animation
+│   │   ├── text-reveal.js      # Character-by-character text animation
+│   │   ├── scroll-reveal.js    # Section fade-in on scroll
+│   │   ├── horizontal-scroll.js# Horizontal scroll in projects section
+│   │   ├── marquee.js          # Footer marquee ticker
+│   │   ├── header-scroll.js    # Header transparent → solid on scroll
+│   │   ├── smooth-scroll.js    # Smooth anchor scrolling
+│   │   ├── mobile-menu.js      # Mobile navigation toggle
+│   │   └── terminal.js         # CRT terminal animation
+│   └── styles/
+│       ├── index.css           # All imports
+│       ├── base/               # Reset, variables, typography
+│       ├── layout/             # Header, grid, responsive
+│       ├── sections/           # Hero, projects, terminal, tutorials, blog, footer
+│       └── components/         # Animations, cursor, scroll-reveal, etc.
+├── vite.config.js              # Auto-discovers blog posts for build
+└── package.json
+```
 
-<img height="170em" src="https://github-readme-stats.vercel.app/api?username=yasindce1998&show_icons=true&theme=material-palenight&include_all_commits=true&count_private=true&hide_border=true&border_radius=8&bg_color=292D3E&title_color=C792EA&icon_color=80CBC4&text_color=EEFFFF&ring_color=7C4DFF"/>
-&nbsp;&nbsp;
-<img height="170em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=yasindce1998&layout=compact&theme=material-palenight&hide_border=true&border_radius=8&bg_color=292D3E&title_color=C792EA&text_color=EEFFFF"/>
+## Writing Blog Posts
 
-<br/><br/>
+### 1. Create a Markdown file
 
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=yasindce1998&theme=material-palenight&hide_border=true&border_radius=8&background=292D3E&ring=7C4DFF&fire=FF5370&currStreakLabel=80CBC4&sideLabels=C792EA&dates=676E95" alt="GitHub Streak"/>
+Create a new `.md` file in `blog/content/`:
 
-</div>
+```markdown
+---
+title: Your Post Title
+date: 2026-06-24
+description: A short summary shown on the blog listing page.
+category: eBPF
+readTime: 5 min read
+---
 
-<br/>
+Your content here. Full **Markdown** support — headings, code blocks,
+lists, blockquotes, images, links, etc.
 
-## Connect
+## Subheading
 
-<div align="center">
+```go
+func main() {
+    fmt.Println("code blocks work")
+}
+```​
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-292D3E?style=flat-square&logo=google-chrome&logoColor=80CBC4)](https://yasindce1998.github.io/)&nbsp;
-[![Email](https://img.shields.io/badge/Email-292D3E?style=flat-square&logo=gmail&logoColor=FF5370)](mailto:yasindce1998@gmail.com)&nbsp;
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-292D3E?style=flat-square&logo=linkedin&logoColor=82AAFF)](https://linkedin.com/in/mohammed-yasin-4660b9206)&nbsp;
-[![Twitter](https://img.shields.io/badge/Twitter-292D3E?style=flat-square&logo=x&logoColor=EEFFFF)](https://twitter.com/yasindce1998)
+> Blockquotes work too.
+```
 
-</div>
+### 2. Frontmatter fields
 
-<br/>
+| Field | Required | Description |
+|-------|----------|-------------|
+| `title` | Yes | Post title (displayed as heading) |
+| `date` | Yes | Publication date (`YYYY-MM-DD`) |
+| `description` | Yes | Summary for the listing page and meta tag |
+| `category` | No | Topic label (e.g. "Kernel Security", "eBPF") |
+| `readTime` | No | Estimated read time (defaults to "5 min read") |
 
-<div align="center">
+### 3. Build and preview
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:292D3E,50:7C4DFF,100:80CBC4&height=100&section=footer" width="100%"/>
+```bash
+npm run blog:build    # generates HTML from your markdown
+npm run dev           # start dev server to preview
+```
 
-</div>
+The filename becomes the URL slug:
+- `blog/content/ebpf-map-poisoning.md` → `/blog/posts/ebpf-map-poisoning.html`
+
+### 4. Publish
+
+```bash
+git add blog/
+git commit -m "add new blog post"
+git push
+```
+
+GitHub Pages deploys automatically. Both the markdown source and generated HTML are committed.
+
+## Design System
+
+### Colors
+
+| Variable | Value | Usage |
+|----------|-------|-------|
+| `--bg-primary` | `#000000` | Page background |
+| `--bg-secondary` | `#0a0a0a` | Card backgrounds |
+| `--bg-elevated` | `#111111` | Elevated surfaces |
+| `--text-primary` | `#ffffff` | Headings, body text |
+| `--text-secondary` | `#888888` | Muted labels |
+| `--terminal-green` | `#00ff41` | Accent / terminal |
+| `--border-color` | `#1a1a1a` | Dividers |
+
+### Typography
+
+- **Display headings:** Manrope 800, negative letter-spacing (`-0.04em`)
+- **Body text:** Manrope 300/500
+- **Monospace / code:** JetBrains Mono 400/600
+
+### Motion Effects
+
+| Effect | File | Description |
+|--------|------|-------------|
+| Particle network | `hero-canvas.js` | Three.js animated particles with mouse interaction |
+| Hover distortion | `hover-distortion.js` | Ripple distortion on mouse move over elements |
+| Text reveal | `text-reveal.js` | Characters animate in one by one on scroll |
+| Scroll reveal | `scroll-reveal.js` | Sections fade up when entering viewport |
+| Horizontal scroll | `horizontal-scroll.js` | Projects section scrolls horizontally |
+| Marquee | `marquee.js` | Infinite scrolling ticker in footer |
+| Custom cursor | `custom-cursor.js` | Dot cursor with trailing circle |
+| Page intro | `page-intro.js` | Full-screen reveal animation on load |
+| Header scroll | `header-scroll.js` | Header goes from transparent to solid |
+
+## Production Build
+
+```bash
+npm run build
+```
+
+Output goes to `dist/`. The build:
+1. Runs `scripts/build-blog.mjs` to generate blog HTML
+2. Vite bundles all JS/CSS, processes assets
+3. `vite.config.js` auto-discovers all `blog/posts/*.html` files as rollup inputs
+
+## Deployment
+
+Push to `main` — GitHub Pages serves from the repo root (or configure to serve from `dist/` if using GitHub Actions).
+
+Currently the site deploys from source (HTML files at repo root), not from the `dist/` folder. The Vite build is available for optimized production builds if you switch to a CI-based deploy.
