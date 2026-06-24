@@ -27,7 +27,7 @@
     top: 0;
     bottom: 0;
     width: 0;
-    background: var(--terminal-green);
+    background: var(--text-primary);
     transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

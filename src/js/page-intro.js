@@ -5,31 +5,36 @@ export function initPageIntro() {
         return;
     }
 
-    const overlay = document.createElement('div');
-    overlay.className = 'loader-overlay';
-    overlay.innerHTML = `
+    const wrapper = document.createElement('div');
+    wrapper.className = 'loader-wrapper';
+    wrapper.innerHTML = `
+        <div class="loader-panel left"></div>
+        <div class="loader-panel right"></div>
         <div class="loader-counter">
             <span class="loader-number">0</span>
         </div>
-        <div class="loader-line"></div>
     `;
-    document.body.appendChild(overlay);
+    document.body.appendChild(wrapper);
     document.body.style.overflow = 'hidden';
 
-    const numberEl = overlay.querySelector('.loader-number');
-    const lineEl = overlay.querySelector('.loader-line');
+    const numberEl = wrapper.querySelector('.loader-number');
+    const panelLeft = wrapper.querySelector('.loader-panel.left');
+    const panelRight = wrapper.querySelector('.loader-panel.right');
+    const counter = wrapper.querySelector('.loader-counter');
 
-    let count = 0;
     const duration = 2000;
     const startTime = performance.now();
+
+    function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+    }
 
     function updateCounter(now) {
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        count = Math.floor(eased * 100);
-        numberEl.textContent = count;
-        lineEl.style.transform = `scaleX(${eased})`;
+        const eased = easeOutCubic(progress);
+        const value = Math.round(eased * 100);
+        numberEl.textContent = value;
 
         if (progress < 1) {
             requestAnimationFrame(updateCounter);
@@ -42,13 +47,15 @@ export function initPageIntro() {
     requestAnimationFrame(updateCounter);
 
     function revealPage() {
-        overlay.classList.add('loader-reveal');
+        panelLeft.classList.add('loader-reveal');
+        panelRight.classList.add('loader-reveal');
+        counter.classList.add('loader-reveal');
         document.body.style.overflow = '';
         document.body.classList.add('page-loaded');
 
         setTimeout(() => {
             document.body.classList.add('intro-complete');
-            overlay.remove();
+            wrapper.remove();
         }, 1200);
     }
 }

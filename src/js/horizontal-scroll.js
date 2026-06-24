@@ -18,6 +18,13 @@ export function initHorizontalScroll() {
     section.insertBefore(stickyWrapper, grid);
     stickyWrapper.appendChild(grid);
 
+    const progressWrap = document.createElement('div');
+    progressWrap.className = 'projects-progress-wrap';
+    const progressBar = document.createElement('div');
+    progressBar.className = 'projects-progress-bar';
+    progressWrap.appendChild(progressBar);
+    stickyWrapper.appendChild(progressWrap);
+
     let ticking = false;
 
     function onScroll() {
@@ -32,6 +39,7 @@ export function initHorizontalScroll() {
             const translateX = -progress * (totalScrollWidth - window.innerWidth);
 
             grid.style.transform = `translateX(${translateX}px)`;
+            progressBar.style.transform = `scaleX(${progress})`;
             ticking = false;
         });
     }
@@ -45,6 +53,7 @@ export function initHorizontalScroll() {
             if (window.innerWidth < 900) {
                 section.style.height = '';
                 grid.style.transform = '';
+                progressBar.style.transform = 'scaleX(0)';
                 return;
             }
             const newCardWidth = window.innerWidth * 0.75;

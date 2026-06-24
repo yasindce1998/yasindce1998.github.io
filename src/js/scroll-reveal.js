@@ -1,7 +1,7 @@
 export function initScrollReveal() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const sections = document.querySelectorAll('.terminal-section, .tutorials-section, .footer-section, .section-label');
+    const sections = document.querySelectorAll('.tutorials-section, .footer-section, .section-label, .marquee, .footer-cta');
 
     sections.forEach(el => {
         el.classList.add('scroll-reveal');

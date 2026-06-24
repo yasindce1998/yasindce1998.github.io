@@ -1,11 +1,19 @@
 .hero {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    align-content: end;
     padding: var(--space-xl) var(--space-md);
-    padding-top: calc(var(--header-height) + var(--space-xl));
+    padding-bottom: var(--space-2xl);
     position: relative;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, transparent 60%, rgba(0,0,0,0.6));
+    pointer-events: none;
+    z-index: 0;
 }
 
 .hero-content {
@@ -15,11 +23,11 @@
 }
 
 .hero-title {
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(40px, 8.5vw, 120px);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
+    font-size: clamp(48px, 10vw, 140px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
     margin-bottom: var(--space-md);
 }
 
@@ -35,87 +43,9 @@
     line-height: 1.7;
 }
 
-.hero-footer {
-    position: absolute;
-    bottom: var(--space-md);
-    left: var(--space-md);
-    right: var(--space-md);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    z-index: 1;
-}
-
-.hero-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.hero-meta-item {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--terminal-green);
-    animation: pulse-dot 2s infinite;
-}
-
-@keyframes pulse-dot {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-}
-
-.hero-scroll {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.hero-scroll:hover {
-    color: var(--text-primary);
-}
-
-.hero-scroll svg {
-    animation: bounce-arrow 2s infinite;
-}
-
-@keyframes bounce-arrow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(4px); }
-}
-
 @media (max-width: 768px) {
     .hero {
         padding: var(--space-lg) var(--space-sm);
-        padding-top: calc(var(--header-height) + var(--space-lg));
-    }
-
-    .hero-footer {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        right: auto;
-        margin-top: var(--space-xl);
-        padding: 0;
-    }
-
-    .hero-scroll {
-        display: none;
+        padding-bottom: var(--space-xl);
     }
 }

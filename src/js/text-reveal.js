@@ -40,6 +40,8 @@ function splitChars(el) {
     el.setAttribute('data-char-split', '');
 
     for (let i = 0; i < text.length; i++) {
+        const outer = document.createElement('span');
+        outer.className = 'char-outer';
         const span = document.createElement('span');
         span.className = 'char';
         if (text[i] === ' ') {
@@ -48,6 +50,7 @@ function splitChars(el) {
             span.textContent = text[i];
         }
         span.style.transitionDelay = `${i * 35}ms`;
-        el.appendChild(span);
+        outer.appendChild(span);
+        el.appendChild(outer);
     }
 }

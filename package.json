@@ -12,8 +12,5 @@
   "devDependencies": {
     "marked": "^18.0.5",
     "vite": "^6.0.0"
-  },
-  "dependencies": {
-    "three": "^0.184.0"
   }
 }

@@ -16,22 +16,37 @@
     pointer-events: none;
     z-index: 99999;
     transform: translate(-50%, -50%);
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+    transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), background-color 0.2s ease;
 }
 
 .cursor-ring {
     position: fixed;
     top: 0;
     left: 0;
-    width: 40px;
-    height: 40px;
-    border: 1.5px solid var(--text-primary);
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--text-primary);
     border-radius: 50%;
     pointer-events: none;
     z-index: 99998;
     transform: translate(-50%, -50%);
-    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
-    opacity: 0.4;
+    transition: width 0.4s var(--ease-out), height 0.4s var(--ease-out), border-color 0.3s ease, opacity 0.3s ease;
+    opacity: 0.25;
+}
+
+.cursor-ring-outer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--text-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99997;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s var(--ease-out), height 0.5s var(--ease-out), opacity 0.3s ease;
+    opacity: 0.12;
 }
 
 .cursor-label {
@@ -39,7 +54,7 @@
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 99997;
+    z-index: 99996;
     transform: translate(-50%, -50%);
     font-family: var(--font-mono);
     font-size: 10px;
@@ -58,13 +73,18 @@
 .cursor-dot.hovering {
     width: 4px;
     height: 4px;
-    background-color: var(--text-primary);
 }
 
 .cursor-ring.hovering {
     width: 60px;
     height: 60px;
-    opacity: 0.3;
+    opacity: 0.2;
+}
+
+.cursor-ring-outer.hovering {
+    width: 80px;
+    height: 80px;
+    opacity: 0.08;
 }
 
 .cursor-ring.project-hover {
@@ -72,17 +92,24 @@
     height: 80px;
     border-color: var(--accent);
     opacity: 0.2;
-    background: rgba(255, 255, 255, 0.03);
+}
+
+.cursor-ring-outer.project-hover {
+    width: 100px;
+    height: 100px;
+    opacity: 0.06;
 }
 
 .cursor-dot.hidden,
-.cursor-ring.hidden {
+.cursor-ring.hidden,
+.cursor-ring-outer.hidden {
     opacity: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
     .cursor-dot,
     .cursor-ring,
+    .cursor-ring-outer,
     .cursor-label {
         display: none;
     }

@@ -4,13 +4,16 @@ export function initCustomCursor() {
 
     const dot = document.createElement('div');
     const ring = document.createElement('div');
+    const outerRing = document.createElement('div');
     const label = document.createElement('div');
     dot.className = 'cursor-dot';
     ring.className = 'cursor-ring';
+    outerRing.className = 'cursor-ring-outer';
     label.className = 'cursor-label';
     label.textContent = 'VIEW';
     document.body.appendChild(dot);
     document.body.appendChild(ring);
+    document.body.appendChild(outerRing);
     document.body.appendChild(label);
     document.body.classList.add('custom-cursor-active');
 
@@ -18,14 +21,15 @@ export function initCustomCursor() {
     let mouseY = -100;
     let ringX = -100;
     let ringY = -100;
+    let outerX = -100;
+    let outerY = -100;
     let labelX = -100;
     let labelY = -100;
-    let isHoveringProject = false;
-    let isHoveringInteractive = false;
     let magnetTarget = null;
 
-    const ringLerp = 0.12;
-    const labelLerp = 0.08;
+    const ringLerp = 0.08;
+    const outerLerp = 0.05;
+    const labelLerp = 0.06;
 
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -55,44 +59,44 @@ export function initCustomCursor() {
     document.addEventListener('mouseenter', () => {
         dot.classList.remove('hidden');
         ring.classList.remove('hidden');
+        outerRing.classList.remove('hidden');
     });
 
     document.addEventListener('mouseleave', () => {
         dot.classList.add('hidden');
         ring.classList.add('hidden');
+        outerRing.classList.add('hidden');
         label.classList.remove('visible');
     });
 
     document.addEventListener('mouseover', (e) => {
         const projectTile = e.target.closest('.project-tile');
-        const interactive = e.target.closest('a, button, input, textarea, [role="button"], .header-nav-link, .terminal-chip');
+        const interactive = e.target.closest('a, button, input, textarea, [role="button"], .header-nav-link');
 
         if (projectTile) {
-            isHoveringProject = true;
-            isHoveringInteractive = true;
             magnetTarget = projectTile;
             dot.classList.add('hovering');
             ring.classList.add('hovering', 'project-hover');
+            outerRing.classList.add('hovering', 'project-hover');
             label.classList.add('visible');
         } else if (interactive) {
-            isHoveringInteractive = true;
             magnetTarget = interactive;
             dot.classList.add('hovering');
             ring.classList.add('hovering');
+            outerRing.classList.add('hovering');
             label.classList.remove('visible');
         }
     });
 
     document.addEventListener('mouseout', (e) => {
         const projectTile = e.target.closest('.project-tile');
-        const interactive = e.target.closest('a, button, input, textarea, [role="button"], .header-nav-link, .terminal-chip');
+        const interactive = e.target.closest('a, button, input, textarea, [role="button"], .header-nav-link');
 
         if (projectTile || interactive) {
-            isHoveringProject = false;
-            isHoveringInteractive = false;
             magnetTarget = null;
             dot.classList.remove('hovering');
             ring.classList.remove('hovering', 'project-hover');
+            outerRing.classList.remove('hovering', 'project-hover');
             label.classList.remove('visible');
         }
     });
@@ -102,6 +106,11 @@ export function initCustomCursor() {
         ringY += (mouseY - ringY) * ringLerp;
         ring.style.left = ringX + 'px';
         ring.style.top = ringY + 'px';
+
+        outerX += (mouseX - outerX) * outerLerp;
+        outerY += (mouseY - outerY) * outerLerp;
+        outerRing.style.left = outerX + 'px';
+        outerRing.style.top = outerY + 'px';
 
         labelX += (mouseX - labelX) * labelLerp;
         labelY += (mouseY - labelY) * labelLerp;
