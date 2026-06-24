@@ -7,10 +7,10 @@ Personal portfolio and blog — dark editorial design inspired by [Active Theory
 ## Tech Stack
 
 - **Build:** Vite 6 (vanilla JS, no framework)
-- **3D:** Three.js particle network in the hero section
+- **Graphics:** Raw WebGL2 with custom GLSL fragment shader (fbm fluid noise)
 - **Typography:** Manrope (display) + JetBrains Mono (monospace)
 - **Blog:** Markdown → HTML via `marked`, built with a Node script
-- **Hosting:** GitHub Pages (static files committed to repo)
+- **Deploy:** GitHub Actions → GitHub Pages
 
 ## Quick Start
 
@@ -35,38 +35,72 @@ The dev server runs at `http://localhost:5173`. Blog HTML is generated automatic
 ```
 ├── index.html                  # Main portfolio page
 ├── blog/
-│   ├── content/                # Markdown source files (you write here)
-│   │   └── hello-world.md
+│   ├── content/                # Markdown source files
 │   ├── posts/                  # Generated HTML (don't edit directly)
-│   │   └── hello-world.html
 │   └── index.html              # Generated blog listing page
 ├── scripts/
 │   └── build-blog.mjs          # Blog build script
 ├── src/
 │   ├── main.js                 # Entry point — initializes all modules
 │   ├── js/
-│   │   ├── hero-canvas.js      # Three.js particle network
+│   │   ├── glsl-hero.js        # WebGL2 fbm fluid noise shader
+│   │   ├── page-intro.js       # Twin-panel horizontal wipe loader
+│   │   ├── custom-cursor.js    # Dual-ring cursor (inner + outer)
+│   │   ├── text-reveal.js      # Clip-path character reveal animation
+│   │   ├── scroll-reveal.js    # IntersectionObserver section reveals
+│   │   ├── horizontal-scroll.js# Horizontal scroll with progress bar
 │   │   ├── hover-distortion.js # Mouse-driven distortion effect
 │   │   ├── hover-glow.js       # Cursor glow on project cards
-│   │   ├── custom-cursor.js    # Custom cursor with trail
-│   │   ├── page-intro.js       # Page load animation
-│   │   ├── text-reveal.js      # Character-by-character text animation
-│   │   ├── scroll-reveal.js    # Section fade-in on scroll
-│   │   ├── horizontal-scroll.js# Horizontal scroll in projects section
 │   │   ├── marquee.js          # Footer marquee ticker
 │   │   ├── header-scroll.js    # Header transparent → solid on scroll
 │   │   ├── smooth-scroll.js    # Smooth anchor scrolling
-│   │   ├── mobile-menu.js      # Mobile navigation toggle
-│   │   └── terminal.js         # CRT terminal animation
+│   │   └── mobile-menu.js      # Mobile navigation toggle
 │   └── styles/
 │       ├── index.css           # All imports
 │       ├── base/               # Reset, variables, typography
 │       ├── layout/             # Header, grid, responsive
-│       ├── sections/           # Hero, projects, terminal, tutorials, blog, footer
-│       └── components/         # Animations, cursor, scroll-reveal, etc.
+│       ├── sections/           # Hero, projects, tutorials, blog, footer
+│       └── components/         # Cursor, text-reveal, page-intro, etc.
+├── .github/workflows/
+│   └── deploy.yml              # CI: build + deploy to GitHub Pages
 ├── vite.config.js              # Auto-discovers blog posts for build
 └── package.json
 ```
+
+## Design & Effects
+
+### Visual System
+
+| Variable | Value | Usage |
+|----------|-------|-------|
+| `--bg-primary` | `#000000` | Page background |
+| `--bg-secondary` | `#080808` | Card/elevated surfaces |
+| `--text-primary` | `#ffffff` | Headings, body, accents |
+| `--text-secondary` | `#888888` | Muted labels |
+| `--text-muted` | `#444444` | Subtle UI elements |
+| `--border-color` | `rgba(255,255,255,0.07)` | Dividers |
+| `--ease-out` | `cubic-bezier(0.16, 1, 0.3, 1)` | Snappy transitions |
+| `--ease-slow` | `cubic-bezier(0.77, 0, 0.175, 1)` | Dramatic wipes |
+
+### Typography
+
+- **Display headings:** Manrope 800, negative letter-spacing (`-0.04em`)
+- **Body text:** Manrope 300/500
+- **Monospace / code:** JetBrains Mono 400/600
+
+### Motion Effects
+
+| Effect | File | Description |
+|--------|------|-------------|
+| GLSL fluid noise | `glsl-hero.js` | Raw WebGL2 fbm shader with mouse distortion and vignette |
+| Twin-panel loader | `page-intro.js` | Horizontal wipe with 0→100 counter animation |
+| Dual-ring cursor | `custom-cursor.js` | Inner ring (lerp 0.08) + outer ring (lerp 0.05) |
+| Clip-path text reveal | `text-reveal.js` | Characters slide up via `.char-outer` overflow clip |
+| Scroll reveal | `scroll-reveal.js` | Sections fade in via IntersectionObserver |
+| Horizontal scroll | `horizontal-scroll.js` | Projects section with scaleX progress bar |
+| Hover distortion | `hover-distortion.js` | Ripple distortion on mouse move |
+| Marquee | `marquee.js` | Infinite scrolling ticker strip |
+| Header scroll | `header-scroll.js` | Transparent → solid on scroll |
 
 ## Writing Blog Posts
 
@@ -83,97 +117,45 @@ category: eBPF
 readTime: 5 min read
 ---
 
-Your content here. Full **Markdown** support — headings, code blocks,
-lists, blockquotes, images, links, etc.
-
-## Subheading
-
-```go
-func main() {
-    fmt.Println("code blocks work")
-}
-```​
-
-> Blockquotes work too.
+Your content here. Full **Markdown** support.
 ```
 
 ### 2. Frontmatter fields
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `title` | Yes | Post title (displayed as heading) |
+| `title` | Yes | Post title |
 | `date` | Yes | Publication date (`YYYY-MM-DD`) |
-| `description` | Yes | Summary for the listing page and meta tag |
-| `category` | No | Topic label (e.g. "Kernel Security", "eBPF") |
+| `description` | Yes | Summary for listing and meta tag |
+| `category` | No | Topic label |
 | `readTime` | No | Estimated read time (defaults to "5 min read") |
 
 ### 3. Build and preview
 
 ```bash
-npm run blog:build    # generates HTML from your markdown
-npm run dev           # start dev server to preview
+npm run blog:build
+npm run dev
 ```
 
-The filename becomes the URL slug:
-- `blog/content/ebpf-map-poisoning.md` → `/blog/posts/ebpf-map-poisoning.html`
+The filename becomes the URL slug: `blog/content/my-post.md` → `/blog/posts/my-post.html`
 
 ### 4. Publish
 
 ```bash
-git add blog/
+git add .
 git commit -m "add new blog post"
 git push
 ```
 
-GitHub Pages deploys automatically. Both the markdown source and generated HTML are committed.
-
-## Design System
-
-### Colors
-
-| Variable | Value | Usage |
-|----------|-------|-------|
-| `--bg-primary` | `#000000` | Page background |
-| `--bg-secondary` | `#0a0a0a` | Card backgrounds |
-| `--bg-elevated` | `#111111` | Elevated surfaces |
-| `--text-primary` | `#ffffff` | Headings, body text |
-| `--text-secondary` | `#888888` | Muted labels |
-| `--terminal-green` | `#00ff41` | Accent / terminal |
-| `--border-color` | `#1a1a1a` | Dividers |
-
-### Typography
-
-- **Display headings:** Manrope 800, negative letter-spacing (`-0.04em`)
-- **Body text:** Manrope 300/500
-- **Monospace / code:** JetBrains Mono 400/600
-
-### Motion Effects
-
-| Effect | File | Description |
-|--------|------|-------------|
-| Particle network | `hero-canvas.js` | Three.js animated particles with mouse interaction |
-| Hover distortion | `hover-distortion.js` | Ripple distortion on mouse move over elements |
-| Text reveal | `text-reveal.js` | Characters animate in one by one on scroll |
-| Scroll reveal | `scroll-reveal.js` | Sections fade up when entering viewport |
-| Horizontal scroll | `horizontal-scroll.js` | Projects section scrolls horizontally |
-| Marquee | `marquee.js` | Infinite scrolling ticker in footer |
-| Custom cursor | `custom-cursor.js` | Dot cursor with trailing circle |
-| Page intro | `page-intro.js` | Full-screen reveal animation on load |
-| Header scroll | `header-scroll.js` | Header goes from transparent to solid |
-
-## Production Build
-
-```bash
-npm run build
-```
-
-Output goes to `dist/`. The build:
-1. Runs `scripts/build-blog.mjs` to generate blog HTML
-2. Vite bundles all JS/CSS, processes assets
-3. `vite.config.js` auto-discovers all `blog/posts/*.html` files as rollup inputs
+GitHub Actions builds and deploys automatically.
 
 ## Deployment
 
-Push to `main` — GitHub Pages serves from the repo root (or configure to serve from `dist/` if using GitHub Actions).
+Push to `main` triggers the GitHub Actions workflow:
 
-Currently the site deploys from source (HTML files at repo root), not from the `dist/` folder. The Vite build is available for optimized production builds if you switch to a CI-based deploy.
+1. `npm ci` — install dependencies
+2. `npm run build` — generates blog HTML + Vite production bundle to `dist/`
+3. Upload `dist/` as Pages artifact
+4. Deploy to GitHub Pages
+
+Site is live at [yasindce1998.github.io](https://yasindce1998.github.io).
