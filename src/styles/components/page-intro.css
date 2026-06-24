@@ -1,6 +1,6 @@
 .page-intro-hidden {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(20px);
     transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -8,13 +8,13 @@
     transform: translateY(-100%);
 }
 
-.scroll-indicator.page-intro-hidden {
+.hero-footer.page-intro-hidden {
     transform: translateY(20px);
 }
 
 body.page-loaded .page-intro-hidden {
     opacity: 1;
-    transform: translateY(0) translateX(0);
+    transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {

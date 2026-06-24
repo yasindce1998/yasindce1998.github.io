@@ -1,11 +1,18 @@
-.container {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    width: 100%;
+.section-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--space-md);
+    margin-bottom: var(--space-lg);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
 }
 
-.border-x-grid {
-    border-left: 1px solid var(--border-color);
-    border-right: 1px solid var(--border-color);
+@media (max-width: 768px) {
+    .section-label {
+        padding: 0 var(--space-sm);
+    }
 }

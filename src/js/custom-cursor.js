@@ -33,7 +33,7 @@ export function initCustomCursor() {
         ring.classList.add('hidden');
     });
 
-    const interactiveSelectors = 'a, button, input, textarea, [role="button"], .nav-link, .search-btn, .blueprint-card-link';
+    const interactiveSelectors = 'a, button, input, textarea, [role="button"], .project-tile, .header-nav-link, .terminal-chip';
 
     document.addEventListener('mouseover', (e) => {
         if (e.target.closest(interactiveSelectors)) {

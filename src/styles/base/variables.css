@@ -1,56 +1,29 @@
 :root {
-    /* Fonts */
     --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-    --font-heading: 'Miriam Libre', sans-serif;
-    --font-fancy: 'Rubik Pixels', cursive;
 
-    /* Theme Colors (Dark Theme - Default) */
-    --bg-primary: #131924;
-    --bg-secondary: #1f273a;
-    --header-bg: rgba(19, 25, 36, 0.85);
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-elevated: #111111;
 
-    --text-primary: #f3f3f4;
-    --text-secondary: rgba(255, 255, 255, 0.6);
-    --text-muted: rgba(255, 255, 255, 0.38);
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --text-muted: #555555;
 
-    --accent: #455ce9;
-    --accent-glow: rgba(69, 92, 233, 0.25);
-    --accent-hover: #5d71eb;
+    --accent: #ffffff;
+    --accent-hover: #cccccc;
 
-    --border-color: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.18);
+    --border-color: #1a1a1a;
+    --border-hover: #333333;
 
-    --success: #7fe787;
-    --warn: #f5c26b;
-    --error: #e07a5f;
-    --info: #6fa8dc;
+    --terminal-green: #00ff41;
 
-    --canvas-grid: rgba(255, 255, 255, 0.03);
-    --canvas-dot: rgba(255, 255, 255, 0.15);
-    --canvas-bg: #151a26;
+    --header-height: 60px;
 
-    --header-height: 70px;
-}
-
-/* Light Theme Variables */
-body.light-theme {
-    --bg-primary: #f5f5f4;
-    --bg-secondary: #ffffff;
-    --header-bg: rgba(245, 245, 244, 0.85);
-
-    --text-primary: #1c1917;
-    --text-secondary: #57534e;
-    --text-muted: #a8a29e;
-
-    --accent: #455ce9;
-    --accent-glow: rgba(69, 92, 233, 0.12);
-    --accent-hover: #3146cc;
-
-    --border-color: rgba(28, 25, 23, 0.08);
-    --border-strong: rgba(28, 25, 23, 0.18);
-
-    --canvas-grid: rgba(69, 92, 233, 0.04);
-    --canvas-dot: rgba(69, 92, 233, 0.15);
-    --canvas-bg: #fafaf9;
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 32px;
+    --space-lg: 64px;
+    --space-xl: 100px;
+    --space-2xl: 140px;
 }

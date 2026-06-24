@@ -7,17 +7,17 @@ body {
     font-family: var(--font-sans);
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    line-height: 1.6;
+    line-height: 1.5;
     overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.font-manrope { font-family: var(--font-sans); }
 .font-mono { font-family: var(--font-mono); }
-.font-miriam { font-family: var(--font-heading); }
-.font-pixel { font-family: var(--font-fancy); }
-.text-accent { color: var(--accent); }
-.text-success { color: var(--success); }
-.text-warn { color: var(--warn); }
-.text-error { color: var(--error); }
+.text-green { color: var(--terminal-green); }
 .hide { display: none !important; }
+
+::selection {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
