@@ -4,44 +4,17 @@ export class PageLoader {
     constructor(onComplete) {
         this.onComplete = onComplete;
         this.progress = 0;
-        this.isComplete = false;
 
-        this.createElement();
+        this.loader = document.querySelector('.loader');
+        if (!this.loader) {
+            if (this.onComplete) this.onComplete();
+            return;
+        }
+
+        this.numberEl = this.loader.querySelector('.loader-number');
+        this.barInner = this.loader.querySelector('.loader-bar-inner');
+
         this.startAnimation();
-    }
-
-    createElement() {
-        this.wrapper = document.createElement('div');
-        this.wrapper.className = 'loader';
-        this.wrapper.innerHTML = `
-            <div class="loader-bg"></div>
-            <div class="loader-content">
-                <div class="loader-line top"></div>
-                <div class="loader-center">
-                    <div class="loader-counter">
-                        <span class="loader-number">0</span>
-                        <span class="loader-percent">%</span>
-                    </div>
-                    <div class="loader-bar-wrap">
-                        <div class="loader-bar"></div>
-                    </div>
-                </div>
-                <div class="loader-line bottom"></div>
-            </div>
-            <div class="loader-columns">
-                <div class="loader-col"></div>
-                <div class="loader-col"></div>
-                <div class="loader-col"></div>
-                <div class="loader-col"></div>
-                <div class="loader-col"></div>
-            </div>
-        `;
-        document.body.appendChild(this.wrapper);
-        document.body.style.overflow = 'hidden';
-
-        this.numberEl = this.wrapper.querySelector('.loader-number');
-        this.barEl = this.wrapper.querySelector('.loader-bar');
-        this.cols = this.wrapper.querySelectorAll('.loader-col');
     }
 
     startAnimation() {
@@ -49,50 +22,49 @@ export class PageLoader {
 
         tl.to(this, {
             progress: 100,
-            duration: 2.2,
+            duration: 2,
             ease: 'power2.inOut',
             onUpdate: () => {
                 const val = Math.round(this.progress);
-                this.numberEl.textContent = val;
-                this.barEl.style.transform = `scaleX(${this.progress / 100})`;
+                if (this.numberEl) this.numberEl.textContent = val;
+                if (this.barInner) this.barInner.style.transform = `scaleX(${this.progress / 100})`;
             }
         });
 
         tl.to({}, { duration: 0.3 });
-
         tl.call(() => this.reveal());
     }
 
     reveal() {
         const tl = gsap.timeline({
             onComplete: () => {
-                this.isComplete = true;
                 document.body.style.overflow = '';
                 document.body.classList.add('loaded');
-                this.wrapper.remove();
-                if (this.onComplete) this.onComplete();
+                this.loader.classList.add('hidden');
+                gsap.to(this.loader, {
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        this.loader.remove();
+                        window.dispatchEvent(new CustomEvent('introComplete'));
+                        if (this.onComplete) this.onComplete();
+                    }
+                });
             }
         });
 
-        tl.to(this.wrapper.querySelector('.loader-content'), {
+        tl.to(this.loader.querySelector('.loader-counter'), {
             opacity: 0,
-            y: -30,
-            duration: 0.4,
+            y: -20,
+            duration: 0.3,
             ease: 'power2.in'
         });
 
-        tl.to(this.cols, {
-            scaleY: 0,
-            duration: 0.8,
-            stagger: 0.08,
-            ease: 'power4.inOut',
-            transformOrigin: 'top'
-        }, '-=0.1');
-
-        tl.to(this.wrapper.querySelector('.loader-bg'), {
-            opacity: 0,
-            duration: 0.4,
+        tl.to(this.barInner, {
+            scaleX: 1,
+            duration: 0.3,
             ease: 'power2.out'
-        }, '-=0.4');
+        }, '-=0.1');
     }
 }

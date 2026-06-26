@@ -6,22 +6,8 @@
     }
 }
 
-@media (max-width: 768px) {
-    .tutorial-row {
-        grid-template-columns: 40px 1fr 44px;
-    }
-
-    .tutorial-category {
-        display: none;
-    }
-
-    .footer-social {
-        flex-wrap: wrap;
-    }
-}
-
 @media (prefers-reduced-motion: reduce) {
-    .char {
+    .hero-line-inner {
         transform: none !important;
         opacity: 1 !important;
     }
@@ -31,7 +17,17 @@
         transform: none !important;
     }
 
-    .hero-subtitle {
+    .nav-link {
+        transform: none !important;
+        opacity: 1 !important;
+        transition-delay: 0s !important;
+    }
+
+    .project-item-title {
+        transition: none !important;
+    }
+
+    .project-item-desc {
         opacity: 1 !important;
         transform: none !important;
     }

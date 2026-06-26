@@ -88,43 +88,41 @@ void main() {
     vec2 uv = vUv;
     vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
 
-    float t = uTime * 0.08;
-    float scrollEffect = uScrollVelocity * 0.5;
+    float t = uTime * 0.06;
+    float scrollEffect = uScrollVelocity * 0.8;
 
     vec2 mouse = uMouse * aspect;
     vec2 uvAspect = uv * aspect;
     float mouseDist = length(uvAspect - mouse);
-    float mouseInfluence = smoothstep(0.5, 0.0, mouseDist) * 0.15;
+    float mouseInfluence = smoothstep(0.6, 0.0, mouseDist) * 0.2;
     vec2 distortedUV = uv + normalize(uvAspect - mouse + 0.001) * mouseInfluence;
 
-    vec3 p1 = vec3(distortedUV * 3.0, t + scrollEffect);
+    vec3 p1 = vec3(distortedUV * 2.5, t + scrollEffect);
     float n1 = fbm(p1);
 
-    vec3 p2 = vec3(distortedUV * 3.0 + vec2(n1 * 1.5), t * 0.7);
+    vec3 p2 = vec3(distortedUV * 3.0 + vec2(n1 * 2.0), t * 0.6);
     float n2 = fbm(p2);
 
-    vec3 p3 = vec3(distortedUV * 4.0 + vec2(n2 * 0.8, n1 * 0.6), t * 0.5);
+    vec3 p3 = vec3(distortedUV * 4.5 + vec2(n2 * 1.0, n1 * 0.8), t * 0.4);
     float n3 = fbm(p3);
 
     float finalNoise = n1 * 0.3 + n2 * 0.4 + n3 * 0.3;
     finalNoise = finalNoise * 0.5 + 0.5;
 
     vec3 color1 = vec3(0.0, 0.0, 0.0);
-    vec3 color2 = vec3(0.02, 0.02, 0.04);
-    vec3 color3 = vec3(0.04, 0.02, 0.06);
-    vec3 color4 = vec3(0.01, 0.03, 0.05);
+    vec3 color2 = vec3(0.015, 0.01, 0.03);
+    vec3 color3 = vec3(0.03, 0.015, 0.05);
+    vec3 color4 = vec3(0.008, 0.02, 0.04);
 
-    vec3 color = mix(color1, color2, smoothstep(0.2, 0.5, finalNoise));
-    color = mix(color, color3, smoothstep(0.4, 0.7, finalNoise));
-    color = mix(color, color4, smoothstep(0.6, 0.9, finalNoise));
+    vec3 color = mix(color1, color2, smoothstep(0.3, 0.5, finalNoise));
+    color = mix(color, color3, smoothstep(0.5, 0.7, finalNoise));
+    color = mix(color, color4, smoothstep(0.65, 0.85, finalNoise));
 
-    float gridX = abs(fract(uv.x * 60.0) - 0.5) * 2.0;
-    float gridY = abs(fract(uv.y * 35.0) - 0.5) * 2.0;
-    float grid = smoothstep(0.98, 1.0, gridX) + smoothstep(0.98, 1.0, gridY);
-    color += vec3(0.015) * grid * (1.0 - finalNoise * 0.5);
+    float mouseGlow = smoothstep(0.4, 0.0, mouseDist) * 0.03;
+    color += vec3(mouseGlow * 0.5, mouseGlow * 0.3, mouseGlow);
 
-    float vignette = 1.0 - length((uv - 0.5) * 1.6);
-    vignette = smoothstep(0.0, 0.8, vignette);
+    float vignette = 1.0 - length((uv - 0.5) * 1.8);
+    vignette = smoothstep(0.0, 0.7, vignette);
     color *= vignette;
 
     gl_FragColor = vec4(color, 1.0);

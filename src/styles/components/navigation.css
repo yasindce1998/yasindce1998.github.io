@@ -1,0 +1,107 @@
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s var(--ease-out-expo), visibility 0s 0.6s;
+}
+
+.nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.6s var(--ease-out-expo), visibility 0s 0s;
+}
+
+.nav-overlay-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+    width: 100%;
+    max-width: 600px;
+    padding: 40px;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.nav-link {
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 200;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.5s ease, transform 0.5s var(--ease-out-expo), color 0.3s ease;
+}
+
+.nav-overlay.active .nav-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-overlay.active .nav-link:nth-child(1) { transition-delay: 0.1s; }
+.nav-overlay.active .nav-link:nth-child(2) { transition-delay: 0.15s; }
+.nav-overlay.active .nav-link:nth-child(3) { transition-delay: 0.2s; }
+.nav-overlay.active .nav-link:nth-child(4) { transition-delay: 0.25s; }
+.nav-overlay.active .nav-link:nth-child(5) { transition-delay: 0.3s; }
+
+.nav-link:hover {
+    color: var(--color-text-muted);
+}
+
+.nav-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease 0.3s, transform 0.5s var(--ease-out-expo) 0.3s;
+}
+
+.nav-overlay.active .nav-footer {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-socials {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.nav-socials a {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-socials a:hover {
+    color: var(--color-text);
+}
+
+.nav-email {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-email:hover {
+    color: var(--color-text);
+}
+

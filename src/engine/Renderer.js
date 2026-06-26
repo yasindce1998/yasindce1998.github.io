@@ -87,7 +87,7 @@ export class Renderer {
     setupSectionPulses() {
         this.pulseIntensity = 0;
         this.pulseDecay = 0.95;
-        const sections = document.querySelectorAll('.hero, .projects, .tutorials-section, .footer-section');
+        const sections = document.querySelectorAll('.hero, .projects, .about, .footer');
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {

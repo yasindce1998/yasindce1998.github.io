@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammed Yasin — Cloud-Native & Cybersecurity Engineer</title>
-    <meta name="description" content="Portfolio of Mohammed Yasin, a Software Engineer with 5+ years of experience in Golang, Rust, Kubernetes, eBPF, and Blockchain.">
+    <title>Mohammed Yasin — Digital Experience Engineer</title>
+    <meta name="description" content="Mohammed Yasin — Engineering immersive digital experiences at the intersection of cloud infrastructure, cybersecurity, and creative technology.">
 
     <link rel="canonical" href="https://yasindce1998.github.io/">
 
@@ -12,402 +12,311 @@
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yasindce1998.github.io/">
-    <meta property="og:title" content="Mohammed Yasin — Cloud-Native & Cybersecurity Engineer">
-    <meta property="og:description" content="Software Engineer with 5+ years of experience in Golang, Rust, Kubernetes, eBPF, and Blockchain. Specializing in cloud-native security and runtime observability.">
-    <meta property="og:image" content="https://yasindce1998.github.io/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:title" content="Mohammed Yasin — Digital Experience Engineer">
+    <meta property="og:description" content="Engineering immersive digital experiences at the intersection of cloud infrastructure, cybersecurity, and creative technology.">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@yasindce1998">
     <meta name="twitter:creator" content="@yasindce1998">
-    <meta name="twitter:title" content="Mohammed Yasin — Cloud-Native & Cybersecurity Engineer">
-    <meta name="twitter:description" content="Software Engineer with 5+ years of experience in Golang, Rust, Kubernetes, eBPF, and Blockchain. Specializing in cloud-native security and runtime observability.">
-    <meta name="twitter:image" content="https://yasindce1998.github.io/og-image.png">
-
-    <meta name="author" content="Mohammed Yasin">
-    <meta name="keywords" content="Mohammed Yasin, Cloud Native, Cybersecurity, Golang, Rust, Kubernetes, eBPF, KubeArmor, Blockchain, Software Engineer">
     <meta name="theme-color" content="#000000">
 
     <script type="module" src="/src/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Mohammed Yasin",
-      "url": "https://yasindce1998.github.io/",
-      "image": "https://yasindce1998.github.io/og-image.png",
-      "jobTitle": "Cloud-Native & Cybersecurity Engineer",
-      "description": "Software Engineer with 5+ years of experience in Golang, Rust, Kubernetes, eBPF, and Blockchain",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Bengaluru",
-        "addressCountry": "India"
-      },
-      "email": "yasindce1998@gmail.com",
-      "sameAs": [
-        "https://www.linkedin.com/in/mohammed-yasin-4660b9206/",
-        "https://github.com/yasindce1998",
-        "https://x.com/yasindce1998",
-        "https://leetcode.com/u/yasindce1998/"
-      ],
-      "knowsAbout": ["Golang", "Rust", "Kubernetes", "eBPF", "Cybersecurity", "Blockchain", "Cloud Native", "KubeArmor"],
-      "alumniOf": "Software Engineering"
-    }
-    </script>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-counter">
+            <span class="loader-number">0</span>
+        </div>
+        <div class="loader-bar">
+            <div class="loader-bar-inner"></div>
+        </div>
+    </div>
 
     <!-- Header -->
     <header class="header" id="main-header">
-        <div class="header-inner">
-            <a href="/" class="header-logo">MOHAMMED YASIN</a>
-
-            <nav class="header-nav" id="main-nav">
-                <a href="#work" class="header-nav-link">Work</a>
-                <a href="#tutorials" class="header-nav-link">Writing</a>
-                <a href="/blog/" class="header-nav-link">Blog</a>
-                <a href="#contact" class="header-nav-link">Contact</a>
-                <a href="/resume.pdf" download class="nav-resume-btn">Resume &darr;</a>
-            </nav>
-
-            <button class="header-menu-btn" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
-                <span class="menu-btn-text">MENU</span>
-                <span class="menu-btn-lines">
-                    <span></span>
-                    <span></span>
-                </span>
-            </button>
-        </div>
+        <a href="/" class="header-logo">MY</a>
+        <button class="header-menu-btn" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+            <span class="menu-lines">
+                <span></span>
+                <span></span>
+            </span>
+        </button>
     </header>
 
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
-        <nav class="mobile-nav">
-            <a href="#work" class="mobile-nav-link">Work</a>
-            <a href="#tutorials" class="mobile-nav-link">Writing</a>
-            <a href="/blog/" class="mobile-nav-link">Blog</a>
-            <a href="#contact" class="mobile-nav-link">Contact</a>
+    <!-- Fullscreen Navigation Overlay -->
+    <div class="nav-overlay" id="nav-overlay">
+        <nav class="nav-overlay-inner">
+            <div class="nav-links">
+                <a href="#work" class="nav-link" data-index="01">Work</a>
+                <a href="#about" class="nav-link" data-index="02">About</a>
+                <a href="/blog/" class="nav-link" data-index="03">Journal</a>
+                <a href="#contact" class="nav-link" data-index="04">Contact</a>
+            </div>
+            <div class="nav-footer">
+                <div class="nav-socials">
+                    <a href="https://github.com/yasindce1998" target="_blank" rel="noopener noreferrer">Github</a>
+                    <a href="https://www.linkedin.com/in/mohammed-yasin-4660b9206/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://x.com/yasindce1998" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+                </div>
+                <a href="mailto:yasindce1998@gmail.com" class="nav-email">yasindce1998@gmail.com</a>
+            </div>
         </nav>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+        <div class="cursor-text">VIEW</div>
     </div>
 
     <main id="main-content">
         <!-- Hero -->
         <section class="hero" id="hero">
             <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="hero-line">CLOUD-NATIVE &</span>
-                    <span class="hero-line">CYBERSECURITY</span>
-                    <span class="hero-line">ENGINEER</span>
-                </h1>
-                <p class="hero-subtitle">Building secure, runtime observable & scalable infrastructures with 5+ years of experience in Golang, Rust, Kubernetes & eBPF.</p>
+                <div class="hero-title-wrap">
+                    <h1 class="hero-title">
+                        <span class="hero-line"><span class="hero-line-inner">We craft</span></span>
+                        <span class="hero-line"><span class="hero-line-inner">digital</span></span>
+                        <span class="hero-line"><span class="hero-line-inner">experiences</span></span>
+                    </h1>
+                </div>
+                <div class="hero-meta">
+                    <p class="hero-description">Cloud-native infrastructure & cybersecurity — engineering secure, observable systems that push boundaries.</p>
+                    <div class="hero-scroll-indicator">
+                        <span class="hero-scroll-text">Scroll</span>
+                        <div class="hero-scroll-line"></div>
+                    </div>
+                </div>
             </div>
-
         </section>
 
         <!-- Projects -->
-        <section class="projects" id="work" role="region" aria-label="Projects" aria-roledescription="carousel" tabindex="0">
-            <div class="section-label">
-                <span>SELECTED WORK</span>
-                <span>8 Projects</span>
+        <section class="projects" id="work">
+            <div class="projects-header">
+                <span class="section-index">01</span>
+                <span class="section-title">Selected Work</span>
             </div>
 
-            <div class="projects-grid" role="list">
-                <a href="https://kroger.com" target="_blank" rel="noopener noreferrer" class="project-tile" role="listitem">
-                    <div class="project-tile-header">
-                        <span class="project-index">01</span>
-                        <span class="project-category">GEOSPATIAL</span>
+            <div class="projects-list">
+                <a href="https://kroger.com" target="_blank" rel="noopener noreferrer" class="project-item" data-project="01">
+                    <div class="project-item-index">01</div>
+                    <div class="project-item-content">
+                        <h3 class="project-item-title">Kroger — Geospatial Services</h3>
+                        <p class="project-item-desc">Real-time delivery routing and zone optimization. Millions of location queries daily with sub-50ms latency.</p>
                     </div>
-                    <div class="project-tile-body">
-                        <h3 class="project-title">Kroger — Location & Geospatial Services</h3>
-                        <p class="project-desc">Architected backend services for real-time delivery routing and zone optimization with haversine calculations and distributed database architecture.</p>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">Geospatial</span>
+                        <span class="project-item-year">2024</span>
                     </div>
-                    <div class="project-tile-footer">
-                        <div class="project-tech">
-                            <span>Golang</span>
-                            <span>YugaByte</span>
-                            <span>PostgreSQL</span>
-                            <span>Redis</span>
-                            <span>Kubernetes</span>
-                        </div>
-                        <span class="project-arrow">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
-                        </span>
+                    <div class="project-item-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
                     </div>
+                    <div class="project-item-line"></div>
                 </a>
 
-                <a href="https://www.bankofamerica.com/" target="_blank" rel="noopener noreferrer" class="project-tile" role="listitem">
-                    <div class="project-tile-header">
-                        <span class="project-index">02</span>
-                        <span class="project-category">CLOUD ARCHITECTURE</span>
+                <a href="https://www.bankofamerica.com/" target="_blank" rel="noopener noreferrer" class="project-item" data-project="02">
+                    <div class="project-item-index">02</div>
+                    <div class="project-item-content">
+                        <h3 class="project-item-title">Bank of America — Cloud Platform</h3>
+                        <p class="project-item-desc">Cloud resource provisioning for containerized workloads with compliance guardrails and self-service deployment.</p>
                     </div>
-                    <div class="project-tile-body">
-                        <h3 class="project-title">Bank of America — Provisioning Platform</h3>
-                        <p class="project-desc">Built cloud resource provisioning platform for containerized workloads on secure microservices architecture with OpenShift, Tekton, and ArgoCD.</p>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">Cloud Architecture</span>
+                        <span class="project-item-year">2023</span>
                     </div>
-                    <div class="project-tile-footer">
-                        <div class="project-tech">
-                            <span>Golang</span>
-                            <span>OpenShift</span>
-                            <span>Tekton</span>
-                            <span>ArgoCD</span>
-                            <span>gRPC</span>
-                        </div>
-                        <span class="project-arrow">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
-                        </span>
+                    <div class="project-item-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
                     </div>
+                    <div class="project-item-line"></div>
                 </a>
 
-                <a href="https://github.com/yasindce1998/RedHands" target="_blank" rel="noopener noreferrer" class="project-tile" role="listitem">
-                    <div class="project-tile-header">
-                        <span class="project-index">03</span>
-                        <span class="project-category">AI SECURITY</span>
+                <a href="https://github.com/yasindce1998/RedHands" target="_blank" rel="noopener noreferrer" class="project-item" data-project="03">
+                    <div class="project-item-index">03</div>
+                    <div class="project-item-content">
+                        <h3 class="project-item-title">RedHands — AI Offensive Security</h3>
+                        <p class="project-item-desc">MCP server enabling autonomous penetration testing workflows through AI agents with standardized protocol interface.</p>
                     </div>
-                    <div class="project-tile-body">
-                        <h3 class="project-title">RedHands — AI Offensive Security Server</h3>
-                        <p class="project-desc">MCP server exposing offensive security tools to AI agents. Enables autonomous penetration testing workflows through standardized protocol interface.</p>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">AI Security</span>
+                        <span class="project-item-year">2024</span>
                     </div>
-                    <div class="project-tile-footer">
-                        <div class="project-tech">
-                            <span>Golang</span>
-                            <span>MCP</span>
-                            <span>AI Agents</span>
-                            <span>Pentesting</span>
-                        </div>
-                        <span class="project-arrow">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
-                        </span>
+                    <div class="project-item-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
                     </div>
+                    <div class="project-item-line"></div>
                 </a>
 
-                <a href="https://github.com/yasindce1998/Aegis-Shadow" target="_blank" rel="noopener noreferrer" class="project-tile" role="listitem">
-                    <div class="project-tile-header">
-                        <span class="project-index">04</span>
-                        <span class="project-category">KERNEL RESEARCH</span>
+                <a href="https://github.com/yasindce1998/Aegis-Shadow" target="_blank" rel="noopener noreferrer" class="project-item" data-project="04">
+                    <div class="project-item-index">04</div>
+                    <div class="project-item-content">
+                        <h3 class="project-item-title">Aegis-Shadow — eBPF Rootkit Research</h3>
+                        <p class="project-item-desc">Dual-module security research framework for offensive rootkit techniques and defensive runtime auditing.</p>
                     </div>
-                    <div class="project-tile-body">
-                        <h3 class="project-title">Aegis-Shadow — eBPF Rootkit Research</h3>
-                        <p class="project-desc">Dual-module eBPF security research framework demonstrating offensive rootkit techniques and defensive runtime auditing for Linux kernel exploration.</p>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">Kernel Research</span>
+                        <span class="project-item-year">2024</span>
                     </div>
-                    <div class="project-tile-footer">
-                        <div class="project-tech">
-                            <span>Rust</span>
-                            <span>eBPF</span>
-                            <span>Linux Kernel</span>
-                            <span>Rootkits</span>
-                        </div>
-                        <span class="project-arrow">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
-                        </span>
+                    <div class="project-item-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
                     </div>
+                    <div class="project-item-line"></div>
                 </a>
 
-                <a href="https://github.com/yasindce1998/KubeDagger" target="_blank" rel="noopener noreferrer" class="project-tile" role="listitem">
-                    <div class="project-tile-header">
-                        <span class="project-index">05</span>
-                        <span class="project-category">SECURITY TOOLING</span>
+                <a href="https://github.com/yasindce1998/KubeDagger" target="_blank" rel="noopener noreferrer" class="project-item" data-project="05">
+                    <div class="project-item-index">05</div>
+                    <div class="project-item-content">
+                        <h3 class="project-item-title">KubeDagger — eBPF Offensive Toolkit</h3>
+                        <p class="project-item-desc">Network discovery, process hiding, and container breakouts for red team Kubernetes assessments.</p>
                     </div>
-                    <div class="project-tile-body">
-                        <h3 class="project-title">KubeDagger — eBPF Offensive Toolkit</h3>
-                        <p class="project-desc">eBPF-based security research tool for network discovery, process hiding, and container breakouts. Designed for red team assessments of Kubernetes environments.</p>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">Security Tooling</span>
+                        <span class="project-item-year">2023</span>
                     </div>
-                    <div class="project-tile-footer">
-                        <div class="project-tech">
-                            <span>Golang</span>
-                            <span>eBPF</span>
-                            <span>Kubernetes</span>
-                            <span>Container Escape</span>
-                        </div>
-                        <span class="project-arrow">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
-                        </span>
+                    <div class="project-item-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
                     </div>
+                    <div class="project-item-line"></div>
                 </a>
 
-                <a href="https://github.com/yasindce1998/Barzakh" target="_blank" rel="noopener noreferrer" class="project-tile" role="listitem">
-                    <div class="project-tile-header">
-                        <span class="project-index">06</span>
-                        <span class="project-category">FIRMWARE SECURITY</span>
+                <a href="https://github.com/yasindce1998/NeuronTrace" target="_blank" rel="noopener noreferrer" class="project-item" data-project="06">
+                    <div class="project-item-index">06</div>
+                    <div class="project-item-content">
+                        <h3 class="project-item-title">NeuronTrace — AI Agent Containment</h3>
+                        <p class="project-item-desc">Kernel-level behavioral containment using eBPF/LSM for monitoring autonomous agent actions at syscall layer.</p>
                     </div>
-                    <div class="project-tile-body">
-                        <h3 class="project-title">Barzakh — UEFI Bootkit Simulation</h3>
-                        <p class="project-desc">Controlled white-hat UEFI bootkit simulation for academic research and defensive detection engineering of firmware-level persistence techniques.</p>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">AI Safety</span>
+                        <span class="project-item-year">2024</span>
                     </div>
-                    <div class="project-tile-footer">
-                        <div class="project-tech">
-                            <span>C</span>
-                            <span>UEFI</span>
-                            <span>Firmware</span>
-                            <span>Bootkit</span>
-                        </div>
-                        <span class="project-arrow">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
-                        </span>
+                    <div class="project-item-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
                     </div>
+                    <div class="project-item-line"></div>
                 </a>
 
-                <a href="https://github.com/yasindce1998/NeuronTrace" target="_blank" rel="noopener noreferrer" class="project-tile" role="listitem">
-                    <div class="project-tile-header">
-                        <span class="project-index">07</span>
-                        <span class="project-category">AI CONTAINMENT</span>
+                <a href="https://github.com/yasindce1998/Barzakh" target="_blank" rel="noopener noreferrer" class="project-item" data-project="07">
+                    <div class="project-item-index">07</div>
+                    <div class="project-item-content">
+                        <h3 class="project-item-title">Barzakh — UEFI Bootkit Simulation</h3>
+                        <p class="project-item-desc">White-hat firmware persistence simulation for defensive detection engineering and academic research.</p>
                     </div>
-                    <div class="project-tile-body">
-                        <h3 class="project-title">NeuronTrace — AI Agent Containment</h3>
-                        <p class="project-desc">Kernel-level behavioral containment for AI agents using eBPF/LSM. Monitors and restricts autonomous agent actions at the syscall layer.</p>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">Firmware Security</span>
+                        <span class="project-item-year">2023</span>
                     </div>
-                    <div class="project-tile-footer">
-                        <div class="project-tech">
-                            <span>Rust</span>
-                            <span>eBPF</span>
-                            <span>LSM</span>
-                            <span>AI Safety</span>
-                        </div>
-                        <span class="project-arrow">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
-                        </span>
+                    <div class="project-item-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
                     </div>
+                    <div class="project-item-line"></div>
                 </a>
 
-                <a href="https://github.com/yasindce1998/Warmor" target="_blank" rel="noopener noreferrer" class="project-tile" role="listitem">
-                    <div class="project-tile-header">
-                        <span class="project-index">08</span>
-                        <span class="project-category">KERNEL & WASM</span>
+                <a href="https://github.com/yasindce1998/Warmor" target="_blank" rel="noopener noreferrer" class="project-item" data-project="08">
+                    <div class="project-item-index">08</div>
+                    <div class="project-item-content">
+                        <h3 class="project-item-title">Warmor — eBPF + WASM Enforcer</h3>
+                        <p class="project-item-desc">Syscall monitoring with WebAssembly policies for cross-platform workload protection.</p>
                     </div>
-                    <div class="project-tile-body">
-                        <h3 class="project-title">Warmor — eBPF + WASM Security Enforcer</h3>
-                        <p class="project-desc">Security enforcer using eBPF for syscall monitoring with WebAssembly-based policies for cross-platform workload protection.</p>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">Kernel & WASM</span>
+                        <span class="project-item-year">2022</span>
                     </div>
-                    <div class="project-tile-footer">
-                        <div class="project-tech">
-                            <span>Golang</span>
-                            <span>eBPF</span>
-                            <span>WebAssembly</span>
-                            <span>Linux</span>
-                        </div>
-                        <span class="project-arrow">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
-                        </span>
+                    <div class="project-item-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
                     </div>
+                    <div class="project-item-line"></div>
                 </a>
             </div>
         </section>
 
-
-        <!-- Tutorials -->
-        <section class="tutorials-section" id="tutorials">
-            <div class="section-label">
-                <span>WRITING</span>
-                <span>Technical Articles</span>
+        <!-- About -->
+        <section class="about" id="about">
+            <div class="about-header">
+                <span class="section-index">02</span>
+                <span class="section-title">About</span>
             </div>
-
-            <div class="tutorials-list">
-                <a href="https://github.com/kubearmor/KubeArmor" target="_blank" rel="noopener noreferrer" class="tutorial-row">
-                    <span class="tutorial-number">01</span>
-                    <span class="tutorial-title">Hardening Kubernetes Workloads with AppArmor & BPF-LSM</span>
-                    <span class="tutorial-category">eBPF / SECURITY</span>
-                    <span class="tutorial-arrow">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </span>
-                </a>
-
-                <a href="https://github.com/yasindce1998" target="_blank" rel="noopener noreferrer" class="tutorial-row">
-                    <span class="tutorial-number">02</span>
-                    <span class="tutorial-title">Building High-Throughput Microservices in Golang with Kafka</span>
-                    <span class="tutorial-category">GOLANG / DISTRIBUTED</span>
-                    <span class="tutorial-arrow">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </span>
-                </a>
-
-                <a href="https://github.com/yasindce1998/warmor" target="_blank" rel="noopener noreferrer" class="tutorial-row">
-                    <span class="tutorial-number">03</span>
-                    <span class="tutorial-title">Syscall Monitoring and Workload Isolation using WebAssembly & Rust</span>
-                    <span class="tutorial-category">RUST / WASM</span>
-                    <span class="tutorial-arrow">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </span>
-                </a>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-large">We believe in building systems that are not just functional, but extraordinary — where security meets elegance and infrastructure becomes invisible.</p>
+                    <p class="about-body">With 5+ years engineering cloud-native platforms at scale, specializing in Golang, Rust, Kubernetes, and eBPF. From kernel-level security research to enterprise cloud architecture, every system is designed to push the boundaries of what's possible.</p>
+                </div>
+                <div class="about-capabilities">
+                    <div class="capability-group">
+                        <h4 class="capability-title">Engineering</h4>
+                        <ul class="capability-list">
+                            <li>Cloud-Native Architecture</li>
+                            <li>Distributed Systems</li>
+                            <li>Kernel Engineering</li>
+                            <li>Runtime Security</li>
+                        </ul>
+                    </div>
+                    <div class="capability-group">
+                        <h4 class="capability-title">Technologies</h4>
+                        <ul class="capability-list">
+                            <li>Golang / Rust</li>
+                            <li>Kubernetes / eBPF</li>
+                            <li>WebAssembly</li>
+                            <li>AI & ML Systems</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
-
-        <!-- Marquee -->
-        <div class="marquee">
-            <div class="marquee-track">
-                <span class="marquee-item">AVAILABLE FOR WORK</span>
-                <span class="marquee-separator">&mdash;</span>
-                <span class="marquee-item">CLOUD-NATIVE</span>
-                <span class="marquee-separator">&mdash;</span>
-                <span class="marquee-item">CYBERSECURITY</span>
-                <span class="marquee-separator">&mdash;</span>
-                <span class="marquee-item">eBPF</span>
-                <span class="marquee-separator">&mdash;</span>
-                <span class="marquee-item">KUBERNETES</span>
-                <span class="marquee-separator">&mdash;</span>
-                <span class="marquee-item">GOLANG</span>
-                <span class="marquee-separator">&mdash;</span>
-                <span class="marquee-item">RUST</span>
-                <span class="marquee-separator">&mdash;</span>
-            </div>
-        </div>
 
         <!-- Footer -->
-        <footer class="footer-section" id="contact">
-            <div class="footer-cta">
-                <h2 class="footer-cta-title">LET'S WORK<br>TOGETHER</h2>
-                <a href="mailto:yasindce1998@gmail.com" class="footer-email">yasindce1998@gmail.com</a>
-            </div>
-
-            <div class="footer-bottom">
-                <span class="footer-copyright">&copy; 2026 Mohammed Yasin</span>
-                <a href="/resume.pdf" download class="footer-resume-btn">Download Resume &darr;</a>
-                <div class="footer-social">
-                    <a href="https://github.com/yasindce1998" target="_blank" rel="noopener noreferrer" class="footer-social-link">GITHUB</a>
-                    <a href="https://www.linkedin.com/in/mohammed-yasin-4660b9206/" target="_blank" rel="noopener noreferrer" class="footer-social-link">LINKEDIN</a>
-                    <a href="https://x.com/yasindce1998" target="_blank" rel="noopener noreferrer" class="footer-social-link">X</a>
-                    <a href="https://leetcode.com/u/yasindce1998/" target="_blank" rel="noopener noreferrer" class="footer-social-link">LEETCODE</a>
+        <footer class="footer" id="contact">
+            <div class="footer-content">
+                <div class="footer-cta">
+                    <h2 class="footer-title">
+                        <span class="footer-title-line">Let's build</span>
+                        <span class="footer-title-line">something</span>
+                        <span class="footer-title-line">together</span>
+                    </h2>
                 </div>
+                <div class="footer-info">
+                    <a href="mailto:yasindce1998@gmail.com" class="footer-email">yasindce1998@gmail.com</a>
+                    <div class="footer-links">
+                        <a href="https://github.com/yasindce1998" target="_blank" rel="noopener noreferrer">Github</a>
+                        <a href="https://www.linkedin.com/in/mohammed-yasin-4660b9206/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="https://x.com/yasindce1998" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+                        <a href="https://leetcode.com/u/yasindce1998/" target="_blank" rel="noopener noreferrer">LeetCode</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Mohammed Yasin</span>
+                <span>Bengaluru, India</span>
             </div>
         </footer>
     </main>
-
 </body>
 </html>

@@ -1,25 +1,25 @@
 :root {
-    --color-bg: #0a0a0a;
-    --color-text: #f0f0f0;
-    --color-text-muted: rgba(240, 240, 240, 0.4);
-    --color-accent: #ffffff;
+    --color-bg: #000000;
+    --color-text: #ffffff;
+    --color-text-muted: rgba(255, 255, 255, 0.4);
+    --color-text-dim: rgba(255, 255, 255, 0.15);
     --color-border: rgba(255, 255, 255, 0.08);
+    --color-accent: #ffffff;
     --color-surface: rgba(255, 255, 255, 0.03);
-    --color-text-secondary: rgba(240, 240, 240, 0.6);
 
-    --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-    --space-xs: 0.5rem;
-    --space-sm: 1rem;
-    --space-md: 2rem;
-    --space-lg: 4rem;
-    --space-xl: 8rem;
-    --space-2xl: 12rem;
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 32px;
+    --space-lg: 64px;
+    --space-xl: 120px;
+    --space-2xl: 200px;
+
+    --header-height: 80px;
 
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
     --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-
-    --header-height: 80px;
+    --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
 }

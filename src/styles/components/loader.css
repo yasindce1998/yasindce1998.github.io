@@ -2,98 +2,45 @@
     position: fixed;
     inset: 0;
     z-index: 10000;
+    background: #000;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.loader-bg {
-    position: absolute;
-    inset: 0;
-    background: var(--color-bg);
-}
-
-.loader-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-md);
-}
-
-.loader-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-sm);
+    gap: 30px;
 }
 
 .loader-counter {
-    font-family: var(--font-mono);
-    font-size: clamp(48px, 8vw, 100px);
-    font-weight: 300;
-    letter-spacing: -0.02em;
+    font-family: var(--font-body);
+    font-size: clamp(60px, 12vw, 140px);
+    font-weight: 200;
+    letter-spacing: -0.03em;
     color: var(--color-text);
 }
 
 .loader-number {
     display: inline-block;
     min-width: 3ch;
-    text-align: right;
-}
-
-.loader-percent {
-    font-size: 0.4em;
-    opacity: 0.4;
-    margin-left: 4px;
-}
-
-.loader-bar-wrap {
-    width: 200px;
-    height: 1px;
-    background: var(--color-border);
-    overflow: hidden;
+    text-align: center;
 }
 
 .loader-bar {
+    width: 200px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.loader-bar-inner {
     height: 100%;
+    width: 100%;
     background: var(--color-text);
     transform: scaleX(0);
     transform-origin: left;
-    will-change: transform;
 }
 
-.loader-line {
-    width: 1px;
-    height: 60px;
-    background: var(--color-border);
-}
-
-.loader-line.top {
-    margin-bottom: auto;
-}
-
-.loader-line.bottom {
-    margin-top: auto;
-}
-
-.loader-columns {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    z-index: 1;
-}
-
-.loader-col {
-    flex: 1;
-    background: var(--color-bg);
-    border-right: 1px solid var(--color-border);
-    transform-origin: top;
-}
-
-.loader-col:last-child {
-    border-right: none;
+.loader.hidden {
+    pointer-events: none;
 }
 
 body:not(.loaded) main {
@@ -102,4 +49,5 @@ body:not(.loaded) main {
 
 body.loaded main {
     opacity: 1;
+    transition: opacity 0.6s ease 0.2s;
 }

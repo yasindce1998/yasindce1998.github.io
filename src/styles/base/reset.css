@@ -15,12 +15,17 @@ body {
     color: var(--color-text);
     font-family: var(--font-body);
     font-weight: 300;
+    font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
     cursor: none;
 }
 
 body.menu-open {
+    overflow: hidden;
+}
+
+body.loading {
     overflow: hidden;
 }
 
@@ -45,11 +50,6 @@ img, video {
 
 ul, ol {
     list-style: none;
-}
-
-input, textarea {
-    font: inherit;
-    color: inherit;
 }
 
 ::selection {
