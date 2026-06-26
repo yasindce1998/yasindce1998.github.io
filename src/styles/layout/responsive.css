@@ -7,9 +7,15 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-line-inner {
+    .hero-line-inner,
+    .hero-char {
         transform: none !important;
         opacity: 1 !important;
+    }
+
+    .hero-subtitle {
+        opacity: 1 !important;
+        transform: none !important;
     }
 
     .scroll-reveal {
@@ -29,6 +35,14 @@
 
     .project-item-desc {
         opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .project-item::before {
+        display: none !important;
+    }
+
+    main {
         transform: none !important;
     }
 }

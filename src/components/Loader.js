@@ -31,8 +31,24 @@ export class PageLoader {
             }
         });
 
-        tl.to({}, { duration: 0.3 });
-        tl.call(() => this.reveal());
+        tl.to({}, { duration: 0.2 });
+        tl.call(() => this.glitchReveal());
+    }
+
+    glitchReveal() {
+        const counter = this.loader.querySelector('.loader-counter');
+        if (!counter) {
+            this.reveal();
+            return;
+        }
+
+        const tl = gsap.timeline({ onComplete: () => this.reveal() });
+
+        tl.to(counter, { opacity: 0, duration: 0.05 });
+        tl.to(counter, { opacity: 1, duration: 0.05 });
+        tl.to(counter, { opacity: 0, x: -3, duration: 0.04 });
+        tl.to(counter, { opacity: 0.7, x: 2, duration: 0.04 });
+        tl.to(counter, { opacity: 0, x: 0, duration: 0.05 });
     }
 
     reveal() {

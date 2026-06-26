@@ -87,10 +87,10 @@ export class HomeScene {
         this.floatingGroup = new THREE.Group();
 
         const wireMaterial = new THREE.MeshBasicMaterial({
-            color: 0x222222,
+            color: 0x6366f1,
             wireframe: true,
             transparent: true,
-            opacity: 0.15
+            opacity: 0.12
         });
 
         const torus = new THREE.Mesh(

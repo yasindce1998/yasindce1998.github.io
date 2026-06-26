@@ -16,6 +16,8 @@ class App {
         this.clock = null;
         this.cursor = null;
         this.textAnimation = null;
+        this.scrollSkew = 0;
+        this.mainEl = document.querySelector('main');
 
         this.init();
     }
@@ -76,27 +78,12 @@ class App {
         this.scroll.onScroll(({ velocity, progress }) => {
             if (this.scene) this.scene.setScroll(velocity, progress);
             if (this.renderer) this.renderer.setScrollVelocity(velocity);
-        });
 
-        this.initLinkInteractions();
-    }
-
-    initLinkInteractions() {
-        const hoverTargets = document.querySelectorAll('a, button, .project-item');
-
-        hoverTargets.forEach((el) => {
-            el.addEventListener('mouseenter', () => {
-                if (this.cursor) {
-                    if (el.classList.contains('project-item')) {
-                        this.cursor.setState('project');
-                    } else {
-                        this.cursor.setState('hover');
-                    }
-                }
-            });
-            el.addEventListener('mouseleave', () => {
-                if (this.cursor) this.cursor.setState('default');
-            });
+            const targetSkew = velocity * 0.04;
+            this.scrollSkew += (targetSkew - this.scrollSkew) * 0.1;
+            if (this.mainEl) {
+                this.mainEl.style.transform = `skewY(${this.scrollSkew}deg)`;
+            }
         });
     }
 

@@ -1,13 +1,18 @@
 :root {
-    --color-bg: #000000;
-    --color-text: #ffffff;
+    --color-bg: #050505;
+    --color-text: #e8e8e8;
     --color-text-muted: rgba(255, 255, 255, 0.4);
     --color-text-dim: rgba(255, 255, 255, 0.15);
     --color-border: rgba(255, 255, 255, 0.08);
-    --color-accent: #ffffff;
+    --color-accent: #22d3ee;
     --color-surface: rgba(255, 255, 255, 0.03);
 
+    --gradient-accent: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+    --gradient-accent-reverse: linear-gradient(135deg, #ec4899, #a855f7, #6366f1);
+    --gradient-glow: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.4));
+
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
 
     --space-xs: 8px;
     --space-sm: 16px;

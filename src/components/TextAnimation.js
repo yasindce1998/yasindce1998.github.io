@@ -2,35 +2,52 @@ import gsap from 'gsap';
 
 export class TextAnimation {
     constructor() {
-        this.heroLines = [];
+        this.heroChars = [];
         this.observers = [];
     }
 
     init() {
-        this.prepareHeroLines();
+        this.splitHeroText();
         this.setupScrollReveals();
     }
 
-    prepareHeroLines() {
-        const lines = document.querySelectorAll('.hero-line');
-        lines.forEach((line) => {
-            const inner = line.querySelector('.hero-line-inner');
-            if (inner) {
-                inner.style.transform = 'translateY(105%)';
-                this.heroLines.push(inner);
-            }
+    splitHeroText() {
+        const lines = document.querySelectorAll('.hero-line-inner');
+        lines.forEach((inner) => {
+            const text = inner.textContent;
+            inner.textContent = '';
+            inner.style.transform = 'none';
+
+            [...text].forEach((char) => {
+                const span = document.createElement('span');
+                span.className = 'hero-char';
+                span.textContent = char === ' ' ? ' ' : char;
+                inner.appendChild(span);
+                this.heroChars.push(span);
+            });
         });
     }
 
     revealHero() {
-        this.heroLines.forEach((inner, index) => {
-            gsap.to(inner, {
-                y: 0,
-                duration: 1.2,
-                delay: index * 0.12,
-                ease: 'power3.out'
-            });
+        gsap.to(this.heroChars, {
+            y: 0,
+            rotation: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.03,
+            ease: 'power3.out'
         });
+
+        const subtitle = document.querySelector('.hero-subtitle');
+        if (subtitle) {
+            gsap.to(subtitle, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: this.heroChars.length * 0.03 + 0.2,
+                ease: 'power2.out'
+            });
+        }
 
         const heroMeta = document.querySelector('.hero-meta');
         if (heroMeta) {
@@ -38,7 +55,7 @@ export class TextAnimation {
                 opacity: 1,
                 y: 0,
                 duration: 1,
-                delay: 0.6,
+                delay: this.heroChars.length * 0.03 + 0.4,
                 ease: 'power2.out'
             });
         }

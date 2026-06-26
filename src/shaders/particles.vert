@@ -8,6 +8,7 @@ attribute float aOffset;
 
 varying float vAlpha;
 varying float vSize;
+varying vec3 vPosition;
 
 void main() {
     vec3 pos = position;
@@ -25,8 +26,9 @@ void main() {
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
     float distToCamera = -mvPosition.z;
 
-    vAlpha = smoothstep(8.0, 2.0, distToCamera) * 0.6;
+    vAlpha = smoothstep(8.0, 2.0, distToCamera) * 0.8;
     vSize = aSize * (300.0 / distToCamera);
+    vPosition = pos;
 
     gl_PointSize = vSize;
     gl_Position = projectionMatrix * mvPosition;

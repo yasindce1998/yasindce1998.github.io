@@ -88,42 +88,58 @@ void main() {
     vec2 uv = vUv;
     vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
 
-    float t = uTime * 0.06;
-    float scrollEffect = uScrollVelocity * 0.8;
+    float t = uTime * 0.05;
+    float scrollEffect = uScrollVelocity * 1.2;
 
     vec2 mouse = uMouse * aspect;
     vec2 uvAspect = uv * aspect;
     float mouseDist = length(uvAspect - mouse);
-    float mouseInfluence = smoothstep(0.6, 0.0, mouseDist) * 0.2;
+    float mouseInfluence = smoothstep(0.7, 0.0, mouseDist) * 0.3;
     vec2 distortedUV = uv + normalize(uvAspect - mouse + 0.001) * mouseInfluence;
 
-    vec3 p1 = vec3(distortedUV * 2.5, t + scrollEffect);
+    vec3 p1 = vec3(distortedUV * 2.2, t + scrollEffect);
     float n1 = fbm(p1);
 
-    vec3 p2 = vec3(distortedUV * 3.0 + vec2(n1 * 2.0), t * 0.6);
+    vec3 p2 = vec3(distortedUV * 2.8 + vec2(n1 * 2.0), t * 0.7);
     float n2 = fbm(p2);
 
-    vec3 p3 = vec3(distortedUV * 4.5 + vec2(n2 * 1.0, n1 * 0.8), t * 0.4);
+    vec3 p3 = vec3(distortedUV * 4.0 + vec2(n2 * 1.2, n1 * 0.9), t * 0.5);
     float n3 = fbm(p3);
 
     float finalNoise = n1 * 0.3 + n2 * 0.4 + n3 * 0.3;
     finalNoise = finalNoise * 0.5 + 0.5;
 
-    vec3 color1 = vec3(0.0, 0.0, 0.0);
-    vec3 color2 = vec3(0.015, 0.01, 0.03);
-    vec3 color3 = vec3(0.03, 0.015, 0.05);
-    vec3 color4 = vec3(0.008, 0.02, 0.04);
+    // Aurora color palette — indigo, purple, cyan, pink
+    vec3 indigo = vec3(0.10, 0.08, 0.35);
+    vec3 purple = vec3(0.20, 0.05, 0.30);
+    vec3 cyan = vec3(0.02, 0.25, 0.35);
+    vec3 pink = vec3(0.30, 0.05, 0.18);
+    vec3 deep = vec3(0.02, 0.01, 0.05);
 
-    vec3 color = mix(color1, color2, smoothstep(0.3, 0.5, finalNoise));
-    color = mix(color, color3, smoothstep(0.5, 0.7, finalNoise));
-    color = mix(color, color4, smoothstep(0.65, 0.85, finalNoise));
+    vec3 color = mix(deep, indigo, smoothstep(0.25, 0.45, finalNoise));
+    color = mix(color, purple, smoothstep(0.4, 0.6, finalNoise));
+    color = mix(color, cyan, smoothstep(0.55, 0.75, finalNoise));
+    color = mix(color, pink, smoothstep(0.7, 0.9, finalNoise));
 
-    float mouseGlow = smoothstep(0.4, 0.0, mouseDist) * 0.03;
-    color += vec3(mouseGlow * 0.5, mouseGlow * 0.3, mouseGlow);
+    // Boost luminosity in bright areas
+    float brightness = smoothstep(0.5, 0.8, finalNoise) * 0.4;
+    color += brightness * vec3(0.08, 0.04, 0.12);
 
-    float vignette = 1.0 - length((uv - 0.5) * 1.8);
-    vignette = smoothstep(0.0, 0.7, vignette);
+    // Cyan mouse glow
+    float mouseGlow = smoothstep(0.5, 0.0, mouseDist) * 0.15;
+    color += vec3(mouseGlow * 0.2, mouseGlow * 0.8, mouseGlow);
+
+    // Scroll velocity adds energy — brighter streaks
+    float scrollGlow = abs(scrollEffect) * 0.1;
+    color += scrollGlow * vec3(0.15, 0.05, 0.25);
+
+    // Soft vignette
+    float vignette = 1.0 - length((uv - 0.5) * 1.4);
+    vignette = smoothstep(0.0, 0.8, vignette);
     color *= vignette;
+
+    // Keep overall scene dark but with visible color
+    color *= 0.7;
 
     gl_FragColor = vec4(color, 1.0);
 }
