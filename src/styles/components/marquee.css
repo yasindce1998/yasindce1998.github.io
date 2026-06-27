@@ -1,26 +1,41 @@
 .marquee {
     overflow: hidden;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    padding: var(--space-sm) 0;
+    border-top: var(--rule) solid var(--color-border);
+    border-bottom: var(--rule) solid var(--color-border);
+    padding: clamp(14px, 2vw, 22px) 0;
     white-space: nowrap;
+    background: var(--color-bg-alt);
 }
 
 .marquee-track {
     display: inline-flex;
+    align-items: center;
     gap: var(--space-md);
     white-space: nowrap;
     will-change: transform;
+    padding-right: var(--space-md);
 }
 
-.marquee-item {
-    font-family: var(--font-body);
-    font-size: clamp(14px, 1.5vw, 18px);
-    font-weight: 700;
-    letter-spacing: 0.1em;
+.marquee-track > span {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.2vw, 1.9rem);
+    font-weight: 360;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+}
+
+.marquee-dot {
+    font-style: normal !important;
+    color: var(--color-accent) !important;
+    font-weight: 400 !important;
+}
+
+.marquee--reverse .marquee-track > span {
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: clamp(0.8rem, 1.4vw, 1.05rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--color-text-muted);
-}
-
-.marquee-separator {
-    color: rgba(255, 255, 255, 0.15);
 }

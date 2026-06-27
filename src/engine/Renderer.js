@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { EffectComposer, RenderPass, EffectPass, BloomEffect, ChromaticAberrationEffect, VignetteEffect, NoiseEffect, BlendFunction } from 'postprocessing';
-import { getDevicePixelRatio, isHighPerformance } from '../utils/device.js';
+import { getDevicePixelRatio, isHighPerformance, getGPUTier } from '../utils/device.js';
 
 export class Renderer {
     constructor(container) {
@@ -9,6 +9,7 @@ export class Renderer {
         this.height = window.innerHeight;
         this.dpr = getDevicePixelRatio();
         this.highPerf = isHighPerformance();
+        this.gpuTier = getGPUTier();
 
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(50, this.width / this.height, 0.1, 1000);
@@ -38,39 +39,48 @@ export class Renderer {
         this.composer = new EffectComposer(this.renderer);
         this.composer.addPass(new RenderPass(this.scene, this.camera));
 
-        this.bloomEffect = new BloomEffect({
-            intensity: 0.5,
-            luminanceThreshold: 0.8,
-            luminanceSmoothing: 0.3,
-            mipmapBlur: true
-        });
+        if (!this.gpuTier.postProcessing) {
+            return;
+        }
+
+        const effects = [];
+
+        if (this.gpuTier.tier >= 2) {
+            this.bloomEffect = new BloomEffect({
+                intensity: 0.5,
+                luminanceThreshold: 0.8,
+                luminanceSmoothing: 0.3,
+                mipmapBlur: true
+            });
+            effects.push(this.bloomEffect);
+        }
 
         this.chromaticAberration = new ChromaticAberrationEffect({
             offset: new THREE.Vector2(0.0005, 0.0005),
             radialModulation: true,
             modulationOffset: 0.5
         });
+        effects.push(this.chromaticAberration);
 
         this.vignetteEffect = new VignetteEffect({
             darkness: 0.5,
             offset: 0.3
         });
+        effects.push(this.vignetteEffect);
 
-        this.noiseEffect = new NoiseEffect({
-            blendFunction: BlendFunction.OVERLAY,
-            premultiply: true
-        });
-        this.noiseEffect.blendMode.opacity.value = 0.06;
+        if (this.gpuTier.tier >= 2) {
+            this.noiseEffect = new NoiseEffect({
+                blendFunction: BlendFunction.OVERLAY,
+                premultiply: true
+            });
+            this.noiseEffect.blendMode.opacity.value = 0.06;
+            effects.push(this.noiseEffect);
+        }
 
-        const effectPass = new EffectPass(
-            this.camera,
-            this.bloomEffect,
-            this.chromaticAberration,
-            this.vignetteEffect,
-            this.noiseEffect
-        );
-
-        this.composer.addPass(effectPass);
+        if (effects.length > 0) {
+            const effectPass = new EffectPass(this.camera, ...effects);
+            this.composer.addPass(effectPass);
+        }
     }
 
     setupResize() {
@@ -101,6 +111,7 @@ export class Renderer {
     }
 
     setScrollVelocity(velocity) {
+        if (!this.chromaticAberration) return;
         const velocityIntensity = Math.min(Math.abs(velocity) * 0.002, 0.003);
         this.pulseIntensity *= this.pulseDecay;
         const total = Math.min(velocityIntensity + this.pulseIntensity, 0.006);

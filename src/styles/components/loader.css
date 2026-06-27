@@ -2,46 +2,93 @@
     position: fixed;
     inset: 0;
     z-index: 10000;
-    background: #050505;
+    perspective: 1200px;
+}
+
+.loader-split {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background: var(--color-bg);
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+.loader-split--left {
+    left: 0;
+    transform-origin: right center;
+}
+
+.loader-split--right {
+    right: 0;
+    transform-origin: left center;
+}
+
+.loader-terminal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 30px;
+    gap: 24px;
+    width: 90%;
+    max-width: 480px;
 }
 
-.loader-counter {
-    font-family: var(--font-display);
-    font-size: clamp(60px, 12vw, 140px);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.loader-terminal-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    min-height: 200px;
 }
 
-.loader-number {
-    display: inline-block;
-    min-width: 3ch;
-    text-align: center;
-}
-
-.loader-bar {
-    width: 200px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.06);
+.loader-terminal-line {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.7;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    white-space: nowrap;
     overflow: hidden;
-    border-radius: 2px;
 }
 
-.loader-bar-inner {
+.loader-terminal-line--ready {
+    color: var(--color-accent);
+    font-weight: 500;
+}
+
+.loader-terminal-bar {
+    width: 300px;
+    height: var(--rule);
+    background: var(--color-border);
+    overflow: hidden;
+}
+
+.loader-terminal-bar-inner {
     height: 100%;
     width: 100%;
-    background: var(--gradient-accent);
+    background: var(--color-accent);
     transform: scaleX(0);
     transform-origin: left;
-    box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
+    will-change: transform;
+}
+
+.loader-seam {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--rule);
+    height: 0;
+    opacity: 0;
+    z-index: 3;
+    background: var(--color-accent);
+    will-change: height, opacity;
 }
 
 .loader.hidden {

@@ -1,21 +1,24 @@
 import './styles/index.css';
 
+import gsap from 'gsap';
 import { Clock } from './engine/Clock.js';
 import { SmoothScroll } from './components/Scroll.js';
 import { Cursor } from './components/Cursor.js';
 import { PageLoader } from './components/Loader.js';
 import { TextAnimation } from './components/TextAnimation.js';
-import { isMobile, hasWebGL2 } from './utils/device.js';
+import { Effects } from './components/Effects.js';
+import { Marquee } from './components/Marquee.js';
+import { isMobile } from './utils/device.js';
 
 class App {
     constructor() {
         this.mouse = { x: 0, y: 0, normalized: { x: 0, y: 0 } };
         this.scroll = null;
-        this.renderer = null;
-        this.scene = null;
         this.clock = null;
         this.cursor = null;
         this.textAnimation = null;
+        this.effects = null;
+        this.marquees = [];
         this.scrollSkew = 0;
         this.mainEl = document.querySelector('main');
 
@@ -23,40 +26,36 @@ class App {
     }
 
     init() {
+        this.initTheme();
         this.textAnimation = new TextAnimation();
         this.textAnimation.init();
+
+        this.effects = new Effects();
 
         new PageLoader(() => this.onLoaded());
     }
 
     onLoaded() {
         this.scroll = new SmoothScroll();
+        this.createScrollProgress();
 
         if (!isMobile()) {
             this.cursor = new Cursor();
+            this.initProjectTilt();
         }
 
-        if (hasWebGL2()) {
-            this.initWebGL();
-        } else {
-            document.body.classList.add('no-webgl');
-        }
+        this.marquees = Marquee.initAll();
 
         this.bindEvents();
         this.initNavigation();
+        this.initContactForm();
 
         this.textAnimation.revealHero();
+        this.effects.init();
 
         this.clock = new Clock();
         this.clock.add(this.update.bind(this), 0);
         this.clock.start();
-    }
-
-    async initWebGL() {
-        const { Renderer } = await import('./engine/Renderer.js');
-        const { HomeScene } = await import('./scenes/HomeScene.js');
-        this.renderer = new Renderer(document.body);
-        this.scene = new HomeScene(this.renderer);
     }
 
     bindEvents() {
@@ -65,25 +64,77 @@ class App {
             this.mouse.y = e.clientY;
             this.mouse.normalized.x = (e.clientX / window.innerWidth) * 2 - 1;
             this.mouse.normalized.y = -(e.clientY / window.innerHeight) * 2 + 1;
-
-            if (this.scene) {
-                this.scene.setMouse(this.mouse.normalized.x, this.mouse.normalized.y);
-            }
-        });
-
-        window.addEventListener('resize', () => {
-            if (this.scene) this.scene.resize();
         });
 
         this.scroll.onScroll(({ velocity, progress }) => {
-            if (this.scene) this.scene.setScroll(velocity, progress);
-            if (this.renderer) this.renderer.setScrollVelocity(velocity);
+            this.marquees.forEach((m) => m.setScrollVelocity(velocity));
 
-            const targetSkew = velocity * 0.04;
+            const targetSkew = isMobile() ? 0 : velocity * 0.02;
             this.scrollSkew += (targetSkew - this.scrollSkew) * 0.1;
             if (this.mainEl) {
                 this.mainEl.style.transform = `skewY(${this.scrollSkew}deg)`;
             }
+
+            if (this.progressBar) {
+                this.progressBar.style.width = `${progress * 100}%`;
+            }
+        });
+    }
+
+    createScrollProgress() {
+        this.progressBar = document.createElement('div');
+        this.progressBar.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--color-accent);
+            z-index: 9999;
+            pointer-events: none;
+            transform-origin: left;
+            transition: none;
+        `;
+        document.body.appendChild(this.progressBar);
+    }
+
+    initProjectTilt() {
+        const items = document.querySelectorAll('.project-item');
+
+        items.forEach((item) => {
+            item.addEventListener('mousemove', (e) => {
+                const rect = item.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+                item.style.transform = `perspective(1000px) rotateX(${-y * 2}deg) rotateY(${x * 2}deg)`;
+            });
+
+            item.addEventListener('mouseleave', () => {
+                gsap.to(item, {
+                    rotateX: 0,
+                    rotateY: 0,
+                    duration: 0.6,
+                    ease: 'elastic.out(1, 0.5)',
+                    clearProps: 'transform'
+                });
+            });
+        });
+    }
+
+    initTheme() {
+        const toggle = document.getElementById('theme-toggle');
+        if (!toggle) return;
+
+        const meta = document.querySelector('meta[name="theme-color"]');
+        const colors = { light: '#f4f1ea', dark: '#0e0d0b' };
+
+        toggle.addEventListener('click', () => {
+            const current = document.documentElement.dataset.theme;
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.dataset.theme = next;
+            localStorage.setItem('theme', next);
+            if (meta) meta.setAttribute('content', colors[next]);
         });
     }
 
@@ -108,12 +159,35 @@ class App {
         });
     }
 
+    initContactForm() {
+        const form = document.getElementById('contact-form');
+        if (!form) return;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inquiry = (form.querySelector('#cf-inquiry')?.value || '').trim();
+            const name = (form.querySelector('#cf-name')?.value || '').trim();
+            const email = (form.querySelector('#cf-email')?.value || '').trim();
+            const note = (form.querySelector('#cf-note')?.value || '').trim();
+
+            const subject = `[${inquiry || 'Inquiry'}]${name ? ' — ' + name : ''}`;
+            const body =
+                `${note || ''}\n\n` +
+                `— ${name || 'Anonymous'}` +
+                `${email ? '\n' + email : ''}`;
+
+            const href = `mailto:yasindce1998@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            form.classList.add('sent');
+            const btn = form.querySelector('.btn-submit');
+            if (btn) btn.firstChild.textContent = 'Opening mail… ';
+
+            window.location.href = href;
+        });
+    }
+
     update(elapsed, delta) {
         if (this.scroll) this.scroll.update(delta);
-        if (this.scene) this.scene.update(elapsed, delta);
-        if (this.renderer && this.scene) {
-            this.renderer.render(this.scene);
-        }
     }
 }
 

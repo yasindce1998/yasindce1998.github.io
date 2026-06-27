@@ -1,0 +1,93 @@
+.philosophy {
+    background: var(--color-bg-alt);
+    border-top: var(--rule) solid var(--color-border);
+    border-bottom: var(--rule) solid var(--color-border);
+}
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--rule);
+    background: var(--color-border);
+    border: var(--rule) solid var(--color-border);
+}
+
+.study {
+    background: var(--color-bg-alt);
+    padding: clamp(28px, 4vw, 56px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    min-height: clamp(300px, 40vh, 460px);
+    position: relative;
+    overflow: hidden;
+}
+
+.study::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    background:
+        repeating-linear-gradient(135deg,
+            transparent 0 14px,
+            var(--color-surface) 14px 15px);
+}
+
+.study--defense::after {
+    background:
+        radial-gradient(120% 120% at 80% 20%,
+            var(--color-accent-soft) 0%,
+            transparent 55%);
+    opacity: 1;
+}
+
+.study-plate {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    position: relative;
+    z-index: 1;
+}
+
+.study-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 360;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+}
+
+.study-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+    font-weight: 340;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--color-text);
+    margin-top: auto;
+    max-width: 32ch;
+    position: relative;
+    z-index: 1;
+}
+
+.study-meta {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .philosophy-grid {
+        grid-template-columns: 1fr;
+    }
+}

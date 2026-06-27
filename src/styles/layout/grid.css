@@ -1,21 +1,69 @@
-.section-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 var(--space-md);
-    padding-left: calc(var(--space-md) + var(--space-sm));
-    margin-bottom: var(--space-lg);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+/* Shared editorial layout primitives */
+
+main {
+    overflow: hidden;
+}
+
+section,
+.footer {
+    padding: clamp(64px, 9vw, 140px) var(--gutter);
+    position: relative;
+}
+
+/* Numbered section header: index · title · meta, on a hairline rule */
+.section-head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: var(--space-md);
+    padding-bottom: var(--space-sm);
+    margin-bottom: clamp(40px, 6vw, 88px);
+    border-bottom: var(--rule) solid var(--color-border-strong);
+}
+
+.section-head .section-index {
+    color: var(--color-accent);
+}
+
+.section-head .section-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+.section-head .coords {
     color: var(--color-text-muted);
-    border-left: 2px solid var(--color-text-muted);
+    text-align: right;
+}
+
+/* Editorial button — underline-rule with arrow */
+.btn-editorial {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    padding-bottom: 4px;
+    border-bottom: var(--rule) solid var(--color-text);
+    transition: gap 0.4s var(--ease-out-expo), color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-editorial:hover {
+    gap: 1.1em;
+    color: var(--color-accent);
+    border-color: var(--color-accent);
 }
 
 @media (max-width: 768px) {
-    .section-label {
-        padding: 0 var(--space-sm);
-        padding-left: calc(var(--space-sm) + 12px);
+    .section-head {
+        grid-template-columns: auto 1fr;
+        gap: var(--space-sm);
+    }
+    .section-head .coords {
+        display: none;
     }
 }

@@ -8,26 +8,82 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 40px;
-    mix-blend-mode: difference;
-    pointer-events: none;
+    gap: var(--space-md);
+    padding: 0 var(--gutter);
+    background: color-mix(in srgb, var(--color-bg) 80%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: var(--rule) solid var(--color-border);
 }
 
 .header-logo {
-    font-family: var(--font-body);
-    font-size: 14px;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
     font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: -0.01em;
     color: var(--color-text);
     pointer-events: auto;
-    text-decoration: none;
+    white-space: nowrap;
+}
+
+.header-issue {
+    flex: 1;
+    text-align: center;
+    color: var(--color-text-muted);
+    pointer-events: none;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    pointer-events: auto;
+}
+
+/* Day / Night word toggle */
+.theme-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--color-text);
+}
+
+.theme-toggle-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.theme-sep {
+    opacity: 0.4;
+}
+
+/* Highlight the active mode word */
+.theme-word--day {
+    color: var(--color-text);
+}
+.theme-word--night {
+    color: var(--color-text-dim);
+}
+[data-theme="dark"] .theme-word--day {
+    color: var(--color-text-dim);
+}
+[data-theme="dark"] .theme-word--night {
+    color: var(--color-text);
 }
 
 .header-menu-btn {
-    pointer-events: auto;
     position: relative;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,7 +99,7 @@
 
 .menu-lines span {
     display: block;
-    height: 1px;
+    height: 1.5px;
     width: 100%;
     background: var(--color-text);
     transition: transform 0.5s var(--ease-out-expo), opacity 0.3s ease;
@@ -51,9 +107,18 @@
 }
 
 .header-menu-btn[aria-expanded="true"] .menu-lines span:first-child {
-    transform: translateY(3.5px) rotate(45deg);
+    transform: translateY(3.75px) rotate(45deg);
 }
 
 .header-menu-btn[aria-expanded="true"] .menu-lines span:last-child {
-    transform: translateY(-3.5px) rotate(-45deg);
+    transform: translateY(-3.75px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    .header-issue {
+        display: none;
+    }
+    .header-logo {
+        font-size: 0.95rem;
+    }
 }

@@ -1,18 +1,38 @@
 :root {
-    --color-bg: #050505;
-    --color-text: #e8e8e8;
-    --color-text-muted: rgba(255, 255, 255, 0.4);
-    --color-text-dim: rgba(255, 255, 255, 0.15);
-    --color-border: rgba(255, 255, 255, 0.08);
-    --color-accent: #22d3ee;
-    --color-surface: rgba(255, 255, 255, 0.03);
+    /* Day / paper — default editorial palette */
+    --color-bg: #f4f1ea;
+    --color-bg-alt: #eeebe0;
+    --color-text: #1a1714;
+    --color-text-muted: rgba(26, 23, 20, 0.62);
+    --color-text-dim: rgba(26, 23, 20, 0.4);
+    --color-border: rgba(26, 23, 20, 0.16);
+    --color-border-strong: rgba(26, 23, 20, 0.32);
+    --color-accent: #9a3b2e;
+    --color-accent-soft: rgba(154, 59, 46, 0.1);
+    --color-surface: rgba(26, 23, 20, 0.025);
 
-    --gradient-accent: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-    --gradient-accent-reverse: linear-gradient(135deg, #ec4899, #a855f7, #6366f1);
-    --gradient-glow: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.4));
+    /* Cursor + selection (context-appropriate per theme) */
+    --cursor-color: rgba(26, 23, 20, 0.85);
+    --cursor-glow: rgba(26, 23, 20, 0.25);
+    --selection-bg: rgba(154, 59, 46, 0.22);
 
+    /* Paper grain overlay strength */
+    --grain-opacity: 0.04;
+
+    /* Type families */
+    --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+
+    /* Editorial type scale */
+    --fs-masthead: clamp(2.75rem, 13vw, 13rem);
+    --fs-display: clamp(2.5rem, 7vw, 6rem);
+    --fs-h2: clamp(1.8rem, 4vw, 3.25rem);
+    --fs-h3: clamp(1.25rem, 2.2vw, 1.9rem);
+    --fs-lead: clamp(1.25rem, 2.4vw, 2rem);
+    --fs-body: 1rem;
+    --fs-label: 0.72rem;
+    --fs-micro: 0.66rem;
 
     --space-xs: 8px;
     --space-sm: 16px;
@@ -21,10 +41,32 @@
     --space-xl: 120px;
     --space-2xl: 200px;
 
-    --header-height: 80px;
+    --gutter: clamp(20px, 5vw, 80px);
+    --header-height: 64px;
+    --rule: 1px;
 
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
     --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
     --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+[data-theme="dark"] {
+    /* Night */
+    --color-bg: #0e0d0b;
+    --color-bg-alt: #15130f;
+    --color-text: #ece7dd;
+    --color-text-muted: rgba(236, 231, 221, 0.6);
+    --color-text-dim: rgba(236, 231, 221, 0.38);
+    --color-border: rgba(236, 231, 221, 0.16);
+    --color-border-strong: rgba(236, 231, 221, 0.34);
+    --color-accent: #e0795f;
+    --color-accent-soft: rgba(224, 121, 95, 0.12);
+    --color-surface: rgba(236, 231, 221, 0.03);
+
+    --cursor-color: rgba(236, 231, 221, 0.9);
+    --cursor-glow: rgba(236, 231, 221, 0.3);
+    --selection-bg: rgba(224, 121, 95, 0.28);
+
+    --grain-opacity: 0.05;
 }

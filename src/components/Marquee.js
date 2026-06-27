@@ -1,14 +1,19 @@
-import gsap from 'gsap';
 import { isReducedMotion } from '../utils/device.js';
 
 export class Marquee {
-    constructor() {
-        this.element = document.querySelector('.marquee');
+    static initAll() {
+        return [...document.querySelectorAll('.marquee')].map((el) => new Marquee(el));
+    }
+
+    constructor(element) {
+        this.element = element || document.querySelector('.marquee');
         if (!this.element) return;
 
         this.track = this.element.querySelector('.marquee-track');
+        if (!this.track) return;
+
         this.speed = 1;
-        this.direction = -1;
+        this.direction = this.element.classList.contains('marquee--reverse') ? 1 : -1;
         this.scrollVelocity = 0;
         this.paused = isReducedMotion();
 
@@ -21,7 +26,7 @@ export class Marquee {
         clone.setAttribute('aria-hidden', 'true');
         this.element.appendChild(clone);
         this.tracks = [this.track, clone];
-        this.xPercent = 0;
+        this.xPercent = this.direction === 1 ? -50 : 0;
     }
 
     setScrollVelocity(velocity) {
@@ -35,7 +40,7 @@ export class Marquee {
         if (this.xPercent < -50) this.xPercent = 0;
         if (this.xPercent > 0) this.xPercent = -50;
 
-        this.tracks.forEach(track => {
+        this.tracks.forEach((track) => {
             track.style.transform = `translateX(${this.xPercent}%)`;
         });
 

@@ -1,8 +1,74 @@
-@media (max-width: 1024px) {
-    .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-md);
+@media (max-width: 768px) {
+    :root {
+        --space-xl: 80px;
+        --space-2xl: 120px;
+    }
+
+    .loader-terminal {
+        width: 95%;
+        max-width: 320px;
+    }
+
+    .loader-terminal-line {
+        font-size: 11px;
+    }
+
+    .loader-terminal-bar {
+        width: 200px;
+    }
+
+    .loader-terminal-lines {
+        min-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .loader-terminal-line {
+        font-size: 10px;
+    }
+
+    .loader-terminal-bar {
+        width: 160px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.75rem, 14vw, 4rem);
+    }
+}
+
+@media (hover: none), (pointer: coarse) {
+    body,
+    a,
+    button {
+        cursor: auto;
+    }
+
+    .cursor {
+        display: none !important;
+    }
+
+    .project-item {
+        transform: none !important;
+    }
+
+    .hero-title-wrap {
+        transform: none !important;
+    }
+
+    /* Touch-friendly tap targets (≥44px) */
+    .theme-toggle,
+    .header-menu-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .footer-links a,
+    .nav-socials a {
+        padding: 8px 0;
+    }
+
+    .form-input {
+        padding: 12px 0;
     }
 }
 
@@ -13,7 +79,8 @@
         opacity: 1 !important;
     }
 
-    .hero-subtitle {
+    .hero-subtitle,
+    .hero-meta {
         opacity: 1 !important;
         transform: none !important;
     }
@@ -33,16 +100,22 @@
         transition: none !important;
     }
 
-    .project-item-desc {
-        opacity: 1 !important;
-        transform: none !important;
-    }
-
-    .project-item::before {
-        display: none !important;
+    .hero-scroll-line {
+        animation: none !important;
     }
 
     main {
+        transform: none !important;
+    }
+
+    .loader-split--left,
+    .loader-split--right {
+        transform: none !important;
+        transition: opacity 0.3s !important;
+    }
+
+    .hero-title-wrap,
+    .project-item {
         transform: none !important;
     }
 }

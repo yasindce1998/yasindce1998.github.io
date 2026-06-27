@@ -16,6 +16,16 @@ body {
     font-family: var(--font-body);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    cursor: auto !important;
+}
+
+body a,
+body button {
+    cursor: pointer !important;
+}
+
+.cursor {
+    display: none !important;
 }
 
 .container {

@@ -1,3 +1,52 @@
 html {
     scroll-padding-top: var(--header-height);
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    font-weight: 320;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+}
+
+/* Display / editorial serif */
+.font-display {
+    font-family: var(--font-display);
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 380;
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    font-optical-sizing: auto;
+}
+
+/* Monospace labels, section tags, metadata, coordinates */
+.label,
+.section-index,
+.coords,
+.issue-line {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+sup,
+.footnote-marker {
+    font-family: var(--font-mono);
+    font-size: 0.5em;
+    font-weight: 500;
+    vertical-align: super;
+    color: var(--color-accent);
+    letter-spacing: 0;
+    margin-left: 0.15em;
+}
+
+::selection {
+    background: var(--selection-bg);
+    color: var(--color-text);
 }

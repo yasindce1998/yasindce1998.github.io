@@ -27,10 +27,8 @@ export default defineConfig({
             input: getBlogInputs(),
             output: {
                 manualChunks: {
-                    'vendor-three': ['three'],
                     'vendor-gsap': ['gsap'],
                     'vendor-lenis': ['lenis'],
-                    'vendor-postprocessing': ['postprocessing'],
                 },
             },
         },

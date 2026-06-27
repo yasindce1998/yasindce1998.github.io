@@ -6,6 +6,9 @@ uniform float uScrollVelocity;
 varying vec2 vUv;
 
 #define PI 3.14159265359
+#ifndef FBM_OCTAVES
+#define FBM_OCTAVES 6
+#endif
 
 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
 vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -76,7 +79,7 @@ float fbm(vec3 p) {
     float value = 0.0;
     float amplitude = 0.5;
     float frequency = 1.0;
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < FBM_OCTAVES; i++) {
         value += amplitude * snoise(p * frequency);
         frequency *= 2.0;
         amplitude *= 0.5;

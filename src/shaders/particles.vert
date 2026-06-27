@@ -1,6 +1,7 @@
 uniform float uTime;
 uniform float uScrollVelocity;
 uniform vec2 uMouse;
+uniform float uBurst;
 
 attribute float aSize;
 attribute float aSpeed;
@@ -17,6 +18,12 @@ void main() {
     pos.x += sin(t * 0.5) * 0.3;
     pos.y += cos(t * 0.3) * 0.2 + uScrollVelocity * 0.01;
     pos.z += sin(t * 0.7) * 0.15;
+
+    // Burst: push particles outward from center
+    if (uBurst > 0.01) {
+        vec3 dir = normalize(pos + 0.001);
+        pos += dir * uBurst * 2.0 * aSpeed;
+    }
 
     vec2 mouse3D = uMouse * 2.0 - 1.0;
     float mouseDist = length(pos.xy - mouse3D * 3.0);

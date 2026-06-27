@@ -1,0 +1,52 @@
+.toolkit-list {
+    border-top: var(--rule) solid var(--color-border-strong);
+}
+
+.toolkit-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    align-items: baseline;
+    gap: var(--space-md);
+    padding: clamp(18px, 2.4vw, 28px) 0;
+    border-bottom: var(--rule) solid var(--color-border);
+    transition: padding-left 0.4s var(--ease-out-expo), color 0.3s ease;
+}
+
+.toolkit-row:hover {
+    padding-left: 16px;
+}
+
+.toolkit-tag {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+}
+
+.toolkit-name {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    font-weight: 360;
+    letter-spacing: -0.01em;
+}
+
+.toolkit-note {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    text-align: right;
+}
+
+@media (max-width: 700px) {
+    .toolkit-row {
+        grid-template-columns: 56px 1fr;
+        gap: var(--space-sm);
+    }
+    .toolkit-note {
+        grid-column: 2;
+        text-align: left;
+        margin-top: 4px;
+    }
+}
