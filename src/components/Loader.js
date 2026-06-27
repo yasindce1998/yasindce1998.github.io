@@ -90,48 +90,41 @@ export class PageLoader {
             onComplete: () => this.cleanup()
         });
 
-        // Fade out terminal
         tl.to(this.loader.querySelector('.loader-terminal'), {
             opacity: 0,
-            scale: 0.95,
-            duration: 0.4,
+            scale: 0.97,
+            duration: 0.5,
             ease: 'power2.in'
         });
 
-        // Fire particle burst event
         tl.call(() => {
             window.dispatchEvent(new CustomEvent('particleBurst'));
         });
 
-        // Seam appears and glows
         tl.to(this.seam, {
             height: '100%',
             opacity: 1,
-            duration: 0.5,
+            duration: 0.7,
             ease: 'power2.inOut'
-        }, '-=0.1');
+        }, '-=0.2');
 
-        // Split panels apart with 3D rotation
         tl.to(this.splitLeft, {
-            x: '-52%',
-            rotateY: -3,
-            duration: 1.2,
-            ease: 'power3.inOut'
-        }, '-=0.3');
+            xPercent: -100,
+            duration: 1.6,
+            ease: 'power2.inOut'
+        }, '-=0.2');
 
         tl.to(this.splitRight, {
-            x: '52%',
-            rotateY: 3,
-            duration: 1.2,
-            ease: 'power3.inOut'
+            xPercent: 100,
+            duration: 1.6,
+            ease: 'power2.inOut'
         }, '<');
 
-        // Fade seam out as panels separate
         tl.to(this.seam, {
             opacity: 0,
-            duration: 0.6,
-            ease: 'power2.out'
-        }, '-=0.6');
+            duration: 0.8,
+            ease: 'power1.out'
+        }, '-=1.2');
 
         return tl;
     }

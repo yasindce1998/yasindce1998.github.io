@@ -1,6 +1,6 @@
 # yasindce1998.github.io
 
-Personal portfolio and blog — dark editorial design with a Three.js rendering engine, post-processing pipeline, and shader-driven interactions.
+Personal portfolio and blog — editorial print-magazine aesthetic with day/night themes, Three.js rendering, and GSAP-driven interactions.
 
 **Live:** [yasindce1998.github.io](https://yasindce1998.github.io)
 
@@ -13,8 +13,9 @@ Personal portfolio and blog — dark editorial design with a Three.js rendering 
 | Animation | GSAP 3.15 (page transitions, tweens, scroll triggers) |
 | Smooth Scroll | Lenis |
 | Shaders | Custom GLSL (fluid noise, particles, image hover distortion) |
-| Typography | Manrope (display) + JetBrains Mono (monospace) |
+| Typography | Fraunces (display) + Inter (body) + JetBrains Mono (mono) |
 | Blog | Markdown → HTML via `marked`, built with a Node script |
+| Testing | Playwright E2E + Lighthouse CI |
 | Deploy | GitHub Actions → GitHub Pages |
 
 ## Quick Start
@@ -34,6 +35,9 @@ Dev server runs at `http://localhost:5173`. Blog HTML is generated automatically
 | `npm run build` | Builds blog + production build to `dist/` |
 | `npm run blog:build` | Generates blog HTML only |
 | `npm run preview` | Preview the production build locally |
+| `npm run test` | Run Playwright E2E tests (desktop + mobile) |
+| `npm run test:ui` | Open Playwright UI mode for debugging |
+| `npm run lighthouse` | Run Lighthouse CI (perf, a11y, SEO assertions) |
 
 ## Project Structure
 
@@ -54,16 +58,17 @@ Dev server runs at `http://localhost:5173`. Blog HTML is generated automatically
 │   ├── main.js                    # App entry — orchestrates all modules
 │   ├── components/
 │   │   ├── Cursor.js              # Dual-ring custom cursor with blend modes
+│   │   ├── Effects.js             # WebGL post-processing pipeline control
 │   │   ├── HorizontalScroll.js    # GSAP-driven horizontal project carousel
 │   │   ├── ImageHoverEffect.js    # WebGL shader overlay on project tiles
-│   │   ├── Loader.js              # Animated loader with counter (0→100)
-│   │   ├── Marquee.js             # Infinite scrolling ticker
-│   │   ├── Router.js              # SPA client-side router (pushState)
-│   │   ├── Scroll.js              # Lenis smooth scroll integration
-│   │   ├── TextAnimation.js       # Clip-path character reveal animations
-│   │   └── Transition.js          # 5-column curtain wipe page transitions
+│   │   ├── Loader.js              # Terminal boot sequence + split reveal
+│   │   ├── Marquee.js            # Infinite scrolling ticker
+│   │   ├── Router.js             # SPA client-side router (pushState)
+│   │   ├── Scroll.js             # Lenis smooth scroll integration
+│   │   ├── TextAnimation.js      # Clip-path character reveal animations
+│   │   └── Transition.js         # 5-column curtain wipe page transitions
 │   ├── data/
-│   │   └── projects.js            # Structured project data (8 projects)
+│   │   └── projects.js            # Structured project data
 │   ├── engine/
 │   │   ├── Clock.js               # High-resolution delta time clock
 │   │   ├── Loader.js              # Asset preloader
@@ -79,16 +84,23 @@ Dev server runs at `http://localhost:5173`. Blog HTML is generated automatically
 │   ├── styles/
 │   │   ├── index.css              # All style imports
 │   │   ├── base/                  # Reset, variables, typography, accessibility
-│   │   ├── components/            # Cursor, loader, marquee, fallback, etc.
+│   │   ├── components/            # Cursor, loader, marquee, navigation, etc.
 │   │   ├── layout/               # Header, grid, responsive
 │   │   ├── pages/                # Project detail page styles
-│   │   └── sections/             # Hero, projects, tutorials, footer
+│   │   └── sections/             # Hero, about, projects, experience, footer
 │   └── utils/
 │       ├── device.js              # WebGL2 detection, performance checks
 │       ├── dom.js                 # DOM helpers
 │       └── math.js                # Lerp, clamp, map utilities
+├── tests/
+│   ├── portfolio.spec.js          # Main site E2E tests (13 tests)
+│   ├── blog.spec.js               # Blog page E2E tests (9 tests)
+│   └── mobile.spec.js             # Mobile viewport tests (5 tests)
 ├── .github/workflows/
-│   └── deploy.yml                 # CI: Node 22, build + deploy to Pages
+│   ├── deploy.yml                 # CI: build + deploy to Pages
+│   └── test.yml                   # CI: Playwright + Lighthouse on push/PR
+├── playwright.config.js           # Desktop Chrome + Mobile Chrome projects
+├── lighthouserc.cjs               # Lighthouse CI thresholds
 ├── vite.config.js                 # Multi-page input + manual chunk splitting
 └── package.json
 ```
@@ -109,9 +121,13 @@ Three.js WebGLRenderer (WebGL2)
 
 The chromatic aberration is reactive — it responds to scroll velocity and pulses when crossing section boundaries via IntersectionObserver.
 
+### Loader Sequence
+
+The intro loader runs a terminal boot sequence (printing editorial setup lines in monospace) with a progress bar, then performs a vertical split reveal — two panels slide apart to unveil the main content underneath.
+
 ### SPA Routing
 
-The site uses client-side routing (`history.pushState` / `popstate`) to navigate between the home page and project detail pages (`/work/:slug`) without full page reloads. Transitions are a 5-column curtain wipe animated with GSAP.
+Client-side routing (`history.pushState` / `popstate`) navigates between the home page and project detail pages (`/work/:slug`) without full page reloads. Transitions are a 5-column curtain wipe animated with GSAP.
 
 ### Code Splitting
 
@@ -129,7 +145,7 @@ WebGL modules are loaded lazily via dynamic `import()` after the page transition
 ### Accessibility
 
 - `prefers-reduced-motion` disables marquee animation and particle motion
-- Project carousel has `role="region"`, `aria-roledescription="carousel"`, keyboard arrow-key navigation
+- Project carousel has `role="region"`, `aria-roledescription="carousel"`, keyboard navigation
 - Focus-visible indicators on interactive elements
 
 ### WebGL Fallback
@@ -138,23 +154,22 @@ When WebGL2 isn't available, the body gets a `.no-webgl` class and a CSS gradien
 
 ## Design System
 
-### Colors
+### Themes
 
-| Variable | Value | Usage |
-|----------|-------|-------|
-| `--color-bg` | `#0a0a0a` | Page background |
-| `--color-text` | `#f0f0f0` | Primary text |
-| `--color-text-muted` | `rgba(240,240,240,0.4)` | Subtle labels |
-| `--color-text-secondary` | `rgba(240,240,240,0.6)` | Secondary content |
-| `--color-accent` | `#ffffff` | Interactive highlights |
-| `--color-border` | `rgba(255,255,255,0.08)` | Dividers |
-| `--color-surface` | `rgba(255,255,255,0.03)` | Elevated surfaces |
+The site supports two themes toggled via a day/night button (persisted in localStorage):
+
+| Theme | Background | Text | Accent |
+|-------|-----------|------|--------|
+| Day (default) | `#f4f1ea` paper | `#1a1714` | `#9a3b2e` burnt sienna |
+| Night | `#0e0d0b` | `#ece7dd` | `#e0795f` warm coral |
 
 ### Typography
 
-- **Display headings:** Manrope 800, negative letter-spacing
-- **Body text:** Manrope 300/500
-- **Code / monospace:** JetBrains Mono 400/600
+| Role | Family | Weight |
+|------|--------|--------|
+| Display headings | Fraunces | 400–900, optical-size |
+| Body text | Inter | 300/400/500 |
+| Code / labels | JetBrains Mono | 400/600 |
 
 ### Easing
 
@@ -164,14 +179,35 @@ When WebGL2 isn't available, the body gets a `.no-webgl` class and a CSS gradien
 | `--ease-in-out-expo` | `cubic-bezier(0.87, 0, 0.13, 1)` | Page transitions |
 | `--ease-out-quart` | `cubic-bezier(0.25, 1, 0.5, 1)` | Subtle reveals |
 
-## Custom Shaders
+## Testing
 
-| Shader | File | Description |
-|--------|------|-------------|
-| Fluid noise | `fluid.vert/frag` | FBM turbulence driven by scroll + time |
-| Particles | `particles.vert/frag` | Spiral point cloud with mouse repulsion |
-| Image hover | `imageHover.vert/frag` | Wave distortion + RGB shift on project tiles |
-| Transition | `transition.frag` | Shader-based page transition effect |
+### E2E (Playwright)
+
+27 tests across two browser projects (Desktop Chrome 1280×720, Mobile Chrome 375×667):
+
+- **portfolio.spec.js** — page load, sections, theme toggle, navigation, projects, contact
+- **blog.spec.js** — blog index, posts, navigation, styling
+- **mobile.spec.js** — overflow checks, hamburger menu, touch targets
+
+### Lighthouse CI
+
+Runs against the production build with these thresholds:
+
+| Category | Minimum Score |
+|----------|--------------|
+| Performance | 80 |
+| Accessibility | 90 |
+| SEO | 90 |
+
+### CI Pipeline
+
+GitHub Actions (`.github/workflows/test.yml`) runs on every push to `main` and on PRs:
+
+1. Checkout → Node 22 → `npm ci`
+2. Install Playwright browsers
+3. Build production bundle
+4. Run Playwright tests (report artifact on failure)
+5. Run Lighthouse CI
 
 ## Writing Blog Posts
 

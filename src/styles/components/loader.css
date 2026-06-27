@@ -64,15 +64,22 @@
 
 .loader-terminal-bar {
     width: 300px;
-    height: var(--rule);
+    height: 6px;
     background: var(--color-border);
     overflow: hidden;
+    border-radius: 3px;
 }
 
 .loader-terminal-bar-inner {
     height: 100%;
     width: 100%;
-    background: var(--color-accent);
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--color-text) 0px,
+        var(--color-text) 4px,
+        var(--color-accent) 4px,
+        var(--color-accent) 8px
+    );
     transform: scaleX(0);
     transform-origin: left;
     will-change: transform;
