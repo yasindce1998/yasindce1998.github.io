@@ -22,7 +22,7 @@ test.describe('Blog — Index Page', () => {
     const count = await posts.count();
     expect(count).toBeGreaterThanOrEqual(4);
 
-    const firstTitle = posts.first().locator('h3');
+    const firstTitle = posts.first().locator('h2');
     await expect(firstTitle).not.toBeEmpty();
 
     const firstDate = posts.first().locator('.blog-post-date');
@@ -33,7 +33,7 @@ test.describe('Blog — Index Page', () => {
     await page.goto('/blog/');
 
     const firstPost = page.locator('.blog-post-item').first();
-    const title = await firstPost.locator('h3').textContent();
+    const title = await firstPost.locator('h2').textContent();
 
     await firstPost.click();
     await page.waitForLoadState('networkidle');
