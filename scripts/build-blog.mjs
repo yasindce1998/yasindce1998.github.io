@@ -68,7 +68,7 @@ function indexTemplate(posts) {
                 <a href="/blog/posts/${p.slug}.html" class="blog-post-item">
                     <span class="blog-post-date">${p.date}</span>
                     <div class="blog-post-info">
-                        <h3>${p.title}</h3>
+                        <h2>${p.title}</h2>
                         <p>${p.description || ''}</p>
                     </div>
                     <span class="blog-post-arrow">&rarr;</span>
