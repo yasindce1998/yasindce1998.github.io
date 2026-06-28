@@ -1,6 +1,6 @@
 # yasindce1998.github.io
 
-Personal portfolio and blog — editorial print-magazine aesthetic with day/night themes, Three.js rendering, and GSAP-driven interactions.
+Personal portfolio and blog—editorial print-magazine aesthetic with day/night themes, Three.js rendering, and GSAP-driven interactions.
 
 **Live:** [yasindce1998.github.io](https://yasindce1998.github.io)
 
