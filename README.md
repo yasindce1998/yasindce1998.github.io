@@ -1,6 +1,6 @@
 # yasindce1998.github.io
 
-Personal portfolio and blog—editorial print-magazine aesthetic with day/night themes, Three.js rendering, and GSAP-driven interactions.
+Personal portfolio and blog — an editorial print-magazine aesthetic with three switchable themes (day / night / cyber), Three.js rendering, and GSAP-driven interactions.
 
 **Live:** [yasindce1998.github.io](https://yasindce1998.github.io)
 
@@ -13,7 +13,7 @@ Personal portfolio and blog—editorial print-magazine aesthetic with day/night 
 | Animation | GSAP 3.15 (page transitions, tweens, scroll triggers) |
 | Smooth Scroll | Lenis |
 | Shaders | Custom GLSL (fluid noise, particles, image hover distortion) |
-| Typography | Fraunces (display) + Inter (body) + JetBrains Mono (mono) |
+| Typography | Fraunces (display) + Inter / Space Grotesk (body) + JetBrains Mono (mono) |
 | Blog | Markdown → HTML via `marked`, built with a Node script |
 | Testing | Playwright E2E + Lighthouse CI |
 | Deploy | GitHub Actions → GitHub Pages |
@@ -44,14 +44,17 @@ Dev server runs at `http://localhost:5173`. Blog HTML is generated automatically
 ```
 ├── index.html                      # Main portfolio SPA
 ├── blog/
-│   ├── blog.css                    # Blog-specific styles
+│   ├── blog.css                    # Blog design system (/dev/log — 3 themes)
+│   ├── blog.js                     # Blog interactions (typewriter, theme toggle, code windows)
 │   ├── content/                    # Markdown source files
 │   ├── posts/                      # Generated HTML (don't edit directly)
 │   └── index.html                  # Generated blog listing page
 ├── public/
 │   ├── 404.html                    # SPA fallback for GitHub Pages
 │   ├── og-image.svg                # Open Graph social preview image
-│   └── resume.pdf                  # Downloadable resume
+│   ├── resume.pdf                  # Downloadable resume
+│   ├── robots.txt                  # Crawl directives
+│   └── sitemap.xml                 # Sitemap
 ├── scripts/
 │   └── build-blog.mjs             # Blog build script (markdown → HTML)
 ├── src/
@@ -93,8 +96,8 @@ Dev server runs at `http://localhost:5173`. Blog HTML is generated automatically
 │       ├── dom.js                 # DOM helpers
 │       └── math.js                # Lerp, clamp, map utilities
 ├── tests/
-│   ├── portfolio.spec.js          # Main site E2E tests (13 tests)
-│   ├── blog.spec.js               # Blog page E2E tests (9 tests)
+│   ├── portfolio.spec.js          # Main site E2E tests (12 tests)
+│   ├── blog.spec.js               # Blog page E2E tests (8 tests)
 │   └── mobile.spec.js             # Mobile viewport tests (5 tests)
 ├── .github/workflows/
 │   ├── deploy.yml                 # CI: build + deploy to Pages
@@ -131,16 +134,14 @@ Client-side routing (`history.pushState` / `popstate`) navigates between the hom
 
 ### Code Splitting
 
-Vite's Rollup config splits heavy dependencies into separate chunks:
+Vite's Rollup config splits the animation dependencies into dedicated vendor chunks:
 
 | Chunk | Contents |
 |-------|----------|
-| `vendor-three` | Three.js core |
 | `vendor-gsap` | GSAP animation library |
 | `vendor-lenis` | Smooth scroll |
-| `vendor-postprocessing` | Post-processing effects |
 
-WebGL modules are loaded lazily via dynamic `import()` after the page transition completes.
+Three.js and the postprocessing library are left to Rollup's automatic chunking. WebGL modules are loaded lazily via dynamic `import()` after the page transition completes.
 
 ### Accessibility
 
@@ -156,20 +157,24 @@ When WebGL2 isn't available, the body gets a `.no-webgl` class and a CSS gradien
 
 ### Themes
 
-The site supports two themes toggled via a day/night button (persisted in localStorage):
+Three themes cycle from a single masthead toggle (or the `t` keyboard shortcut), persisted in `localStorage` under the `theme` key — shared between the portfolio and the blog so the choice follows you across both. Colors are driven entirely by CSS custom properties in `src/styles/base/variables.css`, so the palette cascades through every section automatically.
 
-| Theme | Background | Text | Accent |
+| Theme | Background | Text | Accent / Accent-2 |
 |-------|-----------|------|--------|
-| Day (default) | `#f4f1ea` paper | `#1a1714` | `#9a3b2e` burnt sienna |
-| Night | `#0e0d0b` | `#ece7dd` | `#e0795f` warm coral |
+| Day (default) | `#f3ecdc` paper | `#1a1610` | `#c2410c` burnt orange / `#0e7490` teal |
+| Night | `#0c0b09` | `#f0ead6` | `#f59e0b` amber / `#06b6d4` cyan |
+| Cyber | `#02060a` | `#4eff96` neon green | `#ffea00` yellow / `#ff10f0` magenta |
+
+The cyber theme adds a CRT scanline overlay (`body::before`). The WebGL shaders use their own fixed cosmic palette and are intentionally decoupled from the theme.
 
 ### Typography
 
 | Role | Family | Weight |
 |------|--------|--------|
 | Display headings | Fraunces | 400–900, optical-size |
-| Body text | Inter | 300/400/500 |
-| Code / labels | JetBrains Mono | 400/600 |
+| Body (portfolio) | Inter | 300/400/500 |
+| Body (blog) | Space Grotesk | 300–700 |
+| Code / labels | JetBrains Mono | 400–700 |
 
 ### Easing
 
@@ -183,11 +188,11 @@ The site supports two themes toggled via a day/night button (persisted in localS
 
 ### E2E (Playwright)
 
-27 tests across two browser projects (Desktop Chrome 1280×720, Mobile Chrome 375×667):
+25 tests across two browser projects (Desktop Chrome 1280×720, Mobile Chrome 375×667):
 
-- **portfolio.spec.js** — page load, sections, theme toggle, navigation, projects, contact
-- **blog.spec.js** — blog index, posts, navigation, styling
-- **mobile.spec.js** — overflow checks, hamburger menu, touch targets
+- **portfolio.spec.js** (12) — page load, sections, theme toggle, navigation, projects, contact
+- **blog.spec.js** (8) — blog index, posts, navigation, styling
+- **mobile.spec.js** (5) — overflow checks, hamburger menu, touch targets
 
 ### Lighthouse CI
 
