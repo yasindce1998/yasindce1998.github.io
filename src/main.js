@@ -127,14 +127,28 @@ class App {
         if (!toggle) return;
 
         const meta = document.querySelector('meta[name="theme-color"]');
-        const colors = { light: '#f4f1ea', dark: '#0e0d0b' };
+        const order = ['light', 'dark', 'cyber'];
+        const colors = { light: '#f3ecdc', dark: '#0c0b09', cyber: '#02060a' };
 
-        toggle.addEventListener('click', () => {
+        const apply = (theme) => {
+            document.documentElement.dataset.theme = theme;
+            localStorage.setItem('theme', theme);
+            if (meta && colors[theme]) meta.setAttribute('content', colors[theme]);
+        };
+
+        const cycle = () => {
             const current = document.documentElement.dataset.theme;
-            const next = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.dataset.theme = next;
-            localStorage.setItem('theme', next);
-            if (meta) meta.setAttribute('content', colors[next]);
+            const idx = order.indexOf(current);
+            apply(order[(idx + 1) % order.length]);
+        };
+
+        toggle.addEventListener('click', cycle);
+
+        // `t` cycles themes (matches the blog), ignoring text inputs.
+        document.addEventListener('keydown', (e) => {
+            const tag = e.target.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || e.metaKey || e.ctrlKey) return;
+            if (e.key === 't' || e.key === 'T') cycle();
         });
     }
 

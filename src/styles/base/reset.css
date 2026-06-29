@@ -70,6 +70,23 @@ body::after {
     background-size: 128px 128px;
 }
 
+/* CRT scanlines — cyber theme only */
+[data-theme="cyber"] body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 8999;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(78, 255, 150, 0.025) 2px,
+        rgba(78, 255, 150, 0.025) 3px
+    );
+    mix-blend-mode: overlay;
+}
+
 main {
     will-change: transform;
     transform-origin: center top;

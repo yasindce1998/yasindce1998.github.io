@@ -66,18 +66,17 @@
     opacity: 0.4;
 }
 
-/* Highlight the active mode word */
-.theme-word--day {
-    color: var(--color-text);
-}
-.theme-word--night {
+/* Highlight the active mode word (day / night / cyber) */
+.theme-word {
     color: var(--color-text-dim);
+    transition: color 0.3s ease;
 }
-[data-theme="dark"] .theme-word--day {
-    color: var(--color-text-dim);
-}
+[data-theme="light"] .theme-word--day,
 [data-theme="dark"] .theme-word--night {
     color: var(--color-text);
+}
+[data-theme="cyber"] .theme-word--cyber {
+    color: var(--color-accent);
 }
 
 .header-menu-btn {
