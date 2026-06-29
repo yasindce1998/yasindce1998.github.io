@@ -53,7 +53,7 @@ function head(title, description, canonical) {
     <link href="${FONTS}" rel="stylesheet">
     <link rel="stylesheet" href="/blog/blog.css">
     <script>(function(){var v=['dark','light','cyber'];var t=localStorage.getItem('theme');if(v.indexOf(t)===-1)t='light';document.documentElement.dataset.theme=t;})()</script>
-    <script defer src="/blog/blog.js"></script>
+    <script type="module" src="/blog/blog.js"></script>
 </head>`;
 }
 
