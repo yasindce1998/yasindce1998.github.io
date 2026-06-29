@@ -6,23 +6,41 @@
     <title>My Design Philosophy — Restraint as a Feature | Mohammed Yasin</title>
     <meta name="description" content="Why I design with maximum visual restraint, and how constraint creates more impactful experiences.">
     <link rel="canonical" href="https://yasindce1998.github.io/blog/posts/design-philosophy.html">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23ffffff'/%3E%3Cpath d='M9 23V9L16 16L23 9V23' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-    <meta name="theme-color" content="#f4f1ea">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23f59e0b'/%3E%3Cpath d='M9 23V9L16 16L23 9V23' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <meta name="theme-color" content="#f3ecdc">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/blog.css">
-    <script>(function(){var t=localStorage.getItem('theme')||'light';document.documentElement.dataset.theme=t;})()</script>
+    <script>(function(){var v=['dark','light','cyber'];var t=localStorage.getItem('theme');if(v.indexOf(t)===-1)t='light';document.documentElement.dataset.theme=t;})()</script>
+    <script defer src="/blog/blog.js"></script>
 </head>
 <body>
-    <div class="blog-post-page">
+    <div class="progress-bar" id="progressBar"></div>
+    <header class="blog-nav">
+            <nav class="blog-nav-inner">
+                <a href="/blog/" class="blog-logo"><span class="slash">/</span>dev<span class="dim">/</span>log<span class="logo-cursor" aria-hidden="true"></span></a>
+                <div class="blog-nav-links">
+                    <a href="/blog/#notes" class="hover-link">notes</a>
+                    <a href="/blog/#archive" class="hover-link">archive</a>
+                    <a href="/" class="hover-link">portfolio &#8599;</a>
+                </div>
+                <div class="theme-toggle" role="group" aria-label="Theme selector">
+                    <button class="theme-btn" data-theme="dark" title="Dark" aria-label="Dark theme">&#9789;</button>
+                    <button class="theme-btn" data-theme="light" title="Light" aria-label="Light theme">&#9728;</button>
+                    <button class="theme-btn" data-theme="cyber" title="Cyber" aria-label="Cyber theme">&#9632;</button>
+                </div>
+            </nav>
+        </header>
+
+    <main class="blog-post-page">
         <header class="blog-post-header">
             <a href="/blog/" class="blog-post-back">&larr; All Posts</a>
             <h1 class="blog-post-page-title">My Design Philosophy — Restraint as a Feature</h1>
             <div class="blog-post-page-meta">
                 <span>June 15, 2026</span>
-                <span>5 min read</span>
-                <span>Design</span>
+                <span class="dot">&middot;</span><span>5 min read</span>
+                <span class="dot">&middot;</span><span>Design</span>
             </div>
         </header>
 
@@ -72,6 +90,27 @@
 <p>Most of the time, the answer is the latter. And that&#39;s when you delete it.</p>
 
         </article>
-    </div>
+
+        <div class="blog-post-foot">
+            <a href="/blog/" class="btn-secondary">&larr; all posts</a>
+            <a href="/" class="btn-secondary">portfolio &#8599;</a>
+        </div>
+    </main>
+
+    <footer class="blog-footer">
+            <div class="container">
+                <div class="blog-footer-inner">
+                    <div class="blog-footer-row">
+                        <div class="blog-footer-note">&copy; 2026 Mohammed Yasin &middot; built from the kernel up</div>
+                        <div class="blog-footer-social">
+                            <a href="https://github.com/yasindce1998" target="_blank" rel="noopener" class="hover-link">GitHub</a>
+                            <a href="https://twitter.com/yasindce1998" target="_blank" rel="noopener" class="hover-link">X</a>
+                            <a href="/" class="hover-link">Portfolio</a>
+                        </div>
+                    </div>
+                    <div class="blog-footer-term"><span class="sigil">$</span> echo "thanks for reading" | sudo tee /dev/stdout</div>
+                </div>
+            </div>
+        </footer>
 </body>
 </html>
