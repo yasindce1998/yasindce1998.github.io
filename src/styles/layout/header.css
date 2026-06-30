@@ -119,4 +119,12 @@
     .header-logo {
         font-size: 0.95rem;
     }
+    .theme-toggle {
+        padding: 2px;
+    }
+    .theme-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 11px;
+    }
 }
