@@ -32,16 +32,42 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Loader -->
-    <div class="loader" id="loader">
-        <div class="loader-split loader-split--left"></div>
-        <div class="loader-split loader-split--right"></div>
-        <div class="loader-terminal">
-            <div class="loader-terminal-lines"></div>
-            <div class="loader-terminal-bar">
-                <div class="loader-terminal-bar-inner"></div>
+    <div class="loader" id="loader" aria-hidden="true">
+        <div class="loader-hud">
+            <div class="loader-hud-corner loader-hud-corner--tl"></div>
+            <div class="loader-hud-corner loader-hud-corner--tr"></div>
+            <div class="loader-hud-corner loader-hud-corner--bl"></div>
+            <div class="loader-hud-corner loader-hud-corner--br"></div>
+            <div class="loader-reticle">
+                <div class="loader-reticle-h"></div>
+                <div class="loader-reticle-v"></div>
+            </div>
+            <div class="loader-data loader-data--tl">
+                <span class="loader-data-label">LAT</span>
+                <span class="loader-data-value">12.9716° N</span>
+            </div>
+            <div class="loader-data loader-data--tr">
+                <span class="loader-data-label">LON</span>
+                <span class="loader-data-value">77.5946° E</span>
+            </div>
+            <div class="loader-data loader-data--bl">
+                <span class="loader-data-value">v01.MMXXVI</span>
+            </div>
+            <div class="loader-data loader-data--br">
+                <span class="loader-data-value" id="ldr-status">INIT…</span>
             </div>
         </div>
-        <div class="loader-seam"></div>
+
+        <div class="loader-stage">
+            <div class="loader-glitch-text" id="ldr-glitch" data-text="M.YASIN">M.YASIN</div>
+            <svg class="loader-ring" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="loader-ring-track" cx="60" cy="60" r="52"/>
+                <circle class="loader-ring-fill" cx="60" cy="60" r="52"/>
+            </svg>
+            <div class="loader-boot-lines" id="ldr-lines"></div>
+        </div>
+
+        <div class="loader-slices" id="ldr-slices"></div>
     </div>
 
     <!-- Masthead / Header -->

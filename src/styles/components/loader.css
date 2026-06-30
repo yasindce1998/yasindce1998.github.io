@@ -2,102 +2,224 @@
     position: fixed;
     inset: 0;
     z-index: 10000;
-    perspective: 1200px;
+    background: var(--color-bg);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.loader-split {
+/* HUD Frame */
+.loader-hud {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 50%;
-    background: var(--color-bg);
-    backface-visibility: hidden;
+    inset: clamp(16px, 3vw, 40px);
+    pointer-events: none;
+}
+
+.loader-hud-corner {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.loader-hud-corner--tl {
+    top: 0; left: 0;
+    border-top: 1px solid var(--color-accent);
+    border-left: 1px solid var(--color-accent);
+}
+
+.loader-hud-corner--tr {
+    top: 0; right: 0;
+    border-top: 1px solid var(--color-accent);
+    border-right: 1px solid var(--color-accent);
+}
+
+.loader-hud-corner--bl {
+    bottom: 0; left: 0;
+    border-bottom: 1px solid var(--color-accent);
+    border-left: 1px solid var(--color-accent);
+}
+
+.loader-hud-corner--br {
+    bottom: 0; right: 0;
+    border-bottom: 1px solid var(--color-accent);
+    border-right: 1px solid var(--color-accent);
+}
+
+/* Reticle cross-hairs */
+.loader-reticle {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.loader-reticle-h,
+.loader-reticle-v {
+    position: absolute;
+    background: var(--color-border);
     will-change: transform;
 }
 
-.loader-split--left {
+.loader-reticle-h {
     left: 0;
-    transform-origin: right center;
-}
-
-.loader-split--right {
     right: 0;
-    transform-origin: left center;
+    top: 50%;
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: center;
 }
 
-.loader-terminal {
-    position: absolute;
-    top: 50%;
+.loader-reticle-v {
+    top: 0;
+    bottom: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
+    width: 1px;
+    transform: scaleY(0);
+    transform-origin: center;
+}
+
+/* Peripheral data readouts */
+.loader-data {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    opacity: 0;
+}
+
+.loader-data--tl { top: 56px; left: 0; }
+.loader-data--tr { top: 56px; right: 0; text-align: right; }
+.loader-data--bl { bottom: 0; left: 0; }
+.loader-data--br { bottom: 0; right: 0; text-align: right; }
+
+.loader-data-label {
+    font-size: 9px;
+    opacity: 0.5;
+}
+
+.loader-data-value {
+    color: var(--color-accent);
+}
+
+/* Central stage */
+.loader-stage {
+    position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 24px;
-    width: 90%;
-    max-width: 480px;
 }
 
-.loader-terminal-lines {
+/* Glitch text */
+.loader-glitch-text {
+    position: relative;
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    user-select: none;
+    white-space: nowrap;
+}
+
+[data-theme="cyber"] .loader-glitch-text::before,
+[data-theme="cyber"] .loader-glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    pointer-events: none;
+    opacity: var(--ca-opacity, 0);
+    will-change: transform, opacity;
+}
+
+[data-theme="cyber"] .loader-glitch-text::before {
+    color: var(--color-accent-2);
+    transform: translateX(calc(var(--ca-x, 0) * -1px));
+    mix-blend-mode: screen;
+}
+
+[data-theme="cyber"] .loader-glitch-text::after {
+    color: var(--color-text);
+    transform: translateX(calc(var(--ca-x, 0) * 1px));
+    mix-blend-mode: screen;
+}
+
+/* SVG progress ring */
+.loader-ring {
+    width: clamp(100px, 14vw, 140px);
+    height: clamp(100px, 14vw, 140px);
+    transform: rotate(-90deg);
+}
+
+.loader-ring-track {
+    fill: none;
+    stroke: var(--color-border);
+    stroke-width: 2;
+    stroke-dasharray: 3 6;
+}
+
+.loader-ring-fill {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-dasharray: 326.7;
+    stroke-dashoffset: 326.7;
+    filter: drop-shadow(0 0 4px var(--color-glow));
+}
+
+/* Boot status lines */
+.loader-boot-lines {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    width: 100%;
-    min-height: 200px;
+    gap: 4px;
+    width: clamp(200px, 40vw, 360px);
+    min-height: 64px;
 }
 
-.loader-terminal-line {
+.loader-boot-line {
     font-family: var(--font-mono);
-    font-size: 12px;
-    line-height: 1.7;
-    letter-spacing: 0.06em;
+    font-size: 11px;
+    letter-spacing: 0.08em;
     color: var(--color-text-muted);
+    opacity: 0;
     white-space: nowrap;
     overflow: hidden;
 }
 
-.loader-terminal-line--ready {
+.loader-boot-line--ok {
     color: var(--color-accent);
-    font-weight: 500;
 }
 
-.loader-terminal-bar {
-    width: 300px;
-    height: 6px;
-    background: var(--color-border);
-    overflow: hidden;
-    border-radius: 3px;
+/* Glitch-slice exit bands */
+.loader-slices {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
 }
 
-.loader-terminal-bar-inner {
-    height: 100%;
-    width: 100%;
-    background: repeating-linear-gradient(
-        -45deg,
-        var(--color-text) 0px,
-        var(--color-text) 4px,
-        var(--color-accent) 4px,
-        var(--color-accent) 8px
-    );
-    transform: scaleX(0);
-    transform-origin: left;
+.loader-slice {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: var(--color-bg);
     will-change: transform;
 }
 
-.loader-seam {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: var(--rule);
-    height: 0;
-    opacity: 0;
-    z-index: 3;
-    background: var(--color-accent);
-    will-change: height, opacity;
-}
-
+/* Hidden state */
 .loader.hidden {
     pointer-events: none;
 }
