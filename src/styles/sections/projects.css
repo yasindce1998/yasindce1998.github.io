@@ -30,6 +30,25 @@
     opacity: 0.4;
 }
 
+/* Accent echo of the blog's article-card: gradient top-bar wipes in on hover. */
+.project-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 1;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out-expo);
+}
+
+.project-item:hover::before {
+    transform: scaleX(1);
+}
+
 .project-item-line {
     position: absolute;
     bottom: 0;

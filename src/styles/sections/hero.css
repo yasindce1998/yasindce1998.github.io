@@ -4,6 +4,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Keep real hero content above the ambient grid/dots/glow layer (z-index: 0). */
+.hero > *:not(.hero-ambient) {
+    position: relative;
+    z-index: 1;
 }
 
 /* Top masthead strip — coordinates / location / issue */

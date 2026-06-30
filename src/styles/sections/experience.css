@@ -9,10 +9,31 @@
     gap: clamp(24px, 5vw, 80px);
     padding: clamp(28px, 4vw, 48px) 0;
     border-top: var(--rule) solid var(--color-border);
+    position: relative;
+    overflow: hidden;
 }
 
 .experience-item:last-child {
     border-bottom: var(--rule) solid var(--color-border);
+}
+
+/* Accent echo of the blog's article-card: gradient top-bar wipes in on hover. */
+.experience-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 1;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out-expo);
+}
+
+.experience-item:hover::before {
+    transform: scaleX(1);
 }
 
 .experience-period {
@@ -32,12 +53,39 @@
     margin-bottom: var(--space-sm);
 }
 
-.experience-desc {
-    font-size: 1.02rem;
-    line-height: 1.65;
+.experience-via {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.04em;
     color: var(--color-text-muted);
-    max-width: 56ch;
+    white-space: nowrap;
+}
+
+.experience-desc {
+    max-width: 60ch;
     margin-bottom: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.experience-desc li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+}
+
+.experience-desc li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 7px;
+    height: 7px;
+    border-radius: 1px;
+    background: var(--color-accent);
 }
 
 .experience-tags {

@@ -15,4 +15,5 @@
 @import './components/cursor.css';
 @import './components/navigation.css';
 @import './components/marquee.css';
+@import './components/ambient.css';
 @import './layout/responsive.css';

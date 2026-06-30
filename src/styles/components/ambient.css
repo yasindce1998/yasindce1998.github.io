@@ -1,0 +1,61 @@
+/* ===========================================================================
+   Hero ambient layer — ported from the /dev/log blog (blog/blog.css §grid/dots/glow)
+   and re-scoped to the portfolio hero. Uses the shared --color-* variables so all
+   three themes (day / night / cyber) recolor for free.
+   =========================================================================== */
+
+.hero-ambient {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* === GRAPH-PAPER GRID === */
+.hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--color-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+    background-size: 56px 56px;
+    background-position: center top;
+    /* Fade the grid out toward the edges so it never ends in a hard line and the
+       editorial whitespace below the hero stays clean. */
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 18%, #000 35%, transparent 78%);
+    mask-image: radial-gradient(120% 90% at 50% 18%, #000 35%, transparent 78%);
+}
+
+/* === FLOATING DOTS === */
+.float-dot {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.22;
+    animation: drift 16s ease-in-out infinite;
+}
+
+@keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(60px, -40px) scale(1.1); }
+    66% { transform: translate(-30px, 50px) scale(0.95); }
+}
+
+/* === MOUSE GLOW (position + opacity driven by main.js) === */
+.mouse-glow {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.12) 0%, transparent 60%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    filter: blur(30px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .float-dot { animation: none; }
+    .mouse-glow { display: none; }
+}

@@ -21,6 +21,31 @@
     min-height: clamp(300px, 40vh, 460px);
     position: relative;
     overflow: hidden;
+    transition: box-shadow 0.45s var(--ease-out-quart);
+}
+
+/* Accent echo of the blog's article-card: gradient top-bar wipes in on hover. */
+.study::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 2;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out-expo);
+}
+
+.study:hover::before {
+    transform: scaleX(1);
+}
+
+/* Soft glow pooling into the bottom-right corner on hover. */
+.study:hover {
+    box-shadow: inset -70px -70px 90px -60px var(--color-glow);
 }
 
 .study::after {

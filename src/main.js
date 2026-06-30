@@ -42,6 +42,7 @@ class App {
         if (!isMobile()) {
             this.cursor = new Cursor();
             this.initProjectTilt();
+            this.initHeroGlow();
         }
 
         this.marquees = Marquee.initAll();
@@ -149,6 +150,23 @@ class App {
             const tag = e.target.tagName;
             if (tag === 'INPUT' || tag === 'TEXTAREA' || e.metaKey || e.ctrlKey) return;
             if (e.key === 't' || e.key === 'T') cycle();
+        });
+    }
+
+    initHeroGlow() {
+        const glow = document.getElementById('heroGlow');
+        const hero = document.getElementById('index');
+        if (!glow || !hero) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            glow.style.left = `${e.clientX - rect.left}px`;
+            glow.style.top = `${e.clientY - rect.top}px`;
+            glow.style.opacity = '1';
+        });
+        hero.addEventListener('mouseleave', () => {
+            glow.style.opacity = '0';
         });
     }
 

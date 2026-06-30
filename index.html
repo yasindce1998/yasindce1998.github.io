@@ -75,10 +75,11 @@
                 <a href="#background" class="nav-link" data-index="01">Background</a>
                 <a href="#philosophy" class="nav-link" data-index="02">Philosophy</a>
                 <a href="#experience" class="nav-link" data-index="03">Experience</a>
-                <a href="#work" class="nav-link" data-index="04">Selected Work</a>
-                <a href="#toolkit" class="nav-link" data-index="05">Toolkit</a>
-                <a href="#contact" class="nav-link" data-index="06">Contact</a>
-                <a href="/blog/" class="nav-link" data-index="07">Blog</a>
+                <a href="#professional" class="nav-link" data-index="04">Professional</a>
+                <a href="#work" class="nav-link" data-index="05">Open-Source Projects</a>
+                <a href="#toolkit" class="nav-link" data-index="06">Toolkit</a>
+                <a href="#contact" class="nav-link" data-index="07">Contact</a>
+                <a href="/blog/" class="nav-link" data-index="08">Blog</a>
             </div>
             <div class="nav-footer">
                 <div class="nav-socials">
@@ -101,6 +102,12 @@
     <main id="main-content">
         <!-- 00 — Index / Masthead -->
         <section class="hero" id="index">
+            <div class="hero-ambient" aria-hidden="true">
+                <div class="hero-grid"></div>
+                <div class="float-dot" style="width:480px;height:480px;top:-120px;left:-140px;background:var(--color-accent);"></div>
+                <div class="float-dot" style="width:560px;height:560px;bottom:-220px;right:-180px;background:var(--color-accent-2);animation-delay:-5s;"></div>
+                <div class="mouse-glow" id="heroGlow"></div>
+            </div>
             <div class="hero-masthead-top">
                 <span class="coords">12.9716° N · 77.5946° E</span>
                 <span class="label">Bengaluru · India</span>
@@ -134,7 +141,7 @@
                     <span class="stat-label">Years in production<sup class="footnote-marker">1</sup></span>
                 </div>
                 <div class="stat">
-                    <span class="stat-num">08</span>
+                    <span class="stat-num">10</span>
                     <span class="stat-label">Systems shipped<sup class="footnote-marker">2</sup></span>
                 </div>
                 <div class="stat">
@@ -225,33 +232,158 @@
             </div>
             <div class="experience-list">
                 <article class="experience-item">
-                    <span class="experience-period">2024 — Present</span>
+                    <span class="experience-period">Aug 2025 — Present</span>
                     <div class="experience-body">
-                        <h3 class="experience-role">Backend Engineer — Kroger</h3>
-                        <p class="experience-desc">Architected real-time delivery routing and zone-optimization services with haversine geospatial math and a distributed datastore — millions of location queries daily at sub-50ms latency.</p>
+                        <h3 class="experience-role">Application Developer — IBM</h3>
+                        <ul class="experience-desc">
+                            <li>Built geospatial services and location management in Golang — haversine calculations, zone mapping, and real-time tracking for delivery-routing optimization.</li>
+                            <li>Designed a distributed database architecture with PostgreSQL/PostGIS, YugabyteDB for high availability, and Redis caching for sub-millisecond location queries.</li>
+                            <li>Authored OpenAPI/Swagger specifications and GitHub CI/CD pipelines for automated deployments and consistent API documentation.</li>
+                        </ul>
                         <ul class="experience-tags">
-                            <li>Golang</li><li>YugabyteDB</li><li>Redis</li><li>Kubernetes</li>
+                            <li>Golang</li><li>PostGIS</li><li>YugabyteDB</li><li>Redis</li><li>OpenAPI</li><li>CI/CD</li>
                         </ul>
                     </div>
                 </article>
                 <article class="experience-item">
-                    <span class="experience-period">2022 — 2024</span>
+                    <span class="experience-period">Jan — Jul 2025</span>
                     <div class="experience-body">
-                        <h3 class="experience-role">Cloud Engineer — Bank of America</h3>
-                        <p class="experience-desc">Built a self-service provisioning platform for containerized workloads on a secure microservices architecture, with compliance guardrails baked into every deployment path.</p>
+                        <h3 class="experience-role">Software Engineer (A2) — EPAM Systems</h3>
+                        <ul class="experience-desc">
+                            <li>Designed Kafka topic architecture and Golang consumer services for video ingestion — partitioning, batch processing, and fault-tolerant handling for high-throughput streaming.</li>
+                            <li>Engineered PostgreSQL schema and query optimization for video metadata and analytics through strategic indexing, query refactoring, and connection pooling.</li>
+                            <li>Architected resilient Golang microservices with Kubernetes auto-scaling, improving production reliability and operational efficiency.</li>
+                        </ul>
                         <ul class="experience-tags">
-                            <li>Golang</li><li>OpenShift</li><li>Tekton</li><li>ArgoCD</li><li>gRPC</li>
+                            <li>Golang</li><li>Kafka</li><li>PostgreSQL</li><li>Kubernetes</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="experience-item">
+                    <span class="experience-period">Nov 2023 — Jan 2025</span>
+                    <div class="experience-body">
+                        <h3 class="experience-role">Senior Software Developer — Infosys <span class="experience-via">(via Artech)</span></h3>
+                        <ul class="experience-desc">
+                            <li>Engineered high-performance Golang microservices for a large-scale banking platform, ensuring secure and efficient financial transactions.</li>
+                            <li>Orchestrated deployment and scaling of banking services on OpenShift and Kubernetes, optimizing Docker containerization for resource utilization and reliability.</li>
+                            <li>Implemented inter-service communication over gRPC and REST APIs, and collaborated with front-end teams on user-centric UI integration.</li>
+                        </ul>
+                        <ul class="experience-tags">
+                            <li>Golang</li><li>OpenShift</li><li>Kubernetes</li><li>Docker</li><li>gRPC</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="experience-item">
+                    <span class="experience-period">Sep 2021 — Nov 2023</span>
+                    <div class="experience-body">
+                        <h3 class="experience-role">Cyber Security Engineer — AccuKnox</h3>
+                        <ul class="experience-desc">
+                            <li>Developed Golang security solutions — Kubernetes controllers and operators — for AWS, GCP, and Azure using K8s CRDs, Linux, and Docker.</li>
+                            <li>Implemented eBPF-powered monitoring tools to detect and mitigate security threats in real time across containerized infrastructure.</li>
+                            <li>Architected scalable cybersecurity frameworks and system policies, integrating DevSecOps across the software development lifecycle.</li>
+                        </ul>
+                        <ul class="experience-tags">
+                            <li>Golang</li><li>eBPF</li><li>Kubernetes</li><li>AWS/GCP/Azure</li><li>DevSecOps</li>
                         </ul>
                     </div>
                 </article>
             </div>
         </section>
 
-        <!-- 04 — Selected Work (Plates) -->
-        <section class="projects" id="work">
+        <!-- 04 — Professional Projects (client work, per employer) -->
+        <section class="projects" id="professional">
             <div class="section-head">
                 <span class="section-index">04</span>
-                <span class="section-title">Selected Work</span>
+                <span class="section-title">Professional Projects</span>
+                <span class="coords">Client systems</span>
+            </div>
+
+            <div class="projects-list">
+                <article class="project-item" data-project="01">
+                    <div class="project-item-index">01</div>
+                    <div class="project-item-content">
+                        <span class="project-item-plate">C.01 · via IBM</span>
+                        <h3 class="project-item-title">Kroger</h3>
+                        <p class="project-item-desc">Location &amp; geospatial services for Kroger's delivery network — real-time routing and zone optimization with haversine math over a distributed PostgreSQL/PostGIS + YugabyteDB store and Redis caching.</p>
+                        <ul class="project-item-tags">
+                            <li>Golang</li><li>PostGIS</li><li>YugabyteDB</li><li>Redis</li>
+                        </ul>
+                    </div>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">Geospatial</span>
+                        <span class="project-item-year">2025 — Present</span>
+                        <span class="project-item-status">Proprietary</span>
+                    </div>
+                    <div class="project-item-line"></div>
+                </article>
+
+                <article class="project-item" data-project="02">
+                    <div class="project-item-index">02</div>
+                    <div class="project-item-content">
+                        <span class="project-item-plate">C.02 · via EPAM Systems</span>
+                        <h3 class="project-item-title">P&amp;G</h3>
+                        <p class="project-item-desc">AI-driven video analytics platform — real-time visual pattern detection across media and surveillance feeds, built on Kafka ingestion and Golang consumer services with a PostgreSQL analytics layer.</p>
+                        <ul class="project-item-tags">
+                            <li>Golang</li><li>Kafka</li><li>PostgreSQL</li><li>AI / Video</li>
+                        </ul>
+                    </div>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">AI Video Analytics</span>
+                        <span class="project-item-year">2025</span>
+                        <span class="project-item-status">Proprietary</span>
+                    </div>
+                    <div class="project-item-line"></div>
+                </article>
+
+                <article class="project-item" data-project="03">
+                    <div class="project-item-index">03</div>
+                    <div class="project-item-content">
+                        <span class="project-item-plate">C.03 · via Infosys</span>
+                        <h3 class="project-item-title">Bank of America</h3>
+                        <p class="project-item-desc">Self-service cloud provisioning platform letting internal banking teams deploy containerized workloads on a secure microservices architecture, with compliance guardrails baked into every deployment path.</p>
+                        <ul class="project-item-tags">
+                            <li>Golang</li><li>OpenShift</li><li>Tekton</li><li>ArgoCD</li><li>gRPC</li>
+                        </ul>
+                    </div>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">Cloud Platform</span>
+                        <span class="project-item-year">2023 — 2025</span>
+                        <span class="project-item-status">Proprietary</span>
+                    </div>
+                    <div class="project-item-line"></div>
+                </article>
+
+                <a href="https://github.com/kubearmor/KubeArmor" target="_blank" rel="noopener noreferrer" class="project-item" data-project="04">
+                    <div class="project-item-index">04</div>
+                    <div class="project-item-content">
+                        <span class="project-item-plate">C.04 · via AccuKnox</span>
+                        <h3 class="project-item-title">AccuKnox SaaS + KubeArmor</h3>
+                        <p class="project-item-desc">Runtime security enforcement for the AccuKnox SaaS platform and the open-source KubeArmor engine — workload hardening, sandboxing, and least-permissive policies via LSMs (BPF-LSM, AppArmor).</p>
+                        <ul class="project-item-tags">
+                            <li>Golang</li><li>eBPF</li><li>KubeArmor</li><li>LSM</li>
+                        </ul>
+                    </div>
+                    <div class="project-item-meta">
+                        <span class="project-item-category">Runtime Security</span>
+                        <span class="project-item-year">2021 — 2023</span>
+                        <span class="project-item-status">Open Source</span>
+                    </div>
+                    <div class="project-item-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </div>
+                    <div class="project-item-line"></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 05 — Open-Source Projects (Plates) -->
+        <section class="projects" id="work">
+            <div class="section-head">
+                <span class="section-index">05</span>
+                <span class="section-title">Open-Source Projects</span>
                 <span class="coords">Independent systems</span>
             </div>
 
@@ -405,7 +537,7 @@
         <!-- Marquee — stats -->
         <div class="marquee marquee--reverse" aria-hidden="true">
             <div class="marquee-track">
-                <span>Six systems shipped</span><span class="marquee-dot">✦</span>
+                <span>Ten systems shipped</span><span class="marquee-dot">✦</span>
                 <span>Sub-50ms latency</span><span class="marquee-dot">✦</span>
                 <span>Kernel to cloud</span><span class="marquee-dot">✦</span>
                 <span>Bengaluru · India</span><span class="marquee-dot">✦</span>
@@ -413,10 +545,10 @@
             </div>
         </div>
 
-        <!-- 05 — Toolkit -->
+        <!-- 06 — Toolkit -->
         <section class="toolkit" id="toolkit">
             <div class="section-head">
-                <span class="section-index">05</span>
+                <span class="section-index">06</span>
                 <span class="section-title">Toolkit</span>
                 <span class="coords">The instrument set</span>
             </div>
@@ -432,10 +564,10 @@
             </ul>
         </section>
 
-        <!-- 06 — Contact -->
+        <!-- 07 — Contact -->
         <footer class="footer" id="contact">
             <div class="section-head">
-                <span class="section-index">06</span>
+                <span class="section-index">07</span>
                 <span class="section-title">Contact</span>
                 <span class="coords">¶ Signal</span>
             </div>
