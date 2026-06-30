@@ -63,7 +63,7 @@ export class PageLoader {
 
     startSequence() {
         if (isReducedMotion()) {
-            gsap.delayedCall(0.3, () => this.cleanup());
+            this.buildReducedSequence();
             return;
         }
 
@@ -71,6 +71,47 @@ export class PageLoader {
         master.add(this.buildHUDPhase());
         master.add(this.buildIdentityPhase(), 0.4);
         master.add(this.buildExitPhase(), '-=0.4');
+    }
+
+    // Calm, motion-sensitive variant: same beats, no scramble / flicker /
+    // chromatic aberration / slice jitter. Just gentle fades + a steady ring.
+    buildReducedSequence() {
+        const tl = gsap.timeline({ onComplete: () => this.cleanup() });
+
+        // Place the reticle without motion, then fade it in (avoid a flash).
+        gsap.set([this.reticleH, this.reticleV], { scaleX: 1, scaleY: 1, opacity: 0 });
+
+        tl.fromTo(this.corners,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.5, stagger: 0.05, ease: 'power1.out' }, 0);
+
+        tl.fromTo([this.reticleH, this.reticleV],
+            { opacity: 0 },
+            { opacity: 1, duration: 0.5, ease: 'power1.out' }, 0);
+
+        tl.fromTo(this.dataReadouts,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.4, stagger: 0.05, ease: 'power1.out' }, 0.1);
+
+        // Title resolves instantly — no character scramble.
+        this.glitchEl.textContent = this.glitchEl.dataset.text;
+
+        // Ring fills steadily rather than racing.
+        tl.to(this.ringFill,
+            { attr: { 'stroke-dashoffset': 0 }, duration: 1.2, ease: 'power1.inOut' }, 0.3);
+
+        BOOT_LINES.forEach((text, i) => {
+            tl.call(() => this.addBootLine(text, i === BOOT_LINES.length - 1, true), null, 0.5 + i * 0.25);
+        });
+
+        tl.call(() => {
+            if (this.statusEl) this.statusEl.textContent = 'ONLINE';
+        }, null, 1.6);
+
+        // Brief hold before cleanup's gentle fade.
+        tl.to({}, { duration: 0.5 });
+
+        return tl;
     }
 
     buildHUDPhase() {
@@ -175,17 +216,24 @@ export class PageLoader {
         return tl;
     }
 
-    addBootLine(text, isLast) {
+    addBootLine(text, isLast, reduced) {
         const line = document.createElement('div');
         line.className = 'loader-boot-line';
         if (isLast) line.classList.add('loader-boot-line--ok');
         line.textContent = text;
         this.bootContainer.appendChild(line);
 
-        gsap.fromTo(line,
-            { opacity: 0, x: -8 },
-            { opacity: 1, x: 0, duration: 0.25, ease: 'power2.out' }
-        );
+        if (reduced) {
+            gsap.fromTo(line,
+                { opacity: 0 },
+                { opacity: 1, duration: 0.3, ease: 'power1.out' }
+            );
+        } else {
+            gsap.fromTo(line,
+                { opacity: 0, x: -8 },
+                { opacity: 1, x: 0, duration: 0.25, ease: 'power2.out' }
+            );
+        }
 
         const allLines = this.bootContainer.querySelectorAll('.loader-boot-line');
         if (allLines.length > 1) {
