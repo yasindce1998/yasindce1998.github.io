@@ -54,11 +54,28 @@
 
 .hero-line-inner {
     display: block;
+    /* The name is split into inline-block .hero-char spans; without this they
+       can wrap between letters (e.g. "Mohamme" / "d") in the narrow column. */
+    white-space: nowrap;
 }
 
 .hero-char {
     display: inline-block;
     will-change: transform;
+}
+
+/* Desktop: the masthead sits in the ~1.4fr title column, which is narrower than
+   the viewport, so the fixed clamp could overflow and break mid-word. Make the
+   column a query container and size the title to it (21.8cqi ≈ widest word
+   "Mohammed" at ~96% of the column), scaling dynamically with the column width.
+   Mobile keeps --fs-masthead (full-width column), which already fits. */
+@media (min-width: 901px) {
+    .hero-title-wrap {
+        container-type: inline-size;
+    }
+    .hero-title {
+        font-size: clamp(3rem, 21.8cqi, 13rem);
+    }
 }
 
 .hero-meta {
