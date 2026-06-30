@@ -39,44 +39,43 @@
     pointer-events: auto;
 }
 
-/* Day / Night word toggle */
+/* Theme toggle — icon segmented control (consistent with the /dev/log blog) */
 .theme-toggle {
-    position: relative;
-    display: flex;
-    align-items: center;
-    color: var(--color-text-muted);
-    transition: color 0.3s ease;
-}
-
-.theme-toggle:hover {
-    color: var(--color-text);
-}
-
-.theme-toggle-label {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-family: var(--font-mono);
-    font-size: var(--fs-micro);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    gap: 2px;
+    padding: 3px;
+    background: var(--color-bg-alt);
+    border: var(--rule) solid var(--color-border-strong);
+    border-radius: 999px;
 }
 
-.theme-sep {
-    opacity: 0.4;
+.theme-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    line-height: 1;
+    transition: color 0.3s ease,
+                background 0.35s var(--ease-out-expo),
+                box-shadow 0.35s ease,
+                transform 0.35s var(--ease-out-expo);
 }
 
-/* Highlight the active mode word (day / night / cyber) */
-.theme-word {
-    color: var(--color-text-dim);
-    transition: color 0.3s ease;
-}
-[data-theme="light"] .theme-word--day,
-[data-theme="dark"] .theme-word--night {
+.theme-btn:hover:not(.active) {
     color: var(--color-text);
+    transform: scale(1.08);
 }
-[data-theme="cyber"] .theme-word--cyber {
-    color: var(--color-accent);
+
+.theme-btn.active {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    box-shadow: 0 0 14px rgba(var(--color-accent-rgb), 0.45);
 }
 
 .header-menu-btn {

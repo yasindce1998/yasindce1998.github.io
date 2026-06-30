@@ -49,15 +49,11 @@
         <a href="/" class="header-logo">Mohammed Yasin</a>
         <span class="header-issue issue-line">Vol. 01 · MMXXVI</span>
         <div class="header-actions">
-            <button class="theme-toggle" id="theme-toggle" aria-label="Switch theme: day / night / cyber">
-                <span class="theme-toggle-label">
-                    <span class="theme-word theme-word--day">Day</span>
-                    <span class="theme-sep">/</span>
-                    <span class="theme-word theme-word--night">Night</span>
-                    <span class="theme-sep">/</span>
-                    <span class="theme-word theme-word--cyber">Cyber</span>
-                </span>
-            </button>
+            <div class="theme-toggle" id="theme-toggle" role="group" aria-label="Theme selector">
+                <button class="theme-btn" type="button" data-theme="light" title="Day" aria-label="Day theme">&#9728;</button>
+                <button class="theme-btn" type="button" data-theme="dark" title="Night" aria-label="Night theme">&#9789;</button>
+                <button class="theme-btn" type="button" data-theme="cyber" title="Cyber" aria-label="Cyber theme">&#9632;</button>
+            </div>
             <button class="header-menu-btn" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
                 <span class="menu-lines">
                     <span></span>

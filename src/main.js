@@ -124,32 +124,33 @@ class App {
     }
 
     initTheme() {
-        const toggle = document.getElementById('theme-toggle');
-        if (!toggle) return;
-
         const meta = document.querySelector('meta[name="theme-color"]');
         const order = ['light', 'dark', 'cyber'];
         const colors = { light: '#f3ecdc', dark: '#0c0b09', cyber: '#02060a' };
+        const btns = document.querySelectorAll('.theme-btn');
 
         const apply = (theme) => {
+            if (order.indexOf(theme) === -1) theme = 'light';
             document.documentElement.dataset.theme = theme;
-            localStorage.setItem('theme', theme);
+            try { localStorage.setItem('theme', theme); } catch (e) { /* private mode */ }
             if (meta && colors[theme]) meta.setAttribute('content', colors[theme]);
+            btns.forEach((b) => b.classList.toggle('active', b.dataset.theme === theme));
         };
 
-        const cycle = () => {
-            const current = document.documentElement.dataset.theme;
-            const idx = order.indexOf(current);
-            apply(order[(idx + 1) % order.length]);
-        };
+        // Each icon selects its theme directly (matches the blog's segmented toggle).
+        btns.forEach((b) => b.addEventListener('click', () => apply(b.dataset.theme)));
 
-        toggle.addEventListener('click', cycle);
+        // Sync the active icon with the theme the inline head script already applied.
+        apply(document.documentElement.dataset.theme || 'light');
 
         // `t` cycles themes (matches the blog), ignoring text inputs.
         document.addEventListener('keydown', (e) => {
             const tag = e.target.tagName;
             if (tag === 'INPUT' || tag === 'TEXTAREA' || e.metaKey || e.ctrlKey) return;
-            if (e.key === 't' || e.key === 'T') cycle();
+            if (e.key === 't' || e.key === 'T') {
+                const idx = order.indexOf(document.documentElement.dataset.theme);
+                apply(order[(idx + 1) % order.length]);
+            }
         });
     }
 
