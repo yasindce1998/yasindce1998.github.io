@@ -43,20 +43,22 @@ export class PageLoader {
     buildTerminalPhase() {
         const tl = gsap.timeline();
 
-        // Progress bar fills over the full boot sequence
+        // Progress bar fills steadily across the whole terminal phase and keeps
+        // going after the last boot line, so it reaches 100% right as the split
+        // reveal (and the hero text) begins — no early finish + idle wait.
         tl.to(this.barInner, {
             scaleX: 1,
-            duration: 2.2,
-            ease: 'power1.inOut'
+            duration: 4.8,
+            ease: 'none'
         }, 0);
 
-        // Add boot lines with stagger
+        // Add boot lines with stagger (finish well before the bar does).
         BOOT_LINES.forEach((text, i) => {
-            tl.call(() => this.addLine(text, i === BOOT_LINES.length - 1), null, i * 0.28);
+            tl.call(() => this.addLine(text, i === BOOT_LINES.length - 1), null, i * 0.4);
         });
 
-        // Hold briefly after last line
-        tl.to({}, { duration: 0.4 });
+        // Tiny beat after the bar tops out, then straight into the reveal.
+        tl.to({}, { duration: 0.2 });
 
         return tl;
     }
@@ -110,13 +112,13 @@ export class PageLoader {
 
         tl.to(this.splitLeft, {
             xPercent: -100,
-            duration: 1.6,
+            duration: 1.4,
             ease: 'power2.inOut'
         }, '-=0.2');
 
         tl.to(this.splitRight, {
             xPercent: 100,
-            duration: 1.6,
+            duration: 1.4,
             ease: 'power2.inOut'
         }, '<');
 

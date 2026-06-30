@@ -176,19 +176,26 @@ class App {
         const overlay = document.getElementById('nav-overlay');
         if (!toggle || !overlay) return;
 
+        const setOpen = (open) => {
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            overlay.classList.toggle('active', open);
+            document.body.classList.toggle('menu-open', open);
+        };
+
+        // Hamburger toggles open/closed (it morphs to an X and stays clickable
+        // above the overlay).
         toggle.addEventListener('click', () => {
-            const expanded = toggle.getAttribute('aria-expanded') === 'true';
-            toggle.setAttribute('aria-expanded', !expanded);
-            overlay.classList.toggle('active');
-            document.body.style.overflow = expanded ? '' : 'hidden';
+            setOpen(toggle.getAttribute('aria-expanded') !== 'true');
         });
 
+        // Selecting a destination closes the menu.
         overlay.querySelectorAll('.nav-link').forEach((link) => {
-            link.addEventListener('click', () => {
-                toggle.setAttribute('aria-expanded', 'false');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
+            link.addEventListener('click', () => setOpen(false));
+        });
+
+        // Escape closes the menu.
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) setOpen(false);
         });
     }
 

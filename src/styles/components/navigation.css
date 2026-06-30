@@ -7,6 +7,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Scroll if the menu is taller than the viewport (small/short screens). */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.6s var(--ease-out-expo), visibility 0s 0.6s;
@@ -21,12 +24,14 @@
 .nav-overlay-inner {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: var(--space-xl);
+    justify-content: center;
+    gap: clamp(28px, 5vh, 64px);
     width: 100%;
     max-width: 900px;
-    height: 70vh;
-    padding: var(--gutter);
+    min-height: 100%;
+    /* Top padding clears the fixed header so the first item isn't hidden. */
+    padding: calc(var(--header-height) + var(--space-md)) var(--gutter) var(--space-lg);
+    margin: auto;
 }
 
 .nav-links {
@@ -41,10 +46,10 @@
     align-items: baseline;
     gap: 1rem;
     font-family: var(--font-display);
-    font-size: clamp(2rem, 6vw, 5rem);
+    font-size: clamp(1.5rem, 4.2vw, 3rem);
     font-weight: 340;
     letter-spacing: -0.03em;
-    line-height: 1.05;
+    line-height: 1.1;
     color: var(--color-text);
     opacity: 0;
     transform: translateY(40px);
@@ -74,6 +79,7 @@
 .nav-overlay.active .nav-link:nth-child(6) { transition-delay: 0.28s; }
 .nav-overlay.active .nav-link:nth-child(7) { transition-delay: 0.32s; }
 .nav-overlay.active .nav-link:nth-child(8) { transition-delay: 0.36s; }
+.nav-overlay.active .nav-link:nth-child(9) { transition-delay: 0.40s; }
 
 .nav-link:hover {
     color: var(--color-accent);
@@ -127,11 +133,14 @@
     color: var(--color-text);
 }
 
+/* While the menu is open, lift the header above the overlay so the hamburger
+   (now an X) stays visible and clickable to close it. The header is its own
+   stacking context, so the whole bar must out-rank the overlay's z-index. */
+body.menu-open .header {
+    z-index: 9500;
+}
+
 @media (max-width: 600px) {
-    .nav-overlay-inner {
-        height: auto;
-        gap: var(--space-lg);
-    }
     .nav-footer {
         flex-direction: column;
         align-items: flex-start;
