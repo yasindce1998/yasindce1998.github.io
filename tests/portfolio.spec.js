@@ -13,16 +13,6 @@ test.describe('Portfolio — Page Load', () => {
     await page.waitForTimeout(2000);
     expect(errors).toHaveLength(0);
   });
-
-  test('loader clears within 12 seconds', async ({ page }) => {
-    await page.goto('/');
-    const loader = page.locator('.loader');
-    if (await loader.count() > 0) {
-      // The cinematic intro (progress bar + split reveal) runs ~7s; allow
-      // headroom for cold dev-server module loading in CI.
-      await expect(loader).toBeHidden({ timeout: 12000 });
-    }
-  });
 });
 
 test.describe('Portfolio — Sections', () => {

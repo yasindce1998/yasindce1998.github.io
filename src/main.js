@@ -4,7 +4,6 @@ import gsap from 'gsap';
 import { Clock } from './engine/Clock.js';
 import { SmoothScroll } from './components/Scroll.js';
 import { Cursor } from './components/Cursor.js';
-import { PageLoader } from './components/Loader.js';
 import { TextAnimation } from './components/TextAnimation.js';
 import { Effects } from './components/Effects.js';
 import { Marquee } from './components/Marquee.js';
@@ -32,7 +31,7 @@ class App {
 
         this.effects = new Effects();
 
-        new PageLoader(() => this.onLoaded());
+        this.onLoaded();
     }
 
     onLoaded() {

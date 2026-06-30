@@ -3,48 +3,9 @@
         --space-xl: 80px;
         --space-2xl: 120px;
     }
-
-    .loader-hud-corner {
-        width: 32px;
-        height: 32px;
-    }
-
-    .loader-data {
-        font-size: 9px;
-    }
-
-    .loader-data--tr,
-    .loader-data--br {
-        display: none;
-    }
-
-    .loader-glitch-text {
-        font-size: clamp(1.6rem, 10vw, 2.8rem);
-    }
-
-    .loader-ring {
-        width: 88px;
-        height: 88px;
-    }
-
-    .loader-boot-lines {
-        width: 90vw;
-    }
-
-    .loader-boot-line {
-        font-size: 10px;
-    }
 }
 
 @media (max-width: 480px) {
-    .loader-hud {
-        inset: 10px;
-    }
-
-    .loader-data--tl {
-        display: none;
-    }
-
     .hero-title {
         font-size: clamp(2.75rem, 14vw, 4rem);
     }
@@ -119,19 +80,6 @@
     }
 
     main {
-        transform: none !important;
-    }
-
-    .loader-hud-corner,
-    .loader-reticle-h,
-    .loader-reticle-v,
-    .loader-data,
-    .loader-glitch-text,
-    .loader-ring-fill,
-    .loader-boot-line,
-    .loader-slice {
-        transition: none !important;
-        animation: none !important;
         transform: none !important;
     }
 
