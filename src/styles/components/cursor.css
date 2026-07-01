@@ -1,6 +1,9 @@
+/* Only hide the native cursor once the custom one is actually mounted
+   (Cursor.js adds .has-custom-cursor). Prevents a "no cursor" gap when the
+   page loads narrow — no custom cursor created — and is then widened. */
 @media (pointer: fine) {
-    body,
-    body * {
+    body.has-custom-cursor,
+    body.has-custom-cursor * {
         cursor: none !important;
     }
 }
