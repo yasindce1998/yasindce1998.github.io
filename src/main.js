@@ -213,6 +213,10 @@ class App {
             toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
             overlay.classList.toggle('active', open);
             document.body.classList.toggle('menu-open', open);
+            // The overlay fades out without moving the pointer, so a hovered
+            // link/hamburger never gets its mouseleave — clear the cursor's
+            // magnetic lock so the ring doesn't stay stuck to the hidden menu.
+            if (!open) this.cursor?.reset();
         };
 
         // Hamburger toggles open/closed (it morphs to an X and stays clickable

@@ -17,6 +17,10 @@ export class Cursor {
 
         if (!this.dot || !this.ringEl) return;
 
+        // Signal that the custom cursor is live so CSS only hides the native
+        // cursor when we're actually drawing a replacement (see cursor.css).
+        document.body.classList.add('has-custom-cursor');
+
         this.bindEvents();
         this.setupMagnetic();
         this.animate();
@@ -80,7 +84,24 @@ export class Cursor {
         this.state = state;
     }
 
+    // Drop any magnetic lock and snap back to the default state. Needed when the
+    // element under the pointer disappears without a mouseleave — e.g. the nav
+    // overlay fades out on select while a link is still hovered — which would
+    // otherwise leave the ring pulled toward a now-hidden element.
+    reset() {
+        this.magneticTarget = null;
+        this.magnetic.x = 0;
+        this.magnetic.y = 0;
+        this.setState('default');
+    }
+
     animate() {
+        // If the hovered target was removed from the DOM (page swap, re-render),
+        // release it so the ring returns to the pointer.
+        if (this.magneticTarget && !this.magneticTarget.isConnected) {
+            this.reset();
+        }
+
         if (this.magneticTarget) {
             const rect = this.magneticTarget.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
