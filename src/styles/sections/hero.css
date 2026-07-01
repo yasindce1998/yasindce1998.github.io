@@ -1,199 +1,123 @@
+/* Terminal hero — $ prompt + typewriter, mirroring the /dev/log blog hero. */
 .hero {
-    min-height: 100vh;
-    padding-top: calc(var(--header-height) + clamp(24px, 4vw, 56px));
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
     overflow: hidden;
+    padding-top: calc(var(--header-height) + clamp(40px, 8vh, 96px));
+    padding-bottom: clamp(56px, 10vh, 120px);
 }
 
-/* Keep real hero content above the ambient grid/dots/glow layer (z-index: 0). */
+/* Keep real hero content above the ambient grid/dots/glow layer. */
 .hero > *:not(.hero-ambient) {
     position: relative;
     z-index: 1;
 }
 
-/* Top masthead strip — coordinates / location / issue */
-.hero-masthead-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-md);
-    padding-bottom: var(--space-sm);
-    border-bottom: var(--rule) solid var(--color-border);
-    color: var(--color-text-muted);
+.hero-inner {
+    width: 100%;
 }
 
-.hero-content {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    align-items: end;
-    gap: clamp(32px, 6vw, 96px);
-    padding: clamp(40px, 8vh, 120px) 0;
-}
-
-.hero-index {
-    display: block;
-    color: var(--color-accent);
-    margin-bottom: var(--space-md);
-}
-
-.hero-title {
-    font-size: var(--fs-masthead);
-    font-weight: 360;
-    line-height: 0.86;
-    letter-spacing: -0.03em;
-}
-
-.hero-line {
-    display: block;
-    overflow: hidden;
-}
-
-.hero-line-inner {
-    display: block;
-    /* The name is split into inline-block .hero-char spans; without this they
-       can wrap between letters (e.g. "Mohamme" / "d") in the narrow column. */
-    white-space: nowrap;
-}
-
-.hero-char {
-    display: inline-block;
-    will-change: transform;
-}
-
-/* Desktop: the masthead sits in the ~1.4fr title column, which is narrower than
-   the viewport, so the fixed clamp could overflow and break mid-word. Make the
-   column a query container and size the title to it (21.8cqi ≈ widest word
-   "Mohammed" at ~96% of the column), scaling dynamically with the column width.
-   Mobile keeps --fs-masthead (full-width column), which already fits. */
-@media (min-width: 901px) {
-    .hero-title-wrap {
-        container-type: inline-size;
-    }
-    .hero-title {
-        font-size: clamp(3rem, 21.8cqi, 13rem);
-    }
-}
-
-.hero-meta {
-    opacity: 0;
-    transform: translateY(24px);
-    padding-bottom: clamp(8px, 2vh, 24px);
-}
-
-.hero-subtitle {
-    font-family: var(--font-display);
-    font-size: var(--fs-h3);
-    font-weight: 380;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    margin-bottom: var(--space-md);
-}
-
-.hero-description {
-    font-size: 1.05rem;
-    line-height: 1.55;
-    color: var(--color-text-muted);
-    max-width: 38ch;
-    margin-bottom: var(--space-lg);
-    min-height: 4.5em;
-}
-
-.typed-cursor {
-    display: inline;
-    color: var(--color-accent);
-    font-weight: 400;
-    animation: blink 0.8s step-end infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-.hero-actions {
-    margin-bottom: var(--space-lg);
-}
-
-.hero-scroll-indicator {
+/* Meta row — tag · location · status */
+.hero-meta-row {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    color: var(--color-text-dim);
-}
-
-.hero-scroll-text {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: clamp(24px, 4vw, 36px);
     font-family: var(--font-mono);
-    font-size: var(--fs-micro);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
 }
 
-.hero-scroll-line {
-    width: 56px;
-    height: var(--rule);
-    background: var(--color-text-dim);
-    transform-origin: left;
-    animation: scrollLine 2.4s var(--ease-in-out) infinite;
+.hero-meta-row .dot { color: var(--color-border-strong); }
+
+.hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
-@keyframes scrollLine {
-    0%, 100% { transform: scaleX(0.3); opacity: 0.4; }
-    50% { transform: scaleX(1); opacity: 1; }
+/* Terminal title */
+.hero-title {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 7vw, 5.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    margin-bottom: clamp(24px, 3vw, 32px);
+    color: var(--color-text);
 }
 
-/* Bottom stat callouts */
+.hero-title .prompt { color: var(--color-text-muted); }
+
+/* Serif lead */
+.hero-lead {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 18px;
+    max-width: 40ch;
+}
+
+.hero-sub {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    max-width: 62ch;
+    margin-bottom: clamp(32px, 5vw, 44px);
+}
+
+.hero-sub .name { color: var(--color-text); font-weight: 500; }
+
+.hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: clamp(48px, 8vw, 72px);
+}
+
+/* Stat grid */
 .hero-stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-md);
-    padding-top: var(--space-md);
-    border-top: var(--rule) solid var(--color-border-strong);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 640px;
+}
+
+@media (min-width: 768px) {
+    .hero-stats { grid-template-columns: repeat(4, 1fr); }
 }
 
 .stat {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 }
 
 .stat-num {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.25rem);
-    font-weight: 340;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    color: var(--color-accent);
     line-height: 1;
-    letter-spacing: -0.02em;
 }
 
 .stat-label {
     font-family: var(--font-mono);
-    font-size: var(--fs-micro);
-    letter-spacing: 0.14em;
+    font-size: 11px;
     text-transform: uppercase;
+    letter-spacing: 0.12em;
     color: var(--color-text-muted);
 }
 
-@media (max-width: 900px) {
-    .hero-content {
-        grid-template-columns: 1fr;
-        align-items: start;
-        gap: var(--space-lg);
-    }
-    .hero-meta {
-        transform: none;
-    }
-    .hero-description {
-        min-height: 0;
-    }
-}
-
 @media (max-width: 600px) {
-    .hero-masthead-top .coords { display: none; }
     .hero-stats {
-        grid-template-columns: 1fr;
-        gap: var(--space-sm);
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 }

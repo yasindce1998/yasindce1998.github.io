@@ -49,6 +49,7 @@ class App {
         this.bindEvents();
         this.initNavigation();
         this.initContactForm();
+        this.initTypewriter();
 
         this.textAnimation.revealHero();
         this.effects.init();
@@ -64,7 +65,7 @@ class App {
             this.mouse.y = e.clientY;
             this.mouse.normalized.x = (e.clientX / window.innerWidth) * 2 - 1;
             this.mouse.normalized.y = -(e.clientY / window.innerHeight) * 2 + 1;
-        });
+        }, { passive: true });
 
         this.scroll.onScroll(({ velocity, progress }) => {
             this.marquees.forEach((m) => m.setScrollVelocity(velocity));
@@ -82,20 +83,53 @@ class App {
     }
 
     createScrollProgress() {
+        // Styled by .progress-bar in components/terminal.css (gradient + glow,
+        // matching the blog's reading-progress bar).
         this.progressBar = document.createElement('div');
-        this.progressBar.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 2px;
-            width: 0%;
-            background: var(--color-accent);
-            z-index: 9999;
-            pointer-events: none;
-            transform-origin: left;
-            transition: none;
-        `;
+        this.progressBar.className = 'progress-bar';
         document.body.appendChild(this.progressBar);
+    }
+
+    // Terminal typewriter for the hero title — ported from the /dev/log blog.
+    // Reads phrases from #typewriter[data-words] and respects reduced motion.
+    initTypewriter() {
+        const el = document.getElementById('typewriter');
+        if (!el) return;
+
+        let phrases = [];
+        try { phrases = JSON.parse(el.dataset.words || '[]'); } catch (e) { /* malformed */ }
+        if (!phrases.length) return;
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            el.textContent = phrases[0];
+            return;
+        }
+
+        let gIdx = 0, cIdx = 0, deleting = false;
+        const tick = () => {
+            const cur = phrases[gIdx];
+            if (deleting) {
+                cIdx--;
+                el.textContent = cur.slice(0, cIdx);
+                if (cIdx === 0) {
+                    deleting = false;
+                    gIdx = (gIdx + 1) % phrases.length;
+                    setTimeout(tick, 400);
+                    return;
+                }
+                setTimeout(tick, 35);
+            } else {
+                cIdx++;
+                el.textContent = cur.slice(0, cIdx);
+                if (cIdx === cur.length) {
+                    deleting = true;
+                    setTimeout(tick, 2200);
+                    return;
+                }
+                setTimeout(tick, 75 + Math.random() * 50);
+            }
+        };
+        tick();
     }
 
     initProjectTilt() {

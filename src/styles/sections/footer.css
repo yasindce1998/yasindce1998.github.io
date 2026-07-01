@@ -182,6 +182,20 @@ textarea.form-input {
     color: var(--color-text-muted);
 }
 
+/* Terminal echo line — mirrors the blog footer's `$ echo …` sigil. */
+.footer-term {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: var(--rule) solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    word-break: break-word;
+}
+
+.footer-term .sigil { color: var(--color-accent); }
+
 @media (max-width: 768px) {
     .footer-content {
         grid-template-columns: 1fr;

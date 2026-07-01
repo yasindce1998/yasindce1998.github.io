@@ -9,51 +9,11 @@ export class Effects {
 
     init() {
         if (!isMobile()) {
-            this.initTextScramble();
             this.initMagneticButtons();
-            this.initSectionRevealLines();
             this.initHoverSpotlight();
             this.initCapabilityHighlight();
         }
-        this.initSmoothCountUp();
         this.initFooterGlitch();
-    }
-
-    initTextScramble() {
-        const titles = document.querySelectorAll('.project-item-title');
-
-        titles.forEach(title => {
-            const originalText = title.textContent;
-            let interval = null;
-            let frame = 0;
-
-            title.addEventListener('mouseenter', () => {
-                frame = 0;
-                clearInterval(interval);
-
-                interval = setInterval(() => {
-                    const progress = frame / 15;
-                    const scrambled = originalText.split('').map((char, i) => {
-                        if (char === ' ') return ' ';
-                        if (i / originalText.length < progress) return originalText[i];
-                        return this.glitchChars[Math.floor(Math.random() * this.glitchChars.length)];
-                    }).join('');
-
-                    title.textContent = scrambled;
-                    frame++;
-
-                    if (frame > 15) {
-                        clearInterval(interval);
-                        title.textContent = originalText;
-                    }
-                }, 30);
-            });
-
-            title.addEventListener('mouseleave', () => {
-                clearInterval(interval);
-                title.textContent = originalText;
-            });
-        });
     }
 
     initMagneticButtons() {
@@ -82,54 +42,6 @@ export class Effects {
                 });
             });
         });
-    }
-
-    initSectionRevealLines() {
-        const lines = document.querySelectorAll('.project-item-line');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    gsap.fromTo(entry.target,
-                        { scaleX: 0, transformOrigin: 'left center' },
-                        { scaleX: 1, duration: 1.2, ease: 'power3.inOut' }
-                    );
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        lines.forEach(line => observer.observe(line));
-    }
-
-    initSmoothCountUp() {
-        const indices = document.querySelectorAll('.project-item-index');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = entry.target;
-                    const finalText = target.textContent;
-                    const num = parseInt(finalText, 10);
-                    if (isNaN(num)) return;
-
-                    let current = 0;
-                    const increment = () => {
-                        current++;
-                        target.textContent = String(current).padStart(2, '0');
-                        if (current < num) {
-                            setTimeout(increment, 60);
-                        }
-                    };
-
-                    target.textContent = '00';
-                    setTimeout(increment, 200);
-                    observer.unobserve(target);
-                }
-            });
-        }, { threshold: 0.3 });
-
-        indices.forEach(idx => observer.observe(idx));
     }
 
     initHoverSpotlight() {

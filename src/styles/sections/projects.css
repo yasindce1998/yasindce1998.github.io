@@ -1,123 +1,43 @@
+/* Projects render as /dev/log article cards (see components/terminal.css).
+   Each card keeps the .project-item class as a hook for tilt + tests. */
 .projects-list {
-    border-top: var(--rule) solid var(--color-border-strong);
+    /* .cards-grid (terminal.css) supplies the grid; nothing extra needed. */
 }
 
-.project-item {
-    display: grid;
-    grid-template-columns: 64px 1fr 200px 44px;
-    gap: clamp(20px, 4vw, 64px);
-    align-items: start;
-    padding: clamp(32px, 4vw, 56px) 0;
-    position: relative;
-    text-decoration: none;
-    color: var(--color-text);
-    transition: opacity 0.4s ease;
+/* The custom cursor tilt (main.js) writes transform inline every frame, so
+   drop the card's transform transition here to keep the tilt responsive. */
+.article-card.project-item {
+    transition: box-shadow 0.45s var(--ease-out-expo),
+                border-color 0.4s ease;
     transform-style: preserve-3d;
     will-change: transform;
 }
 
-/* Hover spotlight injected by Effects.js */
-.project-spotlight {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 0;
-}
-
-.projects-list:hover .project-item:not(:hover) {
-    opacity: 0.4;
-}
-
-/* Accent echo of the blog's article-card: gradient top-bar wipes in on hover. */
-.project-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    z-index: 1;
-    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.5s var(--ease-out-expo);
-}
-
-.project-item:hover::before {
-    transform: scaleX(1);
-}
-
-.project-item-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: var(--rule);
-    background: var(--color-border);
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-.project-item-index {
-    font-family: var(--font-mono);
-    font-size: var(--fs-label);
-    letter-spacing: 0.12em;
-    color: var(--color-accent);
-    padding-top: 0.5em;
-    position: relative;
-    z-index: 1;
-}
-
-.project-item-content {
+/* Card meta line: category · year · status */
+.card-meta {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    position: relative;
-    z-index: 1;
-}
-
-.project-item-plate {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin-bottom: 16px;
     font-family: var(--font-mono);
     font-size: var(--fs-micro);
-    letter-spacing: 0.16em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-text-muted);
 }
 
-.project-item-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4.5vw, 4rem);
-    font-weight: 360;
-    letter-spacing: -0.025em;
-    line-height: 0.98;
-    transition: transform 0.6s var(--ease-out-expo), color 0.3s ease;
-}
+.card-meta .card-status { color: var(--color-accent); }
 
-.project-item:hover .project-item-title {
-    transform: translateX(16px);
-    color: var(--color-accent);
-}
-
-.project-item-desc {
-    font-family: var(--font-display);
-    font-size: clamp(1rem, 1.4vw, 1.2rem);
-    font-style: italic;
-    font-weight: 320;
-    color: var(--color-text-muted);
-    max-width: 52ch;
-    line-height: 1.45;
-}
-
-.project-item-tags {
+/* Card tag list (tech stack) */
+.card-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 4px;
+    margin-bottom: 24px;
 }
 
-.project-item-tags li {
+.card-tags li {
     font-family: var(--font-mono);
     font-size: var(--fs-micro);
     letter-spacing: 0.08em;
@@ -126,90 +46,4 @@
     padding: 4px 9px;
     border: var(--rule) solid var(--color-border);
     border-radius: 2px;
-}
-
-.project-item-meta {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
-    text-align: right;
-    position: relative;
-    z-index: 1;
-    padding-top: 0.4em;
-}
-
-.project-item-category {
-    font-family: var(--font-mono);
-    font-size: var(--fs-micro);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-text);
-}
-
-.project-item-year {
-    font-family: var(--font-mono);
-    font-size: var(--fs-micro);
-    color: var(--color-text-dim);
-}
-
-.project-item-status {
-    font-family: var(--font-mono);
-    font-size: var(--fs-micro);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    padding: 3px 8px;
-    border: var(--rule) solid var(--color-accent);
-    border-radius: 100px;
-}
-
-.project-item-arrow {
-    color: var(--color-text-muted);
-    opacity: 0;
-    transform: translate(-8px, 8px);
-    transition: opacity 0.4s ease, transform 0.5s var(--ease-out-expo), color 0.3s ease;
-    position: relative;
-    z-index: 1;
-    padding-top: 0.2em;
-}
-
-.project-item:hover .project-item-arrow {
-    opacity: 1;
-    transform: translate(0, 0);
-    color: var(--color-accent);
-}
-
-@media (max-width: 860px) {
-    .project-item {
-        grid-template-columns: 40px 1fr;
-        gap: var(--space-md);
-    }
-    .project-item-meta {
-        grid-column: 2;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        text-align: left;
-    }
-    .project-item-arrow {
-        display: none;
-    }
-    .project-item:hover .project-item-title {
-        transform: none;
-    }
-    .projects-list:hover .project-item:not(:hover) {
-        opacity: 1;
-    }
-}
-
-@media (max-width: 520px) {
-    .project-item {
-        grid-template-columns: 1fr;
-        gap: var(--space-sm);
-    }
-    .project-item-index {
-        padding-top: 0;
-    }
 }

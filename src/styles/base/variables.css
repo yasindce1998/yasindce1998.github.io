@@ -14,6 +14,10 @@
     --color-accent-2-rgb: 14, 116, 144;
     --color-glow: rgba(194, 65, 12, 0.12);
     --color-surface: rgba(26, 22, 16, 0.03);
+    --color-card: #fffaee;
+    --color-bg-elev-2: #fffaee;
+    --color-code-bg: #1a1610;
+    --color-code-fg: #f3ecdc;
 
     /* Cursor + selection (context-appropriate per theme) */
     --cursor-color: rgba(26, 22, 16, 0.85);
@@ -25,7 +29,7 @@
 
     /* Type families */
     --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
 
     /* Editorial type scale */
@@ -71,6 +75,10 @@
     --color-accent-2-rgb: 6, 182, 212;
     --color-glow: rgba(245, 158, 11, 0.15);
     --color-surface: rgba(240, 234, 214, 0.03);
+    --color-card: #15130e;
+    --color-bg-elev-2: #1c1a14;
+    --color-code-bg: #060503;
+    --color-code-fg: #f0ead6;
 
     --cursor-color: rgba(240, 234, 214, 0.9);
     --cursor-glow: rgba(240, 234, 214, 0.3);
@@ -95,6 +103,10 @@
     --color-accent-2-rgb: 255, 16, 240;
     --color-glow: rgba(78, 255, 150, 0.2);
     --color-surface: rgba(78, 255, 150, 0.04);
+    --color-card: #050d10;
+    --color-bg-elev-2: #071318;
+    --color-code-bg: #000;
+    --color-code-fg: #4eff96;
 
     --cursor-color: rgba(78, 255, 150, 0.9);
     --cursor-glow: rgba(78, 255, 150, 0.35);

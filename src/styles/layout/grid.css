@@ -10,34 +10,22 @@ section,
     position: relative;
 }
 
-/* Numbered section header: index · title · meta, on a hairline rule */
+/* Section header: // mono eyebrow above a large display title, blog-style.
+   The big .section-title itself lives in components/terminal.css. */
 .section-head {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: baseline;
-    gap: var(--space-md);
-    padding-bottom: var(--space-sm);
-    margin-bottom: clamp(40px, 6vw, 88px);
-    border-bottom: var(--rule) solid var(--color-border-strong);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: clamp(40px, 6vw, 72px);
 }
 
-.section-head .section-index {
-    color: var(--color-accent);
+.section-head-lead {
+    max-width: 40ch;
 }
 
-.section-head .section-title {
-    font-family: var(--font-display);
-    font-size: var(--fs-h3);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-}
-
-.section-head .coords {
-    color: var(--color-text-muted);
-    text-align: right;
-}
-
-/* Editorial button — underline-rule with arrow */
+/* Editorial button — underline-rule with arrow (kept for hero/inline CTAs) */
 .btn-editorial {
     display: inline-flex;
     align-items: center;
@@ -56,14 +44,4 @@ section,
     gap: 1.1em;
     color: var(--color-accent);
     border-color: var(--color-accent);
-}
-
-@media (max-width: 768px) {
-    .section-head {
-        grid-template-columns: auto 1fr;
-        gap: var(--space-sm);
-    }
-    .section-head .coords {
-        display: none;
-    }
 }

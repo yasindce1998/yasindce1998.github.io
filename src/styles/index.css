@@ -11,6 +11,7 @@
 @import './sections/projects.css';
 @import './sections/toolkit.css';
 @import './sections/footer.css';
+@import './components/terminal.css';
 @import './components/cursor.css';
 @import './components/navigation.css';
 @import './components/marquee.css';
